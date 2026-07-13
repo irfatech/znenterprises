@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+  return products.map((product) => ({
+    params: { slug: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { data } = product;
+const { Content } = await render(product);
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={data.image}
+>
+  <div class="pt-24">
+    <section class="py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Breadcrumb path={`/products/${product.id}/`} class="mb-8" />
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div>
+            <span class="text-accent font-semibold text-sm uppercase tracking-widest">{data.category}</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mt-3 mb-6">{data.title}</h1>
+            <p class="text-muted text-lg leading-relaxed mb-8">{data.description}</p>
+
+            {data.features && data.features.length > 0 && (
+              <div class="mb-8">
+                <h2 class="text-lg font-semibold mb-4">Key Features</h2>
+                <ul class="space-y-3">
+                  {data.features.map((f) => (
+                    <li class="flex items-center gap-3">
+                      <svg class="h-5 w-5 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <a href="/contact/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200 text-lg px-8 py-4">
+              Enquire About This Product
+            </a>
+          </div>
+
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-section flex items-center justify-center">
+            <div class="text-center p-12">
+              <svg class="h-24 w-24 mx-auto text-accent/20 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" /></svg>
+              <p class="text-muted">{data.title}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 prose prose-lg dark:prose-invert max-w-none">
+          <Content />
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

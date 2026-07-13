@@ -1,0 +1,19 @@
+items:
+  - label: Home
+    href: /
+  - label: About
+    href: /about/
+  - label: Services
+    href: /services/
+  - label: Industries
+    href: /industries/
+  - label: Products
+    href: /products/
+  - label: Projects
+    href: /projects/
+  - label: Blog
+    href: /blog/
+  - label: Careers
+    href: /careers/
+  - label: Contact
+    href: /contact/

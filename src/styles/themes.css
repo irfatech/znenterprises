@@ -1,0 +1,54 @@
+/* Dark Mode */
+.dark {
+  --color-page: #080c16;
+  --color-card: #0c1324;
+  --color-section: #0a101e;
+  --color-inverse: #ffffff;
+
+  --color-body: #e5e7eb;
+  --color-muted: #9ca3af;
+  --color-inverted: #0F1D3A;
+
+  --color-accent: #FF7A2E;
+  --color-accent-hover: #FF8C4A;
+  --color-accent-text: #080c16;
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --color-accent-border: #9a3412;
+
+  --color-border: color-mix(in srgb, #ffffff 10%, transparent);
+  --color-border-strong: #374151;
+
+  --color-hero: #060e19;
+
+  --color-nav-bg: color-mix(in srgb, #080c16 60%, transparent);
+  --color-nav-border: color-mix(in srgb, #ffffff 10%, transparent);
+
+  --color-btn-secondary-border: #ffffff;
+  --color-btn-secondary-text: #ffffff;
+  --color-btn-secondary-hover-bg: #ffffff;
+  --color-btn-secondary-hover-text: #0F1D3A;
+
+  --color-input-border: #374151;
+
+  --color-selection-mix: #FF7A2E;
+}
+
+/* Alternate theme */
+[data-theme="ocean"] {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #2563eb;
+  --color-brand-600: #1d4ed8;
+  --color-brand-700: #1e40af;
+  --color-brand-800: #1e3a8a;
+  --color-brand-900: #172554;
+
+  --color-hero: #1e3a8a;
+}
+
+[data-theme="ocean"].dark {
+  --color-hero: #172554;
+}

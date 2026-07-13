@@ -1,0 +1,103 @@
+@theme {
+  /* ---- Deep Navy Brand Colors ---- */
+  --color-brand-50:  #eef3f7;
+  --color-brand-100: #d5dde8;
+  --color-brand-200: #a1b2c8;
+  --color-brand-300: #7d93b0;
+  --color-brand-400: #4a658a;
+  --color-brand-500: #0F1D3A; /* Deep Navy */
+  --color-brand-600: #0c182f;
+  --color-brand-700: #091324;
+  --color-brand-800: #060e19;
+  --color-brand-900: #03090f;
+  --color-brand-950: #010408;
+
+  /* ---- Safety Orange ---- */
+  --color-orange-50:  #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #FF5E00; /* Vibrant Safety Orange */
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+
+  /* ---- Neutral Palette (Metallic Gray) ---- */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+  --color-neutral-950: #030712;
+
+  /* ---- Status Colors ---- */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* ---- Typography ---- */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Bruno Ace", system-ui, sans-serif;
+  --font-display: "Bruno Ace", system-ui, sans-serif;
+  --font-alt: "Lato", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+
+  /* ---- Border Radius ---- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ---- Semantic Tokens (Light Mode) ---- */
+  --color-page: #fafafa;
+  --color-card: #ffffff;
+  --color-section: #f0f2f5;
+  --color-inverse: #0F1D3A;
+  --color-body: #1f2937;
+  --color-muted: #6b7280;
+  --color-inverted: #ffffff;
+  --color-accent: #FF5E00;
+  --color-accent-hover: #E05000;
+  --color-accent-text: #ffffff;
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  --color-accent-border: #fdba74;
+  --color-border: color-mix(in srgb, var(--color-muted) 12%, transparent);
+  --color-border-strong: #d1d5db;
+  --color-hero: #0F1D3A;
+  --color-nav-bg: color-mix(in srgb, #ffffff 70%, transparent);
+  --color-nav-border: color-mix(in srgb, var(--color-muted) 12%, transparent);
+  --color-btn-secondary-border: #1f2937;
+  --color-btn-secondary-text: #1f2937;
+  --color-btn-secondary-hover-bg: #1f2937;
+  --color-btn-secondary-hover-text: #ffffff;
+  --color-input-border: #d1d5db;
+  --color-selection-mix: #FF5E00;
+
+  /* ---- Animations ---- */
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-slide-up: slide-up 0.6s ease-out;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(1.5rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

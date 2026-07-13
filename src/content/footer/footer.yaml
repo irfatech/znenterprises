@@ -1,0 +1,37 @@
+description: "Z N ENTERPRISES specializes in designing, manufacturing, installing, repairing, and maintaining premium corporate signage across India."
+columns:
+  - title: "Quick Links"
+    links:
+      - label: Home
+        href: /
+      - label: About Us
+        href: /about/
+      - label: Services
+        href: /services/
+      - label: Products
+        href: /products/
+      - label: Blog
+        href: /blog/
+      - label: Contact
+        href: /contact/
+  - title: "Services"
+    links:
+      - label: Corporate Signage
+        href: /services/corporate-signage/
+      - label: LED Signage
+        href: /services/led-signage/
+      - label: ACP Cladding
+        href: /services/acp-cladding/
+      - label: Corporate Branding
+        href: /services/corporate-branding/
+      - label: Installation
+        href: /services/installation/
+  - title: "Support"
+    links:
+      - label: FAQ
+        href: /faq/
+      - label: Privacy Policy
+        href: /privacy/
+      - label: Terms & Conditions
+        href: /terms/
+bottomText: "© 2025 Z N ENTERPRISES. All rights reserved."

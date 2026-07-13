@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://znenterprises.in/sitemap-index.xml
