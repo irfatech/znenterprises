@@ -1,6 +1,9 @@
 ---
 import { getSiteSettings } from "../lib/site";
 
+const base = import.meta.env.BASE_URL;
+const p = (path: string) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
+
 const settings = await getSiteSettings();
 const currentYear = new Date().getFullYear();
 
@@ -14,31 +17,31 @@ const columns = [
   {
     title: "Quick Links",
     links: [
-      { label: "Home", href: "/" },
-      { label: "About Us", href: "/about/" },
-      { label: "Services", href: "/services/" },
-      { label: "Products", href: "/products/" },
-      { label: "Projects", href: "/projects/" },
-      { label: "Contact", href: "/contact/" },
+      { label: "Home", href: p("/") },
+      { label: "About Us", href: p("/about/") },
+      { label: "Services", href: p("/services/") },
+      { label: "Products", href: p("/products/") },
+      { label: "Projects", href: p("/projects/") },
+      { label: "Contact", href: p("/contact/") },
     ],
   },
   {
     title: "Services",
     links: [
-      { label: "Corporate Signage", href: "/services/corporate-signage/" },
-      { label: "LED Signage", href: "/services/led-signage/" },
-      { label: "Petroleum RVI", href: "/services/petroleum-station-branding/" },
-      { label: "Installation", href: "/services/installation/" },
-      { label: "Maintenance", href: "/services/repair-maintenance/" },
+      { label: "Corporate Signage", href: p("/services/corporate-signage/") },
+      { label: "LED Signage", href: p("/services/led-signage/") },
+      { label: "Petroleum RVI", href: p("/services/petroleum-station-branding/") },
+      { label: "Installation", href: p("/services/installation/") },
+      { label: "Maintenance", href: p("/services/repair-maintenance/") },
     ],
   },
   {
     title: "Support",
     links: [
-      { label: "FAQ", href: "/faq/" },
-      { label: "Blog", href: "/blog/" },
-      { label: "Careers", href: "/careers/" },
-      { label: "Privacy Policy", href: "/privacy/" },
+      { label: "FAQ", href: p("/faq/") },
+      { label: "Blog", href: p("/blog/") },
+      { label: "Careers", href: p("/careers/") },
+      { label: "Privacy Policy", href: p("/privacy/") },
     ],
   },
 ];
@@ -56,7 +59,7 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
       </div>
       <div class="flex flex-wrap gap-3 shrink-0">
         <a
-          href="/contact/"
+          href={p("/contact/")}
           class="inline-flex items-center justify-center rounded-xl bg-accent text-accent-text px-5 py-2.5 text-sm font-semibold hover:bg-accent-hover transition-all duration-200 shadow-lg shadow-accent/25"
         >
           Request a Quote
@@ -78,8 +81,8 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
     <div class="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12 lg:gap-x-8">
 
       <div class="col-span-2 lg:col-span-4">
-        <a href="/" class="inline-block" aria-label="ZN Enterprises Home">
-          <img src="/zn-enterprises-logo.png" alt="ZN Enterprises" class="h-12 w-auto brightness-0 invert" width="1536" height="1024" loading="lazy" />
+        <a href={p("/")} class="inline-block" aria-label="ZN Enterprises Home">
+          <img src={p("/zn-enterprises-logo.png")} alt="ZN Enterprises" class="h-12 w-auto brightness-0 invert" width="1536" height="1024" loading="lazy" />
         </a>
         <p class="mt-4 text-inverted/50 leading-relaxed text-sm max-w-xs">
           India's trusted corporate signage partner, delivering end-to-end Retail Visual Identity (RVI) and industrial signage solutions across the country.
@@ -161,8 +164,8 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-inverted/40">
       <p>&copy; {currentYear} ZN Enterprises. All rights reserved.</p>
       <div class="flex items-center gap-6">
-        <a href="/privacy/" class="hover:text-inverted transition-colors">Privacy Policy</a>
-        <a href="/terms/" class="hover:text-inverted transition-colors">Terms & Conditions</a>
+        <a href={p("/privacy/")} class="hover:text-inverted transition-colors">Privacy Policy</a>
+        <a href={p("/terms/")} class="hover:text-inverted transition-colors">Terms & Conditions</a>
         <button
           id="back-to-top"
           type="button"

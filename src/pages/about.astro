@@ -4,6 +4,9 @@ import StatsBar from "../components/StatsBar.astro";
 import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
 
+const base = import.meta.env.BASE_URL;
+const p = (path) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
+
 const [aboutEntry] = await getCollection("about");
 const a = aboutEntry?.data;
 
@@ -14,7 +17,7 @@ const heroHeading = a?.heroHeading ?? "India's Trusted Corporate Signage Partner
 const heroHighlight = a?.heroHighlight ?? "Corporate Signage Partner";
 const heroDescription = a?.heroDescription ?? "";
 
-const storyImage = a?.storyImage ?? "/images/about-1.jpg";
+const storyImage = a?.storyImage ? p(a.storyImage) : p("/images/about-1.jpg");
 const storyImageAlt = a?.storyImageAlt ?? "";
 const storyHeading = a?.storyHeading ?? "Our";
 const storyHighlight = a?.storyHighlight ?? "Story";
@@ -35,9 +38,9 @@ const values = a?.values ?? [];
 const ctaTitle = a?.ctaTitle ?? "Let's Build Your Brand Together";
 const ctaDescription = a?.ctaDescription ?? "";
 const ctaPrimaryLabel = a?.ctaPrimaryLabel ?? "Get in Touch";
-const ctaPrimaryLink = a?.ctaPrimaryLink ?? "/contact/";
+const ctaPrimaryLink = a?.ctaPrimaryLink ? p(a.ctaPrimaryLink) : p("/contact/");
 const ctaSecondaryLabel = a?.ctaSecondaryLabel ?? "View Our Services";
-const ctaSecondaryLink = a?.ctaSecondaryLink ?? "/services/";
+const ctaSecondaryLink = a?.ctaSecondaryLink ? p(a.ctaSecondaryLink) : p("/services/");
 
 const heroHeadingParts = heroHeading.split(heroHighlight);
 const showHeroHighlight = heroHeadingParts.length > 1 && heroHighlight;

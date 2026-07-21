@@ -11,6 +11,9 @@ export async function getStaticPaths() {
   }));
 }
 
+const base = import.meta.env.BASE_URL;
+const p = (path) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
+
 const { service } = Astro.props;
 const { data } = service;
 const { Content } = await render(service);
@@ -47,7 +50,7 @@ const { Content } = await render(service);
             )}
 
             <a
-              href="/contact/"
+              href={p("/contact/")}
               class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 font-medium hover:bg-accent-hover transition-all duration-200 shadow-sm hover:shadow-md active:scale-[0.98]"
             >
               {data.ctaText || "Get in Touch"}
@@ -57,7 +60,7 @@ const { Content } = await render(service);
 
           <div class="aspect-[4/3] rounded-2xl overflow-hidden">
             <img
-              src={data.image || "https://images.unsplash.com/photo-1578575436955-ef29da568c6a?w=800&q=80"}
+              src={data.image ? p(data.image) : "https://images.unsplash.com/photo-1578575436955-ef29da568c6a?w=800&q=80"}
               alt={data.title}
               class="h-full w-full object-cover"
               loading="lazy"
@@ -77,7 +80,7 @@ const { Content } = await render(service);
       title="Need This Service?"
       description="Contact our team to discuss how we can help with your signage requirements."
       primaryLabel="Get in Touch"
-      primaryHref="/contact/"
+      primaryHref={p("/contact/")}
     />
   </div>
 </BaseLayout>

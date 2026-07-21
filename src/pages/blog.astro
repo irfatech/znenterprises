@@ -3,6 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
 
+const base = import.meta.env.BASE_URL;
+const p = (path) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
+
 const posts = (await getCollection("blog"))
   .filter((p) => p.data.published)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -29,10 +32,10 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
 
         {categories.length > 0 && (
           <div class="flex flex-wrap gap-2 mt-10 mb-10">
-            <a href="/blog/" class="px-4 py-2 rounded-full text-sm font-medium bg-accent text-accent-text">All</a>
+            <a href={p("/blog/")} class="px-4 py-2 rounded-full text-sm font-medium bg-accent text-accent-text">All</a>
             {categories.map((cat) => (
               <a
-                href={`/blog/?category=${cat.toLowerCase()}`}
+                href={p(`/blog/?category=${cat.toLowerCase()}`)}
                 class="px-4 py-2 rounded-full text-sm font-medium bg-muted/10 text-muted hover:bg-muted/20 transition-colors"
               >
                 {cat}
@@ -47,7 +50,7 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
               <article class="rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
                 <div class="relative aspect-[16/10] overflow-hidden bg-muted/5">
                   <img
-                    src={post.data.image || "/images/blog-placeholder.svg"}
+                    src={post.data.image ? p(post.data.image) : p("/images/blog-placeholder.svg")}
                     alt={post.data.title}
                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
@@ -65,11 +68,11 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
                     <span>{post.data.author}</span>
                   </div>
                   <h3 class="text-lg font-semibold mb-2 line-clamp-2">
-                    <a href={`/blog/${post.id}/`} class="hover:text-accent transition-colors">{post.data.title}</a>
+                    <a href={p(`/blog/${post.id}/`)} class="hover:text-accent transition-colors">{post.data.title}</a>
                   </h3>
                   <p class="text-muted text-sm leading-relaxed line-clamp-3 mb-4">{post.data.excerpt}</p>
                   <a
-                    href={`/blog/${post.id}/`}
+                    href={p(`/blog/${post.id}/`)}
                     class="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
                   >
                     Read More
@@ -89,7 +92,7 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
             <h3 class="text-xl font-semibold mb-2">No Articles Yet</h3>
             <p class="text-muted mb-6">Check back soon for new content on corporate signage and branding.</p>
             <a
-              href="/contact/"
+              href={p("/contact/")}
               class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200"
             >
               Subscribe to Updates
@@ -103,7 +106,7 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
       title="Want to Learn More?"
       description="Contact our team for expert advice on your corporate signage project."
       primaryLabel="Get in Touch"
-      primaryHref="/contact/"
+      primaryHref={p("/contact/")}
     />
   </div>
 </BaseLayout>
