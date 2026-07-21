@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Breadcrumb from "../components/Breadcrumb.astro";
-import ServiceCard from "../components/ServiceCard.astro";
+import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
 
 const services = (await getCollection("services"))
@@ -10,45 +9,65 @@ const services = (await getCollection("services"))
 
 <BaseLayout
   title="Services"
-  description="Comprehensive corporate signage services across India — design, manufacturing, installation, repair, and maintenance."
+  description="Comprehensive corporate signage services across India — design, manufacturing, installation, repair, and maintenance by ZN Enterprises."
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Breadcrumb path="/services/" class="mb-8" />
-        <div class="section-title text-left max-w-2xl">
-          <span class="text-accent font-semibold text-sm uppercase tracking-widest">What We Offer</span>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mt-3 mb-6">
+        <div class="max-w-3xl">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Services</span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">
             Our <span class="gradient-text">Services</span>
           </h1>
-          <p class="text-muted text-lg">
-            From design and manufacturing to installation and maintenance, we provide complete corporate signage solutions under one roof.
+          <p class="text-muted text-lg leading-relaxed">
+            From design consultation and precision manufacturing to nationwide installation and lifecycle maintenance — we provide complete corporate signage solutions under one roof.
           </p>
         </div>
+
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
           {services.map((service) => (
-            <ServiceCard
-              title={service.data.title}
-              description={service.data.description}
-              icon={service.data.icon}
-              features={service.data.features}
-              href={`/services/${service.id}/`}
-            />
+            <article class="rounded-2xl bg-card border border-border hover:border-accent-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6 sm:p-8 group">
+              {service.data.icon && (
+                <div class="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-accent-text">
+                  <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={service.data.icon} />
+                  </svg>
+                </div>
+              )}
+              <h3 class="text-xl font-semibold mb-3">{service.data.title}</h3>
+              <p class="text-muted leading-relaxed text-sm mb-4">{service.data.description}</p>
+              {service.data.features && service.data.features.length > 0 && (
+                <ul class="space-y-2 mb-5">
+                  {service.data.features.slice(0, 4).map((feature: string) => (
+                    <li class="flex items-center gap-2 text-sm text-body/70">
+                      <svg class="h-4 w-4 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <a
+                href={`/services/${service.id}/`}
+                class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+              >
+                Learn More
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="py-16 sm:py-20 lg:py-24 bg-inverse">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-inverted mb-4">Need a Custom Solution?</h2>
-        <p class="text-inverted/60 text-lg max-w-2xl mx-auto mb-8">
-          Contact us to discuss your specific signage requirements. We're here to help.
-        </p>
-        <a href="/contact/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200 text-lg px-8 py-4">
-          Get in Touch
-        </a>
-      </div>
-    </section>
+    <CTA
+      title="Need a Custom Solution?"
+      description="Every project is unique. Contact our team to discuss your specific signage requirements and get a tailored proposal."
+      primaryLabel="Get in Touch"
+      primaryHref="/contact/"
+    />
   </div>
 </BaseLayout>

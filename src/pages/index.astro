@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import ServiceCard from "../components/ServiceCard.astro";
-import BlogCard from "../components/BlogCard.astro";
-import TestimonialCard from "../components/TestimonialCard.astro";
+import StatsBar from "../components/StatsBar.astro";
+import ProcessTimeline from "../components/ProcessTimeline.astro";
+import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
 import { getSiteSettings } from "../lib/site";
 
@@ -17,7 +17,7 @@ const featuredServices = (await getCollection("services"))
 const featuredProducts = (await getCollection("products"))
   .filter((p) => p.data.featured)
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99))
-  .slice(0, 8);
+  .slice(0, 4);
 
 const latestPosts = (await getCollection("blog"))
   .filter((p) => p.data.published)
@@ -30,142 +30,170 @@ const testimonials = (await getCollection("testimonials"))
 
 const whyChooseUs = [
   {
-    title: "8+ Years Experience",
-    description: "Proven track record in delivering premium corporate signage solutions across India.",
+    title: "End-to-End Execution",
+    description: "From design and engineering to manufacturing, installation, and maintenance — we handle every stage of your project.",
     icon: "M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z",
   },
   {
-    title: "Quality Manufacturing",
-    description: "State-of-the-art fabrication facility producing signage with precision and durability.",
-    icon: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+    title: "Petroleum RVI Specialists",
+    description: "Dedicated expertise in fuel station branding, EV charging infrastructure signage, and petroleum retail identity.",
+    icon: "M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12",
   },
   {
-    title: "Nationwide Service",
-    description: "Pan-India installation and maintenance network serving corporate clients everywhere.",
+    title: "Nationwide Coverage",
+    description: "Pan-India project execution capability with a trained installation network reaching every state and union territory.",
     icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   },
   {
-    title: "Timely Delivery",
-    description: "Commitment to project schedules with efficient project management and execution.",
-    icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z",
+    title: "Engineering Excellence",
+    description: "Precision manufacturing with structural-grade materials, brand-compliant finishes, and safety-certified installations.",
+    icon: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
   },
 ];
 
-const stats = [
-  { label: "Years Experience", value: "8+" },
-  { label: "Annual Project Execution", value: "₹11 Cr" },
-  { label: "Annual Business Opportunity", value: "₹10 Cr" },
-  { label: "Corporate Clients", value: "Pan-India" },
-];
-
 const clients = [
+  { name: "IOCL" },
   { name: "HPCL" },
   { name: "BPCL" },
-  { name: "IOCL" },
-  { name: "Diamond Display Pvt Ltd" },
-  { name: "Sinex Systems Pvt Ltd" },
-  { name: "Intersil Metallic Products" },
+  { name: "Shell" },
+  { name: "Reliance" },
+  { name: "Honda" },
+  { name: "SBI" },
+  { name: "Airtel" },
 ];
 ---
 
-<BaseLayout preloadHero>
+<BaseLayout
+  title="Corporate Signage Manufacturing & Installation | ZN Enterprises"
+  description="ZN Enterprises is India's full-service corporate signage manufacturer specializing in Retail Visual Identity (RVI), petroleum signage, LED signage, and industrial fabrication across India."
+  preloadHero
+>
   <Hero />
 
-  {/* Company Introduction */}
+  <StatsBar />
+
+  {/* About */}
   <section class="py-16 sm:py-20 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div>
-          <span class="text-accent font-semibold text-sm uppercase tracking-widest">Welcome to Z N ENTERPRISES</span>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mt-3 mb-6">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// About</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
             India's Trusted<br />
-            <span class="bg-linear-to-r from-accent to-accent-hover bg-clip-text text-transparent">Corporate Signage Partner</span>
+            <span class="gradient-text">Corporate Signage Partner</span>
           </h2>
           <p class="text-muted leading-relaxed text-lg mb-6">
-            At Z N ENTERPRISES, we specialize in designing, manufacturing, installing, repairing, and maintaining premium corporate signage across India. From petroleum stations to corporate offices, we deliver signage solutions that meet the highest standards of engineering quality and corporate branding.
+            ZN Enterprises is a full-service signage manufacturing company specializing in Retail Visual Identity (RVI), corporate branding, petroleum station signage, architectural signage, fabrication, installation, and maintenance services.
           </p>
           <p class="text-muted leading-relaxed mb-8">
-            With 8+ years of experience and an annual project execution capability of ₹11 Crore, we are the preferred signage partner for major corporations across automotive, petroleum, banking, telecom, and retail sectors.
+            With 8+ years of experience and a project execution capability exceeding ₹11 Crore annually, we serve leading enterprises across petroleum, automotive, banking, telecom, and industrial sectors throughout India.
           </p>
-          <a href="/about/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200">
-            Learn Our Story
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="/about/"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200"
+            >
+              About Us
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+            </a>
+            <a
+              href="/services/"
+              class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-6 py-3 font-medium hover:bg-body hover:text-page transition-all duration-200"
+            >
+              View All Services
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-4">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-section">
+              <img src="https://images.unsplash.com/photo-1578575436955-ef29da568c6a?w=600&q=80" alt="Industrial signage fabrication" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+          </div>
+          <div class="space-y-4 mt-8">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-section">
+              <img src="https://images.unsplash.com/photo-1565479786208-530fb8a4fc0e?w=600&q=80" alt="Corporate building signage installation" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Services */}
+  {featuredServices.length > 0 && (
+    <section class="py-16 sm:py-20 lg:py-24 bg-section">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 sm:mb-16">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// What We Do</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            Our <span class="gradient-text">Services</span>
+          </h2>
+          <p class="text-muted text-lg max-w-2xl mx-auto">Comprehensive corporate signage solutions — from design and engineering to manufacturing, installation, and lifetime maintenance.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {featuredServices.map((service) => (
+            <article class="rounded-2xl bg-card border border-border hover:border-accent-border hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6 sm:p-8 group">
+              {service.data.icon && (
+                <div class="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-accent-text">
+                  <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={service.data.icon} />
+                  </svg>
+                </div>
+              )}
+              <h3 class="text-xl font-semibold mb-3">{service.data.title}</h3>
+              <p class="text-muted leading-relaxed text-sm mb-4">{service.data.description}</p>
+              {service.data.features && service.data.features.length > 0 && (
+                <ul class="space-y-2 mb-5">
+                  {service.data.features.slice(0, 3).map((feature: string) => (
+                    <li class="flex items-center gap-2 text-sm text-body/70">
+                      <svg class="h-4 w-4 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <a
+                href={`/services/${service.id}/`}
+                class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+              >
+                Learn More
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+        <div class="text-center mt-10">
+          <a
+            href="/services/"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 text-lg font-medium hover:bg-accent-hover transition-all duration-200"
+          >
+            View All Services
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
           </a>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-section flex items-center justify-center">
-            <div class="text-center p-8">
-              <svg class="h-16 w-16 mx-auto text-accent/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" /></svg>
-              <p class="text-muted text-sm">Corporate Signage</p>
-            </div>
-          </div>
-          <div class="aspect-[3/4] rounded-2xl overflow-hidden mt-8 bg-section flex items-center justify-center">
-            <div class="text-center p-8">
-              <svg class="h-16 w-16 mx-auto text-accent/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-              <p class="text-muted text-sm">LED Sign Boards</p>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  {/* Stats */}
-  <section class="bg-section py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        {stats.map((stat) => (
-          <div class="text-center">
-            <div class="text-4xl sm:text-5xl font-black text-accent mb-2">{stat.value}</div>
-            <div class="text-sm uppercase tracking-wider">{stat.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Services Overview */}
+  {/* Why Choose Us */}
   <section class="py-16 sm:py-20 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 sm:mb-16">
+        <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Why Us</span>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-          Our <span class="bg-linear-to-r from-accent to-accent-hover bg-clip-text text-transparent">Services</span>
+          Why Choose <span class="gradient-text">ZN Enterprises</span>
         </h2>
-        <p class="text-muted text-lg max-w-2xl mx-auto">Comprehensive corporate signage solutions under one roof.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {featuredServices.map((service) => (
-          <ServiceCard
-            title={service.data.title}
-            description={service.data.description}
-            features={service.data.features}
-            icon={service.data.icon}
-            href={`/services/${service.id}/`}
-          />
-        ))}
-      </div>
-      <div class="text-center mt-10">
-        <a href="/services/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 text-lg font-medium hover:bg-accent-hover transition-all duration-200">
-          View All Services
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  {/* Why Choose Us */}
-  <section class="py-16 sm:py-20 lg:py-24 bg-section">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12 sm:mb-16">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-          Why Choose <span class="bg-linear-to-r from-accent to-accent-hover bg-clip-text text-transparent">Z N ENTERPRISES</span>
-        </h2>
-        <p class="text-muted text-lg max-w-2xl mx-auto">What sets us apart from the competition.</p>
+        <p class="text-muted text-lg max-w-2xl mx-auto">What sets us apart as India's preferred corporate signage partner.</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {whyChooseUs.map((item) => (
           <div class="text-center group">
-            <div class="mx-auto mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-accent-text">
+            <div class="mx-auto mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-accent-text shadow-sm group-hover:shadow-lg group-hover:shadow-accent/25">
               <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d={item.icon} /></svg>
             </div>
             <h3 class="text-lg font-semibold mb-3">{item.title}</h3>
@@ -178,22 +206,28 @@ const clients = [
 
   {/* Featured Products */}
   {featuredProducts.length > 0 && (
-    <section class="py-16 sm:py-20 lg:py-24">
+    <section class="py-16 sm:py-20 lg:py-24 bg-section">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Products</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            Our <span class="bg-linear-to-r from-accent to-accent-hover bg-clip-text text-transparent">Products</span>
+            Signage <span class="gradient-text">Products</span>
           </h2>
-          <p class="text-muted text-lg max-w-2xl mx-auto">Premium signage solutions engineered for corporate excellence.</p>
+          <p class="text-muted text-lg max-w-2xl mx-auto">Premium signage solutions engineered for corporate excellence and built to last.</p>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredProducts.map((product) => (
-            <article class="rounded-2xl bg-card border-border shadow-sm hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 p-6 sm:p-8 group">
+            <article class="rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 p-6 sm:p-8 group">
+              <div class="mb-4">
+                {product.data.category && (
+                  <span class="px-3 py-1 rounded-full text-xs font-semibold bg-accent-soft text-accent">{product.data.category}</span>
+                )}
+              </div>
               <h3 class="text-lg font-semibold mb-3">{product.data.title}</h3>
               <p class="text-muted text-sm leading-relaxed mb-4">{product.data.excerpt || product.data.description}</p>
               {product.data.features && product.data.features.length > 0 && (
                 <ul class="space-y-2 mb-5">
-                  {product.data.features.slice(0, 3).map((feature) => (
+                  {product.data.features.slice(0, 3).map((feature: string) => (
                     <li class="flex items-center gap-2 text-sm text-body/70">
                       <svg class="h-4 w-4 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -213,7 +247,10 @@ const clients = [
           ))}
         </div>
         <div class="text-center mt-10">
-          <a href="/products/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 text-lg font-medium hover:bg-accent-hover transition-all duration-200">
+          <a
+            href="/products/"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 text-lg font-medium hover:bg-accent-hover transition-all duration-200"
+          >
             View All Products
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
           </a>
@@ -222,19 +259,23 @@ const clients = [
     </section>
   )}
 
-  {/* Major Clients */}
-  <section class="py-16 sm:py-20 lg:py-24 bg-section">
+  {/* Process */}
+  <ProcessTimeline />
+
+  {/* Clients */}
+  <section class="py-16 sm:py-20 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 sm:mb-16">
+        <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Clients</span>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-          Our <span class="bg-linear-to-r from-accent to-accent-hover bg-clip-text text-transparent">Clients</span>
+          Our <span class="gradient-text">Clients</span>
         </h2>
-        <p class="text-muted text-lg max-w-2xl mx-auto">Trusted by leading corporations across India.</p>
+        <p class="text-muted text-lg max-w-2xl mx-auto">Trusted by India's leading corporations across petroleum, automotive, banking, and telecom sectors.</p>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
         {clients.map((client) => (
-          <div class="card p-6 text-center flex items-center justify-center">
-            <span class="font-semibold text-lg text-muted">{client.name}</span>
+          <div class="bg-card border border-border rounded-xl p-5 flex items-center justify-center hover:border-accent-border hover:shadow-md transition-all duration-300">
+            <span class="font-bold text-sm sm:text-base text-muted tracking-wider">{client.name}</span>
           </div>
         ))}
       </div>
@@ -243,47 +284,95 @@ const clients = [
 
   {/* Testimonials */}
   {testimonials.length > 0 && (
-    <section class="py-16 sm:py-20 lg:py-24">
+    <section class="py-16 sm:py-20 lg:py-24 bg-section">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Testimonials</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            What Our <span class="bg-linear-to-r from-accent to-accent-hover bg-clip-text text-transparent">Clients Say</span>
+            What Our <span class="gradient-text">Clients Say</span>
           </h2>
-          <p class="text-muted text-lg max-w-2xl mx-auto">Trusted by leading corporations across India.</p>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <TestimonialCard
-              name={t.data.name}
-              content={t.data.content}
-              role={t.data.role}
-              company={t.data.company}
-              avatar={t.data.avatar}
-              rating={t.data.rating}
-            />
+            <figure class="rounded-2xl bg-card border border-border shadow-sm p-6 sm:p-8">
+              <div class="flex gap-1 mb-4">
+                {Array.from({ length: t.data.rating || 5 }, (_, i) => (
+                  <svg key={i} class="h-5 w-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <blockquote class="text-body/80 leading-relaxed mb-6">
+                &ldquo;{t.data.content}&rdquo;
+              </blockquote>
+              <figcaption class="flex items-center gap-4">
+                <div class="h-12 w-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-semibold text-lg">
+                  {t.data.name.charAt(0)}
+                </div>
+                <div>
+                  <div class="font-semibold">{t.data.name}</div>
+                  {(t.data.role || t.data.company) && (
+                    <div class="text-sm text-muted">{t.data.role}{t.data.role && t.data.company ? ", " : ""}{t.data.company}</div>
+                  )}
+                </div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
     </section>
   )}
 
-  {/* Recent Blog Posts */}
+  {/* Blog */}
   {latestPosts.length > 0 && (
-    <section class="py-16 sm:py-20 lg:py-24 bg-section">
+    <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Insights</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            Latest <span class="bg-linear-to-r from-accent to-accent-hover bg-clip-text text-transparent">Articles</span>
+            Latest <span class="gradient-text">Articles</span>
           </h2>
-          <p class="text-muted text-lg max-w-2xl mx-auto">Insights on corporate signage, branding, and industry trends.</p>
+          <p class="text-muted text-lg max-w-2xl mx-auto">Insights on corporate signage, RVI, branding trends, and industry best practices.</p>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
           {latestPosts.map((post) => (
-            <BlogCard post={post} />
+            <article class="rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
+              <div class="relative aspect-[16/10] overflow-hidden bg-muted/5">
+                <img
+                  src={post.data.image || "/images/blog-placeholder.svg"}
+                  alt={post.data.title}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-accent text-accent-text">
+                  {post.data.category}
+                </div>
+              </div>
+              <div class="p-5">
+                <div class="flex items-center gap-3 text-xs text-muted mb-3">
+                  <time datetime={post.data.date.toISOString()}>
+                    {new Intl.DateTimeFormat("en-IN", { month: "short", day: "numeric", year: "numeric" }).format(post.data.date)}
+                  </time>
+                </div>
+                <h3 class="text-lg font-semibold mb-2 line-clamp-2">
+                  <a href={`/blog/${post.id}/`} class="hover:text-accent transition-colors">{post.data.title}</a>
+                </h3>
+                <p class="text-muted text-sm leading-relaxed line-clamp-3 mb-4">{post.data.excerpt}</p>
+                <a href={`/blog/${post.id}/`} class="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover transition-colors">
+                  Read More
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>
+              </div>
+            </article>
           ))}
         </div>
         <div class="text-center mt-10">
-          <a href="/blog/" class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-btn-secondary-border text-body px-6 py-3 font-medium hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text transition-all duration-200">
+          <a
+            href="/blog/"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-6 py-3 font-medium hover:bg-body hover:text-page transition-all duration-200"
+          >
             View All Articles
           </a>
         </div>
@@ -291,24 +380,10 @@ const clients = [
     </section>
   )}
 
-  {/* CTA Section */}
-  <section class="py-16 sm:py-20 lg:py-24 relative overflow-hidden bg-inverse">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(220,38,38,0.1),transparent_60%)]" />
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-inverted mb-4">
-        Ready to Elevate Your Brand?
-      </h2>
-      <p class="text-inverted/60 text-lg max-w-2xl mx-auto mb-8">
-        Contact us today to discuss your corporate signage requirements. From design to installation, we deliver excellence.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 text-lg font-medium hover:bg-accent-hover transition-all duration-200">
-          Request a Quote
-        </a>
-        <a href={`tel:${settings.phone[0].replace(/[^0-9]/g, "")}`} class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-inverted/30 text-inverted px-8 py-4 text-lg font-medium hover:bg-inverted hover:text-inverse transition-all duration-200">
-          Call {settings.phone[0].replace(/[^0-9]/g, "").replace(/(\d{5})(\d{5})/, "$1 $2")}
-        </a>
-      </div>
-    </div>
-  </section>
+  <CTA
+    title="Ready to Elevate Your Brand?"
+    description="Contact us today to discuss your corporate signage requirements. From design consultation to installation and ongoing maintenance, we deliver engineering excellence across India."
+    primaryLabel="Request a Quote"
+    primaryHref="/contact/"
+  />
 </BaseLayout>

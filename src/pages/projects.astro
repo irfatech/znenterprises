@@ -1,37 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Breadcrumb from "../components/Breadcrumb.astro";
+import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
 
 const images = (await getCollection("gallery")).sort(() => Math.random() - 0.5);
-
 const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", "Installation"];
 ---
 
 <BaseLayout
   title="Our Projects"
-  description="Browse our portfolio of corporate signage projects across India. Petroleum stations, corporate branding, retail signage and more."
+  description="Browse ZN Enterprises' portfolio of corporate signage projects across India — petroleum stations, corporate branding, retail signage, and more."
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Breadcrumb path="/projects/" class="mb-8" />
-        <div class="section-title text-left max-w-2xl">
-          <span class="text-accent font-semibold text-sm uppercase tracking-widest">Our Work</span>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mt-3 mb-6">
+        <div class="max-w-3xl">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Projects</span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">
             Our <span class="gradient-text">Projects</span>
           </h1>
-          <p class="text-muted text-lg">
-            A showcase of our corporate signage projects across India, demonstrating our expertise in design, manufacturing, and installation.
+          <p class="text-muted text-lg leading-relaxed">
+            A showcase of our corporate signage projects across India — demonstrating our expertise in design, precision manufacturing, and professional installation for leading brands.
           </p>
         </div>
 
         {images.length > 0 ? (
           <>
-            <div class="flex flex-wrap gap-2 mb-10" id="gallery-filters">
+            <div class="flex flex-wrap gap-2 mt-10 mb-10" id="gallery-filters">
               {categories.map((cat) => (
                 <button
-                  class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 data-[active=true]:bg-accent data-[active=true]:text-accent-text bg-muted/10 text-muted hover:bg-muted/20"
+                  class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 data-[active=true]:bg-accent data-[active=true]:text-accent-text bg-muted/10 text-muted hover:bg-muted/20"
                   data-active={cat === "All" ? "true" : "false"}
                   data-filter={cat.toLowerCase()}
                 >
@@ -45,8 +43,9 @@ const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", 
                 <a
                   href={item.data.image}
                   class="group aspect-square rounded-xl overflow-hidden bg-muted/10 relative"
-                  data-category={item.data.category.toLowerCase()}
+                  data-category={item.data.category?.toLowerCase() || "general"}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <img
                     src={item.data.image}
@@ -54,11 +53,11 @@ const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", 
                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
                     <svg class="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
                   </div>
                   {item.data.title && (
-                    <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+                    <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
                       <p class="text-white text-sm font-medium">{item.data.title}</p>
                     </div>
                   )}
@@ -67,13 +66,29 @@ const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", 
             </div>
           </>
         ) : (
-          <div class="text-center py-20">
+          <div class="text-center py-20 bg-card border border-border rounded-2xl mt-12">
+            <svg class="h-16 w-16 mx-auto text-muted/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+            </svg>
             <h3 class="text-xl font-semibold mb-2">Project Gallery Coming Soon</h3>
-            <p class="text-muted">Check back soon for our project portfolio.</p>
+            <p class="text-muted mb-6">We are compiling our project portfolio. Contact us to see examples of our work.</p>
+            <a
+              href="/contact/"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200"
+            >
+              Request Portfolio
+            </a>
           </div>
         )}
       </div>
     </section>
+
+    <CTA
+      title="Start Your Project"
+      description="Ready to bring your brand to life? Contact us to discuss your signage requirements."
+      primaryLabel="Get in Touch"
+      primaryHref="/contact/"
+    />
   </div>
 </BaseLayout>
 
@@ -84,10 +99,8 @@ const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", 
   filters.forEach((btn) => {
     btn.addEventListener("click", () => {
       const filter = btn.dataset.filter;
-
       filters.forEach((b) => (b.dataset.active = "false"));
       btn.dataset.active = "true";
-
       items.forEach((item) => {
         if (filter === "all" || item.dataset.category === filter) {
           item.style.display = "block";

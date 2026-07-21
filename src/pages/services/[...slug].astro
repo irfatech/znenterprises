@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Breadcrumb from "../../components/Breadcrumb.astro";
-import ServiceCard from "../../components/ServiceCard.astro";
+import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -25,11 +24,10 @@ const { Content } = await render(service);
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Breadcrumb path={`/services/${service.id}/`} class="mb-8" />
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div>
-            <span class="text-accent font-semibold text-sm uppercase tracking-widest">Service</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mt-3 mb-6">{data.title}</h1>
+            <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Service</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">{data.title}</h1>
             <p class="text-muted text-lg leading-relaxed mb-8">{data.description}</p>
 
             {data.features && data.features.length > 0 && (
@@ -48,14 +46,18 @@ const { Content } = await render(service);
               </div>
             )}
 
-            <a href="/contact/" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200 text-lg px-8 py-4">
+            <a
+              href="/contact/"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 font-medium hover:bg-accent-hover transition-all duration-200 shadow-sm hover:shadow-md active:scale-[0.98]"
+            >
               {data.ctaText || "Get in Touch"}
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
             </a>
           </div>
 
           <div class="aspect-[4/3] rounded-2xl overflow-hidden">
             <img
-              src={data.image || "/images/service-default.jpg"}
+              src={data.image || "https://images.unsplash.com/photo-1578575436955-ef29da568c6a?w=800&q=80"}
               alt={data.title}
               class="h-full w-full object-cover"
               loading="lazy"
@@ -63,10 +65,19 @@ const { Content } = await render(service);
           </div>
         </div>
 
-        <div class="mt-16 prose prose-lg dark:prose-invert max-w-none">
-          <Content />
+        <div class="mt-16 max-w-3xl">
+          <div class="prose prose-lg dark:prose-invert max-w-none prose-headings:text-body prose-a:text-accent">
+            <Content />
+          </div>
         </div>
       </div>
     </section>
+
+    <CTA
+      title="Need This Service?"
+      description="Contact our team to discuss how we can help with your signage requirements."
+      primaryLabel="Get in Touch"
+      primaryHref="/contact/"
+    />
   </div>
 </BaseLayout>

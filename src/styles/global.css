@@ -27,6 +27,26 @@
     background-color: color-mix(in srgb, var(--color-selection-mix) 30%, transparent);
     color: var(--color-inverted);
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    transition: color 0.2s ease;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

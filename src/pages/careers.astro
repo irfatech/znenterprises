@@ -1,57 +1,55 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Breadcrumb from "../components/Breadcrumb.astro";
 
 const positions = [
   {
     title: "Signage Fabrication Technician",
     type: "Full-time",
-    location: "Bangalore",
-    description: "We are looking for experienced fabrication technicians skilled in ACP, acrylic, metal, and LED signage manufacturing.",
+    location: "Bengaluru",
+    description: "Experienced fabrication technician skilled in ACP, acrylic, metal, and LED signage manufacturing.",
   },
   {
     title: "Installation Supervisor",
     type: "Full-time",
-    location: "Bangalore",
-    description: "Seeking an experienced installation supervisor to lead signage installation projects across Karnataka.",
+    location: "Bengaluru",
+    description: "Supervise signage installation projects across Karnataka and coordinate with client site teams.",
   },
   {
     title: "Graphic Designer",
     type: "Full-time",
-    location: "Bangalore",
-    description: "Looking for a creative graphic designer with experience in corporate branding and signage design.",
+    location: "Bengaluru",
+    description: "Creative designer with experience in corporate branding, RVI design, and signage layout.",
   },
   {
     title: "Project Manager",
     type: "Full-time",
-    location: "Bangalore",
-    description: "Experienced project manager to oversee end-to-end signage project execution for corporate clients.",
+    location: "Bengaluru",
+    description: "Manage end-to-end signage project execution for corporate clients across multiple sectors.",
   },
 ];
 ---
 
 <BaseLayout
   title="Careers"
-  description="Join Z N ENTERPRISES and build a career in the corporate signage industry. We're hiring skilled professionals."
+  description="Join ZN Enterprises and build a career in the corporate signage industry. We're hiring skilled professionals in Bengaluru."
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Breadcrumb path="/careers/" class="mb-8" />
-        <div class="section-title text-left max-w-2xl">
-          <span class="text-accent font-semibold text-sm uppercase tracking-widest">Careers</span>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mt-3 mb-6">
+        <div class="max-w-3xl">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Careers</span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">
             Join Our <span class="gradient-text">Team</span>
           </h1>
-          <p class="text-muted text-lg">
-            Build your career with India's trusted corporate signage company. We're always looking for talented individuals.
+          <p class="text-muted text-lg leading-relaxed">
+            Build your career with India's trusted corporate signage company. We're always looking for skilled professionals who share our commitment to quality and engineering excellence.
           </p>
         </div>
 
         <div class="mt-12 space-y-4">
           {positions.length > 0 ? (
             positions.map((position) => (
-              <div class="card p-6 sm:p-8">
+              <div class="bg-card border border-border rounded-xl p-6 sm:p-8 hover:border-accent-border hover:shadow-lg transition-all duration-300">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
                     <h3 class="text-xl font-semibold mb-2">{position.title}</h3>
@@ -67,8 +65,8 @@ const positions = [
                     </div>
                   </div>
                   <a
-                    href={`mailto:careers@znenterprises.in?subject=Application for ${encodeURIComponent(position.title)}`}
-                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200 shrink-0"
+                    href={`mailto:imran@znenterprises.in?subject=Application for ${encodeURIComponent(position.title)}`}
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200 shrink-0 active:scale-[0.98]"
                   >
                     Apply Now
                   </a>
@@ -77,17 +75,21 @@ const positions = [
               </div>
             ))
           ) : (
-            <div class="text-center py-20">
+            <div class="text-center py-20 bg-card border border-border rounded-xl">
               <h3 class="text-xl font-semibold mb-2">No Open Positions</h3>
-              <p class="text-muted">We don't have any open positions right now. Check back later or send your resume to careers@znenterprises.in</p>
+              <p class="text-muted">We don't have any open positions right now. Send your resume to imran@znenterprises.in and we'll keep you in mind.</p>
             </div>
           )}
         </div>
 
-        <div class="mt-12 card p-8 text-center">
-          <h2 class="text-2xl font-semibold mb-4">Don't See a Matching Role?</h2>
-          <p class="text-muted mb-6">We're always interested in connecting with talented professionals. Send your resume to our careers team.</p>
-          <a href="mailto:careers@znenterprises.in" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200">
+        <div class="mt-12 bg-card border border-border rounded-xl p-8 text-center hover:border-accent-border transition-all duration-300">
+          <h2 class="text-2xl font-bold mb-4">Don't See a Matching Role?</h2>
+          <p class="text-muted mb-6">We're always interested in connecting with talented professionals. Send your resume to our hiring team.</p>
+          <a
+            href="mailto:imran@znenterprises.in"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200 active:scale-[0.98]"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
             Send Your Resume
           </a>
         </div>

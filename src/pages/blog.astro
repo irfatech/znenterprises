@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Breadcrumb from "../components/Breadcrumb.astro";
-import BlogCard from "../components/BlogCard.astro";
+import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog"))
@@ -13,29 +12,28 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
 
 <BaseLayout
   title="Blog"
-  description="Corporate signage insights, industry news, and updates from Z N ENTERPRISES."
+  description="Corporate signage insights, RVI industry news, branding trends, and updates from ZN Enterprises."
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Breadcrumb path="/blog/" class="mb-8" />
-        <div class="section-title text-left max-w-2xl">
-          <span class="text-accent font-semibold text-sm uppercase tracking-widest">Blog</span>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mt-3 mb-6">
+        <div class="max-w-3xl">
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Blog</span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">
             Latest <span class="gradient-text">Articles</span>
           </h1>
-          <p class="text-muted text-lg">
-            Corporate signage insights, industry news, and updates from the Z N ENTERPRISES team.
+          <p class="text-muted text-lg leading-relaxed">
+            Corporate signage insights, RVI industry updates, branding trends, and best practices from the ZN Enterprises team.
           </p>
         </div>
 
         {categories.length > 0 && (
-          <div class="flex flex-wrap gap-2 mb-10">
-            <a href="/blog/" class="px-5 py-2 rounded-full text-sm font-medium bg-accent text-accent-text">All</a>
+          <div class="flex flex-wrap gap-2 mt-10 mb-10">
+            <a href="/blog/" class="px-4 py-2 rounded-full text-sm font-medium bg-accent text-accent-text">All</a>
             {categories.map((cat) => (
               <a
                 href={`/blog/?category=${cat.toLowerCase()}`}
-                class="px-5 py-2 rounded-full text-sm font-medium bg-muted/10 text-muted hover:bg-muted/20 transition-colors"
+                class="px-4 py-2 rounded-full text-sm font-medium bg-muted/10 text-muted hover:bg-muted/20 transition-colors"
               >
                 {cat}
               </a>
@@ -46,16 +44,66 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
         {posts.length > 0 ? (
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
-              <BlogCard post={post} />
+              <article class="rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
+                <div class="relative aspect-[16/10] overflow-hidden bg-muted/5">
+                  <img
+                    src={post.data.image || "/images/blog-placeholder.svg"}
+                    alt={post.data.title}
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-accent text-accent-text">
+                    {post.data.category}
+                  </div>
+                </div>
+                <div class="p-5">
+                  <div class="flex items-center gap-3 text-xs text-muted mb-3">
+                    <time datetime={post.data.date.toISOString()}>
+                      {new Intl.DateTimeFormat("en-IN", { month: "short", day: "numeric", year: "numeric" }).format(post.data.date)}
+                    </time>
+                    <span>•</span>
+                    <span>{post.data.author}</span>
+                  </div>
+                  <h3 class="text-lg font-semibold mb-2 line-clamp-2">
+                    <a href={`/blog/${post.id}/`} class="hover:text-accent transition-colors">{post.data.title}</a>
+                  </h3>
+                  <p class="text-muted text-sm leading-relaxed line-clamp-3 mb-4">{post.data.excerpt}</p>
+                  <a
+                    href={`/blog/${post.id}/`}
+                    class="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+                  >
+                    Read More
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </a>
+                </div>
+              </article>
             ))}
           </div>
         ) : (
-          <div class="text-center py-20">
+          <div class="text-center py-20 bg-card border border-border rounded-2xl">
+            <svg class="h-16 w-16 mx-auto text-muted/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
             <h3 class="text-xl font-semibold mb-2">No Articles Yet</h3>
-            <p class="text-muted">Check back soon for new content.</p>
+            <p class="text-muted mb-6">Check back soon for new content on corporate signage and branding.</p>
+            <a
+              href="/contact/"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200"
+            >
+              Subscribe to Updates
+            </a>
           </div>
         )}
       </div>
     </section>
+
+    <CTA
+      title="Want to Learn More?"
+      description="Contact our team for expert advice on your corporate signage project."
+      primaryLabel="Get in Touch"
+      primaryHref="/contact/"
+    />
   </div>
 </BaseLayout>

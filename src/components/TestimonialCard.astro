@@ -11,7 +11,7 @@ interface Props {
 const { name, content, role, company, avatar, rating = 5 } = Astro.props;
 ---
 
-<figure class="rounded-2xl bg-card border-border shadow-sm p-6 sm:p-8">
+<figure class="rounded-2xl bg-card border border-border shadow-sm p-6 sm:p-8 hover:shadow-lg hover:border-accent-border transition-all duration-300">
   <div class="flex gap-1 mb-4">
     {Array.from({ length: rating }, (_, i) => (
       <svg key={i} class="h-5 w-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
@@ -21,7 +21,7 @@ const { name, content, role, company, avatar, rating = 5 } = Astro.props;
   </div>
 
   <blockquote class="text-body/80 leading-relaxed mb-6">
-    "{content}"
+    &ldquo;{content}&rdquo;
   </blockquote>
 
   <figcaption class="flex items-center gap-4">
@@ -35,7 +35,7 @@ const { name, content, role, company, avatar, rating = 5 } = Astro.props;
     <div>
       <div class="font-semibold">{name}</div>
       {(role || company) && (
-        <div class="text-sm text-metallic">{role}{role && company ? ", " : ""}{company}</div>
+        <div class="text-sm text-muted">{role}{role && company ? ", " : ""}{company}</div>
       )}
     </div>
   </figcaption>

@@ -1,0 +1,46 @@
+---
+const steps = [
+  { number: "01", title: "Consultation", description: "We begin with a thorough discussion to understand your branding requirements, site conditions, and project timelines." },
+  { number: "02", title: "Site Survey", description: "Our engineering team conducts a detailed site survey to assess structural requirements and site-specific conditions." },
+  { number: "03", title: "Design & Engineering", description: "We create detailed engineering drawings and design proposals aligned with your brand guidelines." },
+  { number: "04", title: "Approvals", description: "Designs and structural plans are reviewed and approved before manufacturing begins." },
+  { number: "05", title: "Manufacturing", description: "Signage components are precision-fabricated at our facility using premium materials." },
+  { number: "06", title: "Quality Inspection", description: "Every component undergoes rigorous quality checks before dispatch." },
+  { number: "07", title: "Installation", description: "Our trained technicians execute professional installation at your site." },
+  { number: "08", title: "Handover & Support", description: "We conduct a final inspection, handover documentation, and begin ongoing maintenance support." },
+];
+---
+
+<section class="py-16 sm:py-20 lg:py-24 bg-section">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 sm:mb-16">
+      <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Our Process</span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+        How We <span class="gradient-text">Deliver</span>
+      </h2>
+      <p class="text-muted text-lg max-w-2xl mx-auto">A systematic approach from consultation to handover, ensuring quality at every stage.</p>
+    </div>
+
+    <div class="relative">
+      <div class="absolute left-8 top-0 bottom-0 w-px bg-border hidden lg:block" />
+      <div class="space-y-8 lg:space-y-0">
+        {steps.map((step, i) => (
+          <div class="lg:grid lg:grid-cols-12 lg:gap-8 lg:items-start relative" style={`animation-delay: ${i * 0.1}s`}>
+            <div class="lg:col-span-4 lg:text-right mb-4 lg:mb-0">
+              <span class="text-4xl lg:text-5xl font-black text-accent/15 leading-none">{step.number}</span>
+            </div>
+            <div class="lg:col-span-1 hidden lg:flex justify-center">
+              <div class="h-10 w-10 rounded-full bg-accent text-accent-text flex items-center justify-center text-sm font-bold relative z-10 shadow-lg shadow-accent/25">
+                {step.number}
+              </div>
+            </div>
+            <div class="lg:col-span-7 bg-card border border-border rounded-xl p-6 sm:p-8 hover:border-accent-border hover:shadow-lg transition-all duration-300">
+              <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
+              <p class="text-muted leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

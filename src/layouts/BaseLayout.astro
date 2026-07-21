@@ -5,7 +5,6 @@ import Footer from "../components/Footer.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 import PwaToast from "../components/PwaToast.astro";
 import PwaInstallButton from "../components/PwaInstallButton.astro";
-import ThemePicker from "../components/ThemePicker.astro";
 import SEO from "../components/SEO.astro";
 import type { SEOProps } from "../lib/seo";
 
@@ -34,28 +33,21 @@ const seoProps = { ...seo, title, description, image };
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Z N Enterprises" />
-    {preloadHero && <link rel="preload" as="image" href="/images/hero-bg.jpg" />}
+    <meta name="apple-mobile-web-app-title" content="ZN Enterprises" />
+    {preloadHero && <link rel="preload" as="image" href="/images/hero-bg.png" />}
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin.woff2" />
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/bruno-ace-latin.woff2" />
     <SEO {...seoProps} />
     <script is:inline>
       (function () {
-        // Restore dark mode (default dark)
         const theme = localStorage.getItem("theme");
         if (theme !== "light") {
           document.documentElement.classList.add("dark");
-        }
-        // Restore color palette theme
-        const palette = localStorage.getItem("theme-palette");
-        if (palette && palette !== "brand") {
-          document.documentElement.setAttribute("data-theme", palette);
         }
       })();
     </script>
   </head>
   <body class="flex flex-col min-h-screen bg-page text-body font-sans antialiased">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-text focus:rounded-xl focus:outline-none">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-text focus:rounded-xl focus:outline-none focus:shadow-lg">
       Skip to main content
     </a>
     <Navbar />
@@ -63,7 +55,6 @@ const seoProps = { ...seo, title, description, image };
       <slot />
     </main>
     <Footer />
-    <!-- <ThemePicker /> -->
     <PwaToast />
     <PwaInstallButton />
     <WhatsAppButton />

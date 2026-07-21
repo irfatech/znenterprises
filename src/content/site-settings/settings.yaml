@@ -1,16 +1,15 @@
-siteName: Z N ENTERPRISES
-tagline: Premium Corporate Signage Solutions
-description: Z N ENTERPRISES specializes in designing, manufacturing, installing, repairing, and maintaining premium corporate signage across India.
+siteName: ZN Enterprises
+tagline: Fueling Your Visibility Across Pan-India
+description: ZN Enterprises is a full-service signage manufacturing company specializing in Retail Visual Identity (RVI), corporate branding, petroleum station signage, architectural signage, fabrication, installation, and maintenance services across India.
 url: https://znenterprises.in
-logo: /images/zn-enterprises-logo.png
+logo: /zn-enterprises-logo.png
 favicon: /favicon.svg
 phone:
-  - +91 98765 43210
-email: info@znenterprises.in
-address: Bangalore, Karnataka, India
+  - +91 9902595400
+  - +91 9686201985
+email: imran@znenterprises.in
+address: No.15, S.M & Sons Residency, 1st Floor, 3rd Cross Road, St Mary's Layout, K.G Halli, Bengaluru - 560045
 workingHours: Mon–Sat, 9:00–18:00
 social:
-  facebook: https://facebook.com/znenterprises
-  instagram: https://instagram.com/znenterprises
-  whatsapp: '+919876543210'
+  whatsapp: '+919902595400'
 currency: INR

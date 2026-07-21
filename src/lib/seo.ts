@@ -13,10 +13,10 @@ export interface SEOProps {
 }
 
 const defaults = {
-  siteName: "Z N ENTERPRISES",
-  title: "Z N ENTERPRISES — Premium Corporate Signage Solutions Across India",
+  siteName: "ZN Enterprises",
+  title: "ZN Enterprises — Corporate Signage Manufacturing & Installation Across India",
   description:
-    "Z N ENTERPRISES specializes in designing, manufacturing, installing, repairing, and maintaining premium corporate signage across India.",
+    "ZN Enterprises is a full-service corporate signage manufacturer specializing in Retail Visual Identity (RVI), petroleum signage, LED signage, and industrial fabrication across India.",
   url: "https://znenterprises.in",
   image: "/images/og-default.jpg",
 };

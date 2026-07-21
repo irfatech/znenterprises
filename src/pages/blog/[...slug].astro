@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Breadcrumb from "../../components/Breadcrumb.astro";
+import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -29,29 +29,28 @@ const { Content } = await render(post);
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Breadcrumb path={`/blog/${post.id}/`} class="mb-8" />
         <article class="max-w-3xl mx-auto">
           <div class="mb-8">
             <div class="flex items-center gap-3 text-sm text-muted mb-4">
               <span class="px-3 py-1 rounded-full bg-accent-soft text-accent text-xs font-medium">{data.category}</span>
               <time datetime={data.date.toISOString()}>
-                {new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(data.date)}
+                {new Intl.DateTimeFormat("en-IN", { month: "long", day: "numeric", year: "numeric" }).format(data.date)}
               </time>
               <span>•</span>
               <span>{data.author}</span>
             </div>
 
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">{data.title}</h1>
-            <p class="text-lg text-muted">{data.excerpt}</p>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6">{data.title}</h1>
+            <p class="text-lg text-muted leading-relaxed">{data.excerpt}</p>
           </div>
 
           {data.image && (
-            <div class="aspect-[16/9] rounded-2xl overflow-hidden mb-10">
+            <div class="aspect-[16/9] rounded-2xl overflow-hidden mb-10 shadow-md">
               <img src={data.image} alt={data.title} class="h-full w-full object-cover" loading="lazy" />
             </div>
           )}
 
-          <div class="prose prose-lg dark:prose-invert max-w-none">
+          <div class="prose prose-lg dark:prose-invert max-w-none prose-headings:text-body prose-a:text-accent">
             <Content />
           </div>
 
@@ -65,8 +64,11 @@ const { Content } = await render(post);
             </div>
           )}
 
-          <div class="mt-10 pt-8 border-t border-border flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <a href="/blog/" class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-btn-secondary-border text-btn-secondary-text px-6 py-3 font-medium hover:bg-btn-secondary-hover-bg hover:text-btn-secondary-hover-text transition-all duration-200">
+          <div class="mt-10 pt-8 border-t border-border">
+            <a
+              href="/blog/"
+              class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-6 py-3 font-medium hover:bg-body hover:text-page transition-all duration-200"
+            >
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
               Back to Blog
             </a>
@@ -74,5 +76,12 @@ const { Content } = await render(post);
         </article>
       </div>
     </section>
+
+    <CTA
+      title="Need Signage Solutions?"
+      description="Contact ZN Enterprises for expert corporate signage manufacturing and installation."
+      primaryLabel="Get in Touch"
+      primaryHref="/contact/"
+    />
   </div>
 </BaseLayout>

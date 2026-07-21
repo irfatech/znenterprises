@@ -9,7 +9,7 @@ const { post } = Astro.props;
 const { data } = post;
 ---
 
-<article class="rounded-2xl bg-card border-border shadow-sm hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
+<article class="rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
   <div class="relative aspect-[16/10] overflow-hidden bg-muted/5">
     <img
       src={data.image || "/images/blog-placeholder.svg"}
@@ -25,7 +25,7 @@ const { data } = post;
   <div class="p-5">
     <div class="flex items-center gap-3 text-xs text-muted mb-3">
       <time datetime={data.date.toISOString()}>
-        {new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(data.date)}
+        {new Intl.DateTimeFormat("en-IN", { month: "short", day: "numeric", year: "numeric" }).format(data.date)}
       </time>
       <span>•</span>
       <span>{data.author}</span>
