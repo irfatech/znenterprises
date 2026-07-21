@@ -1,8 +1,5 @@
 ---
-import { getSiteSettings } from "../lib/site";
-
-const base = import.meta.env.BASE_URL;
-const p = (path: string) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
+import { getSiteSettings, p } from "../lib/site";
 
 const settings = await getSiteSettings();
 const currentYear = new Date().getFullYear();

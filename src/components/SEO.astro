@@ -1,6 +1,9 @@
 ---
 import { buildSEO } from "../lib/seo";
+import { getSiteSettings } from "../lib/site";
 import type { SEOProps } from "../lib/seo";
+
+const settings = await getSiteSettings();
 
 const {
   title,
@@ -28,6 +31,50 @@ const schemaOrg = breadcrumbs
       })),
     }
   : null;
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: settings.siteName,
+      url: settings.url,
+      logo: settings.logo ? `${settings.url}${settings.logo}` : undefined,
+      description: settings.description,
+      contactPoint: settings.phone[0] ? {
+        "@type": "ContactPoint",
+        telephone: settings.phone[0],
+        contactType: "sales",
+      } : undefined,
+      sameAs: [
+        settings.social?.facebook,
+        settings.social?.instagram,
+        settings.social?.youtube,
+      ].filter(Boolean),
+    },
+    ...(settings.address ? [{
+      "@type": "LocalBusiness",
+      name: settings.siteName,
+      "@id": settings.url,
+      url: settings.url,
+      image: settings.logo ? `${settings.url}${settings.logo}` : undefined,
+      telephone: settings.phone[0],
+      email: settings.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: settings.address,
+        addressCountry: "IN",
+      },
+      openingHoursSpecification: settings.workingHours ? [{
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      }] : undefined,
+      priceRange: "₹₹",
+    }] : []),
+  ],
+};
 ---
 
 <title>{title}</title>
@@ -51,6 +98,7 @@ const schemaOrg = breadcrumbs
 {noIndex && <meta name="robots" content="noindex,nofollow" />}
 
 <script type="application/ld+json" set:html={schemaOrg && JSON.stringify(schemaOrg)} />
+<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
 
 {breadcrumbs && (
   <nav aria-label="Breadcrumb" class="sr-only">

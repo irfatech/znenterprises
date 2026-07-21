@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
+import BlogCard from "../components/BlogCard.astro";
 import { getCollection } from "astro:content";
+import { p } from "../lib/site";
 
-const base = import.meta.env.BASE_URL;
-const p = (path) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
 
 const posts = (await getCollection("blog"))
   .filter((p) => p.data.published)
@@ -47,41 +47,7 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
         {posts.length > 0 ? (
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
-              <article class="rounded-2xl bg-card border border-border hover:shadow-lg hover:border-accent-border hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
-                <div class="relative aspect-[16/10] overflow-hidden bg-muted/5">
-                  <img
-                    src={post.data.image ? p(post.data.image) : p("/images/blog-placeholder.svg")}
-                    alt={post.data.title}
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-accent text-accent-text">
-                    {post.data.category}
-                  </div>
-                </div>
-                <div class="p-5">
-                  <div class="flex items-center gap-3 text-xs text-muted mb-3">
-                    <time datetime={post.data.date.toISOString()}>
-                      {new Intl.DateTimeFormat("en-IN", { month: "short", day: "numeric", year: "numeric" }).format(post.data.date)}
-                    </time>
-                    <span>•</span>
-                    <span>{post.data.author}</span>
-                  </div>
-                  <h3 class="text-lg font-semibold mb-2 line-clamp-2">
-                    <a href={p(`/blog/${post.id}/`)} class="hover:text-accent transition-colors">{post.data.title}</a>
-                  </h3>
-                  <p class="text-muted text-sm leading-relaxed line-clamp-3 mb-4">{post.data.excerpt}</p>
-                  <a
-                    href={p(`/blog/${post.id}/`)}
-                    class="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
-                  >
-                    Read More
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </a>
-                </div>
-              </article>
+              <BlogCard post={post} />
             ))}
           </div>
         ) : (

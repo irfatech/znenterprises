@@ -1,6 +1,9 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 
+const base = import.meta.env.BASE_URL;
+export const p = (path: string) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
+
 export interface NavItem {
   label: string;
   href: string;

@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
+import { p } from "../../lib/site";
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
@@ -11,8 +12,6 @@ export async function getStaticPaths() {
   }));
 }
 
-const base = import.meta.env.BASE_URL;
-const p = (path) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
 
 const { product } = Astro.props;
 const { data } = product;
