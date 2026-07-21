@@ -1,0 +1,29 @@
+sectionLabel: "/// Our Process"
+heading: How We Deliver
+highlightWord: Deliver
+subtitle: A systematic approach from consultation to handover, ensuring quality at every stage.
+steps:
+  - number: "01"
+    title: Consultation
+    description: We begin with a thorough discussion to understand your branding requirements, site conditions, and project timelines.
+  - number: "02"
+    title: Site Survey
+    description: Our engineering team conducts a detailed site survey to assess structural requirements and site-specific conditions.
+  - number: "03"
+    title: Design & Engineering
+    description: We create detailed engineering drawings and design proposals aligned with your brand guidelines.
+  - number: "04"
+    title: Approvals
+    description: Designs and structural plans are reviewed and approved before manufacturing begins.
+  - number: "05"
+    title: Manufacturing
+    description: Signage components are precision-fabricated at our facility using premium materials.
+  - number: "06"
+    title: Quality Inspection
+    description: Every component undergoes rigorous quality checks before dispatch.
+  - number: "07"
+    title: Installation
+    description: Our trained technicians execute professional installation at your site.
+  - number: "08"
+    title: Handover & Support
+    description: We conduct a final inspection, handover documentation, and begin ongoing maintenance support.

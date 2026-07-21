@@ -196,6 +196,92 @@ const footer = defineCollection({
   }),
 });
 
+const hero = defineCollection({
+  loader: glob({ pattern: "hero.yaml", base: "./src/content/hero" }),
+  schema: z.object({
+    badge: z.string(),
+    headingLine1: z.string(),
+    headingLine2: z.string(),
+    headingLine3: z.string(),
+    highlightLine: z.number({ coerce: true }).int().min(1).max(3).default(2),
+    subtitle: z.string(),
+    ctaPrimaryText: z.string(),
+    ctaPrimaryLink: z.string(),
+    ctaSecondaryText: z.string(),
+    ctaSecondaryLink: z.string(),
+    trustBadges: z.array(z.object({
+      text: z.string(),
+    })).default([]),
+    heroImage: z.string(),
+    heroImageAlt: z.string().default(""),
+  }),
+});
+
+const process = defineCollection({
+  loader: glob({ pattern: "process.yaml", base: "./src/content/process" }),
+  schema: z.object({
+    sectionLabel: z.string(),
+    heading: z.string(),
+    highlightWord: z.string(),
+    subtitle: z.string(),
+    steps: z.array(z.object({
+      number: z.string(),
+      title: z.string(),
+      description: z.string(),
+    })),
+  }),
+});
+
+const about = defineCollection({
+  loader: glob({ pattern: "about.yaml", base: "./src/content/about" }),
+  schema: z.object({
+    heroLabel: z.string(),
+    heroHeading: z.string(),
+    heroHighlight: z.string(),
+    heroDescription: z.string(),
+
+    storyImage: z.string(),
+    storyImageAlt: z.string().default(""),
+    storyHeading: z.string(),
+    storyHighlight: z.string(),
+    storyParagraphs: z.array(z.string()),
+    stats: z.array(z.object({
+      number: z.string(),
+      label: z.string(),
+    })),
+
+    missionTitle: z.string(),
+    missionText: z.string(),
+    visionTitle: z.string(),
+    visionText: z.string(),
+
+    valuesSectionLabel: z.string(),
+    valuesHeading: z.string(),
+    valuesHighlight: z.string(),
+    valuesSubtitle: z.string(),
+    values: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+    })),
+
+    homeLabel: z.string(),
+    homeHeading: z.string(),
+    homeHighlight: z.string(),
+    homeParagraphs: z.array(z.string()),
+    homeImage1: z.string(),
+    homeImage1Alt: z.string().default(""),
+    homeImage2: z.string(),
+    homeImage2Alt: z.string().default(""),
+
+    ctaTitle: z.string(),
+    ctaDescription: z.string(),
+    ctaPrimaryLabel: z.string(),
+    ctaPrimaryLink: z.string(),
+    ctaSecondaryLabel: z.string(),
+    ctaSecondaryLink: z.string(),
+  }),
+});
+
 export const collections = {
   blog,
   products,
@@ -209,5 +295,7 @@ export const collections = {
   "site-settings": siteSettings,
   navigation,
   footer,
-
+  hero,
+  process,
+  about,
 };

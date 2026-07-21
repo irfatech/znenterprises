@@ -28,6 +28,19 @@ const testimonials = (await getCollection("testimonials"))
   .filter((t) => t.data.featured)
   .slice(0, 3);
 
+const [aboutEntry] = await getCollection("about");
+const a = aboutEntry?.data;
+const homeLabel = a?.homeLabel ?? "/// About";
+const homeHeading = a?.homeHeading ?? "India's Trusted Corporate Signage Partner";
+const homeHighlight = a?.homeHighlight ?? "Corporate Signage Partner";
+const homeParagraphs = a?.homeParagraphs ?? [];
+const homeImage1 = a?.homeImage1 ?? "/images/about-1.jpg";
+const homeImage1Alt = a?.homeImage1Alt ?? "";
+const homeImage2 = a?.homeImage2 ?? "/images/about-2.jpg";
+const homeImage2Alt = a?.homeImage2Alt ?? "";
+const homeHeadingParts = homeHeading.split(homeHighlight);
+const showHomeHighlight = homeHeadingParts.length > 1 && homeHighlight;
+
 const whyChooseUs = [
   {
     title: "End-to-End Execution",
@@ -77,17 +90,15 @@ const clients = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div>
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// About</span>
+          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">{homeLabel}</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
-            India's Trusted<br />
-            <span class="gradient-text">Corporate Signage Partner</span>
+            {showHomeHighlight ? homeHeadingParts[0] : homeHeading}
+            {showHomeHighlight && <span class="gradient-text">{homeHighlight}</span>}
+            {showHomeHighlight && homeHeadingParts.slice(1).join("")}
           </h2>
-          <p class="text-muted leading-relaxed text-lg mb-6">
-            ZN Enterprises is a full-service signage manufacturing company specializing in Retail Visual Identity (RVI), corporate branding, petroleum station signage, architectural signage, fabrication, installation, and maintenance services.
-          </p>
-          <p class="text-muted leading-relaxed mb-8">
-            With 8+ years of experience and a project execution capability exceeding ₹11 Crore annually, we serve leading enterprises across petroleum, automotive, banking, telecom, and industrial sectors throughout India.
-          </p>
+          {homeParagraphs.map((p) => (
+            <p class="text-muted leading-relaxed text-lg mb-6">{p}</p>
+          ))}
           <div class="flex flex-wrap gap-3">
             <a
               href="/about/"
@@ -107,12 +118,12 @@ const clients = [
         <div class="grid grid-cols-2 gap-4">
           <div class="space-y-4">
             <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-section">
-              <img src="https://images.unsplash.com/photo-1578575436955-ef29da568c6a?w=600&q=80" alt="Industrial signage fabrication" class="h-full w-full object-cover" loading="lazy" />
+              <img src={homeImage1} alt={homeImage1Alt} class="h-full w-full object-cover" loading="lazy" />
             </div>
           </div>
           <div class="space-y-4 mt-8">
             <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-section">
-              <img src="https://images.unsplash.com/photo-1565479786208-530fb8a4fc0e?w=600&q=80" alt="Corporate building signage installation" class="h-full w-full object-cover" loading="lazy" />
+              <img src={homeImage2} alt={homeImage2Alt} class="h-full w-full object-cover" loading="lazy" />
             </div>
           </div>
         </div>
