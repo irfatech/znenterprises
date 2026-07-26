@@ -2,7 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
-import { p } from "../../lib/site";
+import { p, generateBreadcrumbs } from "../../lib/site";
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
@@ -16,13 +17,28 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 const { data } = product;
 const { Content } = await render(product);
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: data.title,
+  description: data.description,
+  category: data.category,
+  ...(data.features?.length ? { features: data.features } : {}),
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+  },
+};
 ---
 
 <BaseLayout
   title={data.title}
   description={data.description}
   image={data.image}
+  seo={{ breadcrumbs }}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

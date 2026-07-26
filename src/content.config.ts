@@ -282,6 +282,19 @@ const about = defineCollection({
   }),
 });
 
+const clients = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/clients" }),
+  schema: z.object({
+    name: z.string(),
+    fullName: z.string().optional(),
+    slug: z.string(),
+    logo: z.string(),
+    description: z.string(),
+    order: z.number({ coerce: true }).int().default(0),
+    lang: z.string().default("en"),
+  }),
+});
+
 export const collections = {
   blog,
   products,
@@ -292,6 +305,7 @@ export const collections = {
   gallery,
   pages,
   partners,
+  clients,
   "site-settings": siteSettings,
   navigation,
   footer,

@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 
 export default defineConfig({
-  site: "https://irfatech.github.io/znenterprises",
+  site: "https://znenterprises.in",
   base: "/znenterprises",
   output: "static",
   trailingSlash: "always",
@@ -27,5 +27,17 @@ export default defineConfig({
   image: {
     service: { entrypoint: "astro/assets/services/sharp" },
   },
-
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data: https:",
+        "font-src 'self'",
+        "connect-src 'self'",
+        "frame-src 'self' https://www.google.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+      ],
+    },
+  },
 });

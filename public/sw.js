@@ -1,24 +1,27 @@
-const CACHE_NAME = "ashaz-autoz-v1";
+const CACHE_NAME = "znenterprises-v1";
+
+const BASE = "/znenterprises";
 
 const PRECACHE_URLS = [
-  "/",
-  "/about/",
-  "/services/",
-  "/vehicles/",
-  "/contact/",
-  "/install/",
-  "/fonts/inter-latin.woff2",
-  "/fonts/bruno-ace-latin.woff2",
-  "/fonts/lato-latin-300.woff2",
-  "/fonts/lato-latin-400.woff2",
-  "/fonts/lato-latin-700.woff2",
-  "/manifest.json",
-  "/favicon.svg",
-  "/apple-touch-icon.png",
-  "/pwa-192x192.png",
-  "/pwa-512x512.png",
-  "/ashaz-logo.png",
-  "/icon.png",
+  `${BASE}/`,
+  `${BASE}/about/`,
+  `${BASE}/services/`,
+  `${BASE}/industries/`,
+  `${BASE}/blog/`,
+  `${BASE}/faq/`,
+  `${BASE}/gallery/`,
+  `${BASE}/products/`,
+  `${BASE}/projects/`,
+  `${BASE}/careers/`,
+  `${BASE}/privacy/`,
+  `${BASE}/terms/`,
+  `${BASE}/contact/`,
+  `${BASE}/fonts/inter-latin.woff2`,
+  `${BASE}/manifest.json`,
+  `${BASE}/favicon.svg`,
+  `${BASE}/apple-touch-icon.png`,
+  `${BASE}/pwa-192x192.png`,
+  `${BASE}/pwa-512x512.png`,
 ];
 
 self.addEventListener("install", (event) => {
@@ -67,7 +70,7 @@ async function networkFirst(request) {
   } catch {
     const cached = await caches.match(request);
     if (cached) return cached;
-    return caches.match("/");
+    return caches.match(`${BASE}/`);
   }
 }
 

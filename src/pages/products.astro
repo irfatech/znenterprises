@@ -2,7 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
-import { p } from "../lib/site";
+import { p, generateBreadcrumbs } from "../lib/site";
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
 const allProducts = (await getCollection("products"))
@@ -14,6 +15,7 @@ const categories = [...new Set(allProducts.map((p) => p.data.category))];
 <BaseLayout
   title="Products"
   description="Explore premium corporate signage products from ZN Enterprises — LED boards, illuminated signage, ACP signage, monoliths, totems, and more."
+  seo={{ breadcrumbs }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

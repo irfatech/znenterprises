@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { p } from "../lib/site";
+import { p, generateBreadcrumbs } from "../lib/site";
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
 const images = (await getCollection("gallery")).sort(() => Math.random() - 0.5);
@@ -11,6 +12,7 @@ const categories = ["All", "Corporate", "Petroleum", "Retail", "Manufacturing", 
 <BaseLayout
   title="Gallery"
   description="Browse ZN Enterprises' project gallery showcasing corporate signage, LED boards, petroleum branding, and installation work across India."
+  seo={{ breadcrumbs }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

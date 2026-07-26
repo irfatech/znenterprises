@@ -3,7 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import { getCollection } from "astro:content";
-import { p } from "../lib/site";
+import { p, generateBreadcrumbs } from "../lib/site";
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
 const services = (await getCollection("services"))
@@ -13,6 +14,7 @@ const services = (await getCollection("services"))
 <BaseLayout
   title="Services"
   description="Comprehensive corporate signage services across India — design, manufacturing, installation, repair, and maintenance by ZN Enterprises."
+  seo={{ breadcrumbs }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

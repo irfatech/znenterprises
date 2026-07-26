@@ -2,18 +2,26 @@
 const stats = [
   { label: "Years of Experience", value: "8+" },
   { label: "Annual Project Value", value: "₹11 Cr+" },
-  { label: "Corporate Clients", value: "50+" },
-  { label: "Pan-India Coverage", value: "All States" },
+  { label: "PSU Clients", value: "Top Indian" },
+  { label: "Region of India", value: "Southern" },
 ];
 ---
 
-<section class="bg-inverse py-14 sm:py-16">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
-      {stats.map((stat) => (
-        <div class="text-center">
-          <div class="text-4xl sm:text-5xl font-black text-accent mb-2 tracking-tight">{stat.value}</div>
-          <div class="text-xs uppercase tracking-[0.12em] text-inverted/50 font-medium">{stat.label}</div>
+<section class="relative overflow-hidden bg-hero py-14 sm:py-16">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(252,163,17,0.08),transparent_60%)]" />
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(252,163,17,0.04),transparent_50%)] dark:opacity-60" />
+  <div aria-hidden="true" class="absolute inset-0 opacity-[0.03] dark:opacity-[0.06]" style="background-image: radial-gradient(circle, #fca311 1px, transparent 1px); background-size: 24px 24px;" />
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
+      {stats.map((stat, i) => (
+        <div class="text-center py-4 animate-slide-up-sm" style={`animation-delay: ${i * 100}ms`}>
+          <div class="text-4xl sm:text-5xl font-black text-accent mb-1 tracking-tight drop-shadow-sm">
+            {stat.value}
+          </div>
+          <div class="text-xs uppercase tracking-[0.15em] text-white/50 font-medium">
+            {stat.label}
+          </div>
         </div>
       ))}
     </div>

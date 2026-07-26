@@ -1,10 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { generateBreadcrumbs } from "../lib/site";
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 ---
 
 <BaseLayout
   title="Privacy Policy"
   description="Privacy policy for ZN Enterprises website."
+  seo={{ breadcrumbs }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

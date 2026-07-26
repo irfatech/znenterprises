@@ -1,26 +1,26 @@
 {
-  "name": "Z N ENTERPRISES",
+  "name": "ZN Enterprises",
   "short_name": "ZN Enterprises",
   "description": "Premium Corporate Signage Solutions Across India",
-  "start_url": "/",
-  "scope": "/",
-  "id": "/",
+  "start_url": "/znenterprises/",
+  "scope": "/znenterprises/",
+  "id": "/znenterprises/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
   "background_color": "#fafafa",
-  "theme_color": "#DA291C",
+  "theme_color": "#14213d",
   "orientation": "portrait-primary",
   "categories": ["business", "signage", "manufacturing"],
   "lang": "en",
   "icons": [
     {
-      "src": "/pwa-192x192.png",
+      "src": "/znenterprises/pwa-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/pwa-512x512.png",
+      "src": "/znenterprises/pwa-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

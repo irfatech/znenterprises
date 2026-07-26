@@ -6,6 +6,7 @@ import ProcessTimeline from "../components/ProcessTimeline.astro";
 import CTA from "../components/CTA.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import BlogCard from "../components/BlogCard.astro";
+import ClientCard from "../components/ClientCard.astro";
 import { getCollection } from "astro:content";
 import { p, getSiteSettings } from "../lib/site";
 
@@ -30,6 +31,9 @@ const latestPosts = (await getCollection("blog"))
 const testimonials = (await getCollection("testimonials"))
   .filter((t) => t.data.featured)
   .slice(0, 3);
+
+const clients = (await getCollection("clients"))
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 
 const [aboutEntry] = await getCollection("about");
 const a = aboutEntry?.data;
@@ -67,17 +71,8 @@ const whyChooseUs = [
   },
 ];
 
-const clients = [
-  { name: "IOCL" },
-  { name: "HPCL" },
-  { name: "BPCL" },
-  { name: "Shell" },
-  { name: "Reliance" },
-  { name: "Honda" },
-  { name: "SBI" },
-  { name: "Airtel" },
-];
 ---
+
 
 <BaseLayout
   title="Corporate Signage Manufacturing & Installation | ZN Enterprises"
@@ -259,13 +254,16 @@ const clients = [
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
           Our <span class="gradient-text">Clients</span>
         </h2>
-        <p class="text-muted text-lg max-w-2xl mx-auto">Trusted by India's leading corporations across petroleum, automotive, banking, and telecom sectors.</p>
+        <p class="text-muted text-lg max-w-2xl mx-auto">Trusted partners in petroleum retail branding across India.</p>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
         {clients.map((client) => (
-          <div class="bg-card border border-border rounded-xl p-5 flex items-center justify-center hover:border-accent-border hover:shadow-md transition-all duration-300">
-            <span class="font-bold text-sm sm:text-base text-muted tracking-wider">{client.name}</span>
-          </div>
+          <ClientCard
+            name={client.data.name}
+            fullName={client.data.fullName}
+            logo={client.data.logo}
+            description={client.data.description}
+          />
         ))}
       </div>
     </div>

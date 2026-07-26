@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { generateBreadcrumbs } from "../lib/site";
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 const positions = [
   {
@@ -32,6 +34,7 @@ const positions = [
 <BaseLayout
   title="Careers"
   description="Join ZN Enterprises and build a career in the corporate signage industry. We're hiring skilled professionals in Bengaluru."
+  seo={{ breadcrumbs }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

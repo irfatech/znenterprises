@@ -3,7 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import BlogCard from "../components/BlogCard.astro";
 import { getCollection } from "astro:content";
-import { p } from "../lib/site";
+import { p, generateBreadcrumbs } from "../lib/site";
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
 const posts = (await getCollection("blog"))
@@ -16,6 +17,7 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
 <BaseLayout
   title="Blog"
   description="Corporate signage insights, RVI industry news, branding trends, and updates from ZN Enterprises."
+  seo={{ breadcrumbs }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
@@ -35,7 +37,7 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
             <a href={p("/blog/")} class="px-4 py-2 rounded-full text-sm font-medium bg-accent text-accent-text">All</a>
             {categories.map((cat) => (
               <a
-                href={p(`/blog/?category=${cat.toLowerCase()}`)}
+                href={`/blog/?category=${cat.toLowerCase()}`}
                 class="px-4 py-2 rounded-full text-sm font-medium bg-muted/10 text-muted hover:bg-muted/20 transition-colors"
               >
                 {cat}

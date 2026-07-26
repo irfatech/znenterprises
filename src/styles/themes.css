@@ -7,18 +7,18 @@
 
   --color-body: #e5e7eb;
   --color-muted: #9ca3af;
-  --color-inverted: #0F1D3A;
+  --color-inverted: #14213d;
 
-  --color-accent: #FF7A2E;
-  --color-accent-hover: #FF8C4A;
-  --color-accent-text: #080c16;
+  --color-accent: #fca311;
+  --color-accent-hover: #fdd166;
+  --color-accent-text: #000000;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, transparent);
-  --color-accent-border: #9a3412;
+  --color-accent-border: #a86b0b;
 
   --color-border: color-mix(in srgb, #ffffff 10%, transparent);
   --color-border-strong: #374151;
 
-  --color-hero: #060e19;
+  --color-hero: #080d1c;
 
   --color-nav-bg: color-mix(in srgb, #080c16 60%, transparent);
   --color-nav-border: color-mix(in srgb, #ffffff 10%, transparent);
@@ -26,11 +26,11 @@
   --color-btn-secondary-border: #ffffff;
   --color-btn-secondary-text: #ffffff;
   --color-btn-secondary-hover-bg: #ffffff;
-  --color-btn-secondary-hover-text: #0F1D3A;
+  --color-btn-secondary-hover-text: #14213d;
 
   --color-input-border: #374151;
 
-  --color-selection-mix: #FF7A2E;
+  --color-selection-mix: #fca311;
 }
 
 /* Alternate theme */
