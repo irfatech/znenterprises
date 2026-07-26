@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import { p } from "../lib/site";
 
 
+
+
 const [heroEntry] = await getCollection("hero");
 const hero = heroEntry?.data;
 

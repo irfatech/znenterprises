@@ -28,16 +28,6 @@ export default defineConfig({
     service: { entrypoint: "astro/assets/services/sharp" },
   },
   security: {
-    csp: {
-      directives: [
-        "default-src 'self'",
-        "img-src 'self' data: https:",
-        "font-src 'self'",
-        "connect-src 'self'",
-        "frame-src 'self' https://www.google.com",
-        "object-src 'none'",
-        "base-uri 'self'",
-      ],
-    },
+    csp: false,
   },
 });
