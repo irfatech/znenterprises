@@ -7,6 +7,9 @@ const currentYear = new Date().getFullYear();
 const phoneClean = (p: string) => p.replace(/[^0-9]/g, "");
 const phoneDisplay = (p: string) => {
   const clean = phoneClean(p);
+  if (clean.startsWith("91") && clean.length === 12) {
+    return `+91 ${clean.slice(2, 7)} ${clean.slice(7)}`;
+  }
   return clean.replace(/(\d{5})(\d{5})/, "$1 $2");
 };
 
@@ -25,11 +28,12 @@ const columns = [
   {
     title: "Services",
     links: [
-      { label: "Corporate Signage", href: p("/services/corporate-signage/") },
-      { label: "LED Signage", href: p("/services/led-signage/") },
-      { label: "Petroleum RVI", href: p("/services/petroleum-station-branding/") },
-      { label: "Installation", href: p("/services/installation/") },
-      { label: "Maintenance", href: p("/services/repair-maintenance/") },
+      { label: "Pump & Canopy Signage", href: p("/products/petrol-pump-branding/") },
+      { label: "LED Signage", href: p("/products/led-sign-boards/") },
+      { label: "Pylon Signage", href: p("/products/pylon-signage/") },
+      { label: "Totem Signage", href: p("/products/") },
+      { label: "ACP Cladding", href: p("/products/acp-signage/") },
+      { label: "Programmatic Maintenance", href: p("/services/repair-maintenance/") },
     ],
   },
   {
@@ -82,7 +86,7 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
           <img src={p("/zn-enterprises-logo.png")} alt="ZN Enterprises" class="h-12 w-auto brightness-0 invert" width="1536" height="1024" loading="lazy" />
         </a>
         <p class="mt-4 text-inverted/50 leading-relaxed text-sm max-w-xs">
-          India's trusted corporate signage partner, delivering end-to-end Retail Visual Identity (RVI) and industrial signage solutions across the country.
+          India's trusted petroleum &amp; retail signage manufacturer — delivering end-to-end signage solutions manufactured, installed, and maintained 100% in-house.
         </p>
         <div class="mt-6 flex gap-4">
           {settings.social?.facebook && (
@@ -122,9 +126,16 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
           <li class="flex items-start gap-3">
             <svg class="h-5 w-5 mt-0.5 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
             <div>
-              <span class="block text-inverted/70">Bengaluru Office</span>
-              <span class="block">No.15, S.M & Sons Residency, 1st Floor, K.G Halli</span>
+              <span class="block text-inverted/70">Office</span>
+              <span class="block">No. 15, ST Mary's Layout, 1st Floor, SM &amp; Sons, K.G Halli, Bengaluru – 560045</span>
               <a href={mapsHref} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-xs">Get directions</a>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="h-5 w-5 mt-0.5 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            <div>
+              <span class="block text-inverted/70">Factory</span>
+              <span class="block">No. 85/2, Site No. 9, Sulikere Road, Ramasandra Village, Sulikere Post, Hobli Kengeri, Bengaluru – 560060</span>
             </div>
           </li>
           {settings.phone.map((p) => {
@@ -159,7 +170,7 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 
   <div class="border-t border-white/10 py-6">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-inverted/40">
-      <p>&copy; {currentYear} ZN Enterprises. All rights reserved.</p>
+      <p>&copy; {currentYear} ZN Enterprises. All rights reserved. Bengaluru, India.&nbsp; GST Registered | MSME Certified</p>
       <div class="flex items-center gap-6">
         <a href={p("/privacy/")} class="hover:text-inverted transition-colors">Privacy Policy</a>
         <a href={p("/terms/")} class="hover:text-inverted transition-colors">Terms & Conditions</a>

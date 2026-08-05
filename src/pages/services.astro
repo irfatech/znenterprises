@@ -37,6 +37,7 @@ const services = (await getCollection("services"))
                 icon={service.data.icon}
                 href={`/services/${service.id}/`}
                 features={service.data.features?.slice(0, 4)}
+                image={service.data.image}
               />
           ))}
         </div>

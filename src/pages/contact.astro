@@ -7,6 +7,9 @@ const settings = await getSiteSettings();
 const phoneClean = (p: string) => p.replace(/[^0-9]/g, "");
 const phoneDisplay = (p: string) => {
   const clean = phoneClean(p);
+  if (clean.startsWith("91") && clean.length === 12) {
+    return `+91 ${clean.slice(2, 7)} ${clean.slice(7)}`;
+  }
   return clean.replace(/(\d{5})(\d{5})/, "$1 $2");
 };
 ---
@@ -37,9 +40,9 @@ const phoneDisplay = (p: string) => {
                 <div>
                   <h3 class="font-semibold">Office Address</h3>
                   <p class="text-muted mt-1 leading-relaxed">
-                    No.15, S.M & Sons Residency,<br />
-                    1st Floor, 3rd Cross Road,<br />
-                    St Mary's Layout, K.G Halli,<br />
+                    No. 15, ST Mary's Layout,<br />
+                    1st Floor, SM &amp; Sons,<br />
+                    K.G Halli,<br />
                     Bengaluru - 560045
                   </p>
                 </div>
@@ -88,8 +91,9 @@ const phoneDisplay = (p: string) => {
                 <div>
                   <h3 class="font-semibold">Factory Address</h3>
                   <p class="text-muted mt-1 leading-relaxed">
-                    No.85/2, Site No.9, Sulikere Road,<br />
-                    Ramasandra Village, Kengeri Hobli,<br />
+                    No. 85/2, Site No. 9, Sulikere Road,<br />
+                    Ramasandra Village, Sulikere Post,<br />
+                    Hobli Kengeri,<br />
                     Bengaluru - 560060
                   </p>
                 </div>

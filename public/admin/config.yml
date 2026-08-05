@@ -146,6 +146,25 @@ collections:
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
       - { label: "Date", name: "date", widget: "datetime", required: false }
 
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Client", name: "client", widget: "string", required: false }
+      - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Category", name: "category", widget: "string", default: "General" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        field: { label: "Image", name: "image", widget: "image" }
+        hint: "Upload one or more project photos. The first image is used as the cover."
+
   - name: "partners"
     label: "Partners"
     folder: "src/content/partners"

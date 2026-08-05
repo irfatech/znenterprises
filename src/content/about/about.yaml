@@ -1,7 +1,7 @@
 heroLabel: /// About
-heroHeading: India's Trusted Corporate Signage Partner
-heroHighlight: Corporate Signage Partner
-heroDescription: ZN Enterprises is a full-service signage manufacturing company specializing in Retail Visual Identity (RVI), corporate branding, petroleum station signage, architectural signage, fabrication, installation, and maintenance services. The company executes projects across India providing complete lifecycle support — from design and engineering to manufacturing, installation, inspection, and maintenance.
+heroHeading: About ZN Enterprises
+heroHighlight: ZN Enterprises
+heroDescription: We engineer your brand's visual identity. End-to-end signage solutions for petroleum and retail brands — manufactured, installed, and maintained 100% in-house across India.
 storyImage: /images/blog-retail-signage.jpg
 storyImageAlt: Signage manufacturing facility
 storyHeading: Our Story
@@ -9,42 +9,50 @@ storyHighlight: Story
 storyParagraphs:
   - Founded with a vision to deliver premium corporate signage solutions in India, ZN Enterprises has grown into a comprehensive signage partner serving major corporations across multiple sectors.
   - We have built a state-of-the-art manufacturing facility and assembled a team of skilled professionals dedicated to precision manufacturing and quality execution. Our expertise spans across petroleum, automotive, banking, telecom, and industrial sectors.
-  - Today, we are proud to serve leading corporations including IOCL, HPCL, BPCL, Shell, Reliance, and major automotive and banking brands across India — providing end-to-end signage solutions from design conception to installation and ongoing maintenance.
+  - Today, we are proud to serve leading corporations including HPCL, BPCL, and CPCL across India — providing end-to-end signage solutions from design conception to installation and ongoing maintenance.
 stats:
-  - number: 50+
-    label: Corporate Clients
-  - number: 1000+
-    label: Projects Delivered
+  - number: 8+
+    label: Years of Excellence
+  - number: ₹11 Cr+
+    label: Annual Project Execution Value
+  - number: 350+
+    label: Petroleum Outlets Handled Annually
+  - number: 2 Weeks
+    label: Average Project Delivery
 missionTitle: Our Mission
-missionText: Deliver durable, high-quality signage solutions that strengthen customer brand identity while maintaining engineering excellence, safety, and long-term reliability.
+missionText: Deliver highly durable, precision-engineered signage solutions that fortify your brand's visibility through strict safety and long-term reliability.
 visionTitle: Our Vision
-visionText: Become India's most trusted Retail Visual Identity (RVI) and corporate signage execution partner — known for quality, reliability, and engineering excellence.
+visionText: Become India's most trusted brand infrastructure and corporate signage partner, known for uncompromising quality, speed, and engineering excellence.
 valuesSectionLabel: /// Values
 valuesHeading: Our Values
 valuesHighlight: Values
 valuesSubtitle: The principles that guide every project we undertake.
 values:
-  - title: Engineering Quality
-    description: Every signage solution is manufactured to precise engineering standards with rigorous quality control at every stage.
-  - title: Brand Compliance
-    description: Strict adherence to corporate brand guidelines ensuring consistent visual identity across all installations.
-  - title: Safety First
-    description: All installations follow structured safety protocols, protecting both our teams and client sites.
-  - title: Long-Term Partnerships
-    description: We build lasting relationships through reliable service, maintenance support, and consistent delivery.
+  - title: Engineering First
+    description: Precision manufacturing with rigorous, multi-stage quality control.
+  - title: Zero-Deviation Compliance
+    description: Strict adherence to your brand's visual guidelines.
+  - title: Uncompromising Safety
+    description: Structured protocols protecting our teams and your sites.
+  - title: Lifetime Partnership
+    description: We don't just install and leave; we support, maintain, and protect your investment.
 homeLabel: /// About
-homeHeading: India's Trusted Corporate Signage Partner
-homeHighlight: Corporate Signage Partner
+homeHeading: About ZN Enterprises
+homeHighlight: ZN Enterprises
+homeSubHead: We Engineer Your Brand's Visual Identity.
+homeProblem: Corporate networks and national retail chains need more than just a sign supplier. Generic vendors lead to inconsistent branding, delayed rollouts, and structural failures.
+homeSolution: We bridge the gap between massive scale and pinpoint accuracy. ZN Enterprises was built to make signage simple, fast, and durable. We fabricate, install, and maintain premium visual assets that guarantee structural safety and 24/7 brand compliance across your entire operational landscape.
+homePhilosophy: Quality over Quantity. We'd rather deliver 10 flawless projects than 50 mediocre ones.
 homeParagraphs:
-  - ZN Enterprises is a full-service signage manufacturing company specializing in Retail Visual Identity (RVI), corporate branding, petroleum station signage, architectural signage, fabrication, installation, and maintenance services.
-  - With 8+ years of experience and a project execution capability exceeding ₹11 Crore annually, we serve leading enterprises across petroleum, automotive, banking, telecom, and industrial sectors throughout India.
+  - We bridge the gap between massive scale and pinpoint accuracy. ZN Enterprises was built to make signage simple, fast, and durable.
+  - We fabricate, install, and maintain premium visual assets that guarantee structural safety and 24/7 brand compliance across your entire operational landscape.
 homeImage1: /images/about-1.jpg
 homeImage1Alt: Industrial signage fabrication
 homeImage2: /images/hero-bg.webp
 homeImage2Alt: Corporate building signage installation
-ctaTitle: Let's Build Your Brand Together
-ctaDescription: Partner with India's trusted corporate signage manufacturer. From concept to installation, we deliver quality across India.
-ctaPrimaryLabel: Get in Touch
+ctaTitle: Ready to Transform Your Brand's Visibility?
+ctaDescription: From brief to installation. No delays. No compromises. India's top petroleum chains trust us—you can too.
+ctaPrimaryLabel: Request a Free Quote
 ctaPrimaryLink: /contact/
 ctaSecondaryLabel: View Our Services
 ctaSecondaryLink: /services/

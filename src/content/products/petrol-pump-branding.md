@@ -1,17 +1,28 @@
 ---
-title: Petrol Pump Branding
-description: Complete branding solutions for petroleum stations including canopy signage, price boards, pole signs, and forecourt branding elements.
-excerpt: Complete branding solutions for petroleum stations.
-category: Specialized
-order: 10
-featured: true
+title: Pump & Canopy Signage (Petroleum)
+description: High-visibility, weather-resistant branding for fuel islands. The first thing customers see — it must be flawless.
+excerpt: High-visibility, weather-resistant branding for fuel islands.
+image: /images/hero-bg.jpg
 features:
-  - Canopy signage systems
-  - Digital price boards
-  - Pole and pylon signs
-  - Forecourt branding
-  - Fuel dispenser branding
-  - Brand compliance
+  - ACP, metal, acrylic, vinyl, polycarbonate
+  - UV-resistant finishes
+  - Weather-resistant construction
+  - Brand-compliant forecourt presence
+category: Specialized
+order: 1
+featured: true
+ctaLink: /contact/
+ctaText: Get a Quote
 ---
 
-Specialized branding solutions for petroleum retail outlets. We provide end-to-end signage services for petrol stations including canopy signs, price displays, pole signs, and complete forecourt branding.
+## What It Is
+
+High-visibility, weather-resistant branding for fuel islands.
+
+## Materials
+
+ACP, metal, acrylic, vinyl, polycarbonate. UV-resistant finishes.
+
+## Why It Matters
+
+First thing customers see, it must be flawless.

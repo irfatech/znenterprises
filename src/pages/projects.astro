@@ -6,8 +6,14 @@ import { p, generateBreadcrumbs } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
-const images = (await getCollection("gallery")).sort(() => Math.random() - 0.5);
-const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", "Installation"];
+const projects = (await getCollection("projects"))
+  .filter((project) => project.data.images.length > 0)
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+const categories = ["All", ...new Set(projects.map((project) => project.data.category).filter(Boolean))];
+const galleryData = projects.map((project) => ({
+  title: project.data.title,
+  images: project.data.images.map((img) => p(img)),
+}));
 ---
 
 <BaseLayout
@@ -28,7 +34,7 @@ const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", 
           </p>
         </div>
 
-        {images.length > 0 ? (
+        {projects.length > 0 ? (
           <>
             <div class="flex flex-wrap gap-2 mt-10 mb-10" id="gallery-filters">
               {categories.map((cat) => (
@@ -42,30 +48,41 @@ const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", 
               ))}
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
-              {images.map((item) => (
-                <a
-                  href={p(item.data.image)}
-                  class="group aspect-square rounded-xl overflow-hidden bg-muted/10 relative"
-                  data-category={item.data.category?.toLowerCase() || "general"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="project-grid">
+              {projects.map((project, i) => (
+                <button
+                  type="button"
+                  class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted/10 text-left ring-1 ring-border hover:ring-accent-border transition-all duration-300"
+                  data-project={i}
+                  data-category={project.data.category?.toLowerCase() || "general"}
+                  aria-label={`View ${project.data.title} project`}
                 >
                   <img
-                    src={p(item.data.image)}
-                    alt={item.data.title || "Project image"}
+                    src={p(project.data.images[0])}
+                    alt={project.data.title}
                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
-                    <svg class="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-                  </div>
-                  {item.data.title && (
-                    <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                      <p class="text-white text-sm font-medium">{item.data.title}</p>
-                    </div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                  {project.data.images.length > 1 && (
+                    <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur text-white text-xs font-medium">
+                      {project.data.images.length} photos
+                    </span>
                   )}
-                </a>
+                  <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                    {project.data.category && (
+                      <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide bg-accent text-accent-text mb-2">
+                        {project.data.category}
+                      </span>
+                    )}
+                    <h3 class="text-white font-semibold leading-snug">{project.data.title}</h3>
+                    {(project.data.client || project.data.location) && (
+                      <p class="text-white/70 text-sm mt-1">
+                        {[project.data.client, project.data.location].filter(Boolean).join(" · ")}
+                      </p>
+                    )}
+                  </div>
+                </button>
               ))}
             </div>
           </>
@@ -94,23 +111,103 @@ const categories = ["All", "Petroleum", "Corporate", "Retail", "Manufacturing", 
       primaryHref={p("/contact/")}
     />
   </div>
+
+  <div id="project-lightbox" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Project gallery">
+    <button id="lightbox-close" class="absolute top-4 right-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Close gallery">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+    <button id="lightbox-prev" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Previous image">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+    </button>
+    <button id="lightbox-next" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Next image">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+    </button>
+    <figure class="flex h-full w-full items-center justify-center px-16 sm:px-24 py-20">
+      <img id="lightbox-img" src="" alt="" class="max-h-full max-w-full object-contain rounded-lg" />
+    </figure>
+    <div class="absolute bottom-6 left-0 right-0 text-center px-6">
+      <p id="lightbox-title" class="text-white font-semibold"></p>
+      <p id="lightbox-counter" class="text-white/60 text-sm mt-1"></p>
+    </div>
+  </div>
 </BaseLayout>
 
+<script type="application/json" id="projects-data" set:html={JSON.stringify(galleryData)} />
+
 <script>
+  const projectsData = JSON.parse(document.getElementById("projects-data").textContent);
+  const lightbox = document.getElementById("project-lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxTitle = document.getElementById("lightbox-title");
+  const lightboxCounter = document.getElementById("lightbox-counter");
+  const prevBtn = document.getElementById("lightbox-prev");
+  const nextBtn = document.getElementById("lightbox-next");
+  const closeBtn = document.getElementById("lightbox-close");
+
+  let currentProject = 0;
+  let currentIndex = 0;
+
+  function render() {
+    const project = projectsData[currentProject];
+    if (!project) return;
+    lightboxImg.src = project.images[currentIndex];
+    lightboxImg.alt = project.title;
+    lightboxTitle.textContent = project.title;
+    lightboxCounter.textContent = `${currentIndex + 1} / ${project.images.length}`;
+  }
+
+  function open(index) {
+    currentProject = index;
+    currentIndex = 0;
+    render();
+    lightbox.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    lightbox.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  function next() {
+    const project = projectsData[currentProject];
+    currentIndex = (currentIndex + 1) % project.images.length;
+    render();
+  }
+
+  function prev() {
+    const project = projectsData[currentProject];
+    currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
+    render();
+  }
+
+  document.querySelectorAll("[data-project]").forEach((card) => {
+    card.addEventListener("click", () => open(Number(card.dataset.project)));
+  });
+
+  closeBtn.addEventListener("click", close);
+  nextBtn.addEventListener("click", next);
+  prevBtn.addEventListener("click", prev);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.classList.contains("hidden")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") next();
+    if (e.key === "ArrowLeft") prev();
+  });
+
   const filters = document.querySelectorAll("[data-filter]");
-  const items = document.querySelectorAll("[data-category]");
+  const cards = document.querySelectorAll("[data-category]");
 
   filters.forEach((btn) => {
     btn.addEventListener("click", () => {
       const filter = btn.dataset.filter;
       filters.forEach((b) => (b.dataset.active = "false"));
       btn.dataset.active = "true";
-      items.forEach((item) => {
-        if (filter === "all" || item.dataset.category === filter) {
-          item.style.display = "block";
-        } else {
-          item.style.display = "none";
-        }
+      cards.forEach((card) => {
+        card.style.display = filter === "all" || card.dataset.category === filter ? "" : "none";
       });
     });
   });

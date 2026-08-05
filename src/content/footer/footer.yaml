@@ -1,31 +1,33 @@
-description: "Z N ENTERPRISES specializes in designing, manufacturing, installing, repairing, and maintaining premium corporate signage across India."
+description: "ZN Enterprises — India's trusted petroleum & retail signage manufacturer. End-to-end signage solutions manufactured, installed, and maintained 100% in-house."
 columns:
   - title: "Quick Links"
     links:
       - label: Home
         href: /
-      - label: About Us
+      - label: About
         href: /about/
       - label: Services
         href: /services/
       - label: Products
         href: /products/
-      - label: Blog
-        href: /blog/
+      - label: Projects
+        href: /projects/
       - label: Contact
         href: /contact/
   - title: "Services"
     links:
-      - label: Corporate Signage
-        href: /services/corporate-signage/
+      - label: Pump & Canopy Signage
+        href: /products/petrol-pump-branding/
       - label: LED Signage
-        href: /services/led-signage/
+        href: /products/led-sign-boards/
+      - label: Pylon Signage
+        href: /products/pylon-signage/
+      - label: Totem Signage
+        href: /products/
       - label: ACP Cladding
-        href: /services/acp-cladding/
-      - label: Corporate Branding
-        href: /services/corporate-branding/
-      - label: Installation
-        href: /services/installation/
+        href: /products/acp-signage/
+      - label: Programmatic Maintenance
+        href: /services/repair-maintenance/
   - title: "Support"
     links:
       - label: FAQ
@@ -34,4 +36,4 @@ columns:
         href: /privacy/
       - label: Terms & Conditions
         href: /terms/
-bottomText: "© 2025 Z N ENTERPRISES. All rights reserved."
+bottomText: "© 2026 ZN Enterprises. All rights reserved. Bengaluru, India. GST Registered | MSME Certified."

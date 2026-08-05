@@ -21,7 +21,14 @@ const heroImage = hero?.heroImage ? p(hero.heroImage) : "";
 const heroImageAlt = hero?.heroImageAlt ?? "";
 ---
 
-<section class="relative min-h-[90vh] flex items-center overflow-hidden bg-cover bg-center bg-no-repeat" style={`background-image: url(${p("/images/hero-bg1.jpeg")})`}>
+<section class="relative min-h-[90vh] flex items-center overflow-hidden">
+  <img
+    src={p("/images/hero-bg.jpeg")}
+    alt=""
+    aria-hidden="true"
+    fetchpriority="high"
+    class="absolute inset-0 h-full w-full object-cover object-center mask-l-from-50% mask-l-to-90%"
+  />
   <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-brand-900/50 to-transparent z-10" />
   <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(252,163,17,0.1),transparent_60%)] z-10" />
 

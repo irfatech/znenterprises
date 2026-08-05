@@ -1,17 +1,28 @@
 ---
-title: Pylon Signage
-description: Tall pylon signage structures for high-visibility corporate branding along highways, commercial zones, and petroleum stations.
-excerpt: Tall pylon signage for high-visibility corporate branding.
+title: Highway & Urban Pylon Signage
+description: Towering, freestanding structures engineered from steel and premium cladding. Commands attention from miles away.
+excerpt: Towering, freestanding pylon structures engineered from steel.
 category: Illuminated
-order: 8
+order: 3
 featured: true
 features:
-  - High-rise visibility
-  - Structural engineering
-  - LED illumination
-  - Multi-tenant options
-  - Wind load compliance
-  - 24/7 brand presence
+  - Steel frame construction
+  - ACP or metal cladding
+  - LED or non-illuminated options
+  - Wind-load engineered
+  - Maximum long-distance visibility
+ctaText: Get a Quote
+ctaLink: /contact/
 ---
 
-Our pylon signs are engineered for maximum visibility from long distances. Ideal for petroleum stations, highway locations, and commercial developments requiring prominent brand presence.
+## What It Is
+
+Towering, freestanding structures engineered from steel and premium cladding.
+
+## Materials
+
+Steel frame. ACP or metal cladding. LED or non-illuminated.
+
+## Why It Matters
+
+Commands attention from miles away.

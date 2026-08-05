@@ -93,17 +93,6 @@ const testimonials = defineCollection({
   }),
 });
 
-const faq = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/faq" }),
-  schema: z.object({
-    question: z.string(),
-    answer: z.string(),
-    category: z.string().default("General"),
-    order: z.number({ coerce: true }).int().default(0),
-    lang: z.string().default("en"),
-  }),
-});
-
 const gallery = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/gallery" }),
   schema: z.object({
@@ -112,6 +101,21 @@ const gallery = defineCollection({
     category: z.string().default("General"),
     featured: z.boolean().default(false),
     date: z.date({ coerce: true }).optional(),
+    lang: z.string().default("en"),
+  }),
+});
+
+const projects = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
+  schema: z.object({
+    title: z.string(),
+    client: z.string().optional(),
+    location: z.string().optional(),
+    description: z.string().optional(),
+    images: z.array(z.string()).default([]),
+    category: z.string().default("General"),
+    order: z.number({ coerce: true }).int().default(0),
+    featured: z.boolean().default(false),
     lang: z.string().default("en"),
   }),
 });
@@ -267,6 +271,10 @@ const about = defineCollection({
     homeLabel: z.string(),
     homeHeading: z.string(),
     homeHighlight: z.string(),
+    homeSubHead: z.string().optional(),
+    homeProblem: z.string().optional(),
+    homeSolution: z.string().optional(),
+    homePhilosophy: z.string().optional(),
     homeParagraphs: z.array(z.string()),
     homeImage1: z.string(),
     homeImage1Alt: z.string().default(""),
@@ -301,8 +309,8 @@ export const collections = {
   services,
   team,
   testimonials,
-  faq,
   gallery,
+  projects,
   pages,
   partners,
   clients,
