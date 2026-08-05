@@ -290,6 +290,17 @@ const about = defineCollection({
   }),
 });
 
+const faq = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/faq" }),
+  schema: z.object({
+    question: z.string(),
+    answer: z.string(),
+    category: z.string().default("General"),
+    order: z.number({ coerce: true }).int().default(0),
+    lang: z.string().default("en"),
+  }),
+});
+
 const clients = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/clients" }),
   schema: z.object({
@@ -314,6 +325,7 @@ export const collections = {
   pages,
   partners,
   clients,
+  faq,
   "site-settings": siteSettings,
   navigation,
   footer,

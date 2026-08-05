@@ -2,11 +2,14 @@ export interface SEOProps {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   canonical?: string;
   noIndex?: boolean;
   type?: "website" | "article" | "product";
   publishedTime?: string;
   author?: string;
+  articleSection?: string;
+  articleTags?: string[];
   breadcrumbs?: { label: string; href: string }[];
   siteName?: string;
   url?: string;
@@ -34,6 +37,7 @@ export function buildSEO(props: SEOProps) {
     title,
     description,
     image,
+    imageAlt: props.imageAlt,
     url,
     siteName,
     noIndex: props.noIndex,
@@ -41,6 +45,8 @@ export function buildSEO(props: SEOProps) {
     type: props.type || "website",
     publishedTime: props.publishedTime,
     author: props.author,
+    articleSection: props.articleSection,
+    articleTags: props.articleTags,
     breadcrumbs: props.breadcrumbs,
   };
 }

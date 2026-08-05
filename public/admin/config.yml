@@ -7,7 +7,7 @@ backend:
   branch: main
 
 logo:
-  src: /public/zn-enterprises-logo.png
+  src: /zn-enterprises-logo.png
   show_in_header: true
 
 media_folder: "public/images"

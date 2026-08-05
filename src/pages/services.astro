@@ -9,6 +9,19 @@ const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 const services = (await getCollection("services"))
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const serviceListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Signage Services",
+  numberOfItems: services.length,
+  itemListElement: services.map((service, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: service.data.title,
+    url: new URL(p(`/services/${service.id}/`), Astro.site).href,
+  })),
+};
 ---
 
 <BaseLayout
@@ -16,6 +29,7 @@ const services = (await getCollection("services"))
   description="Comprehensive corporate signage services across India — design, manufacturing, installation, repair, and maintenance by ZN Enterprises."
   seo={{ breadcrumbs }}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(serviceListSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

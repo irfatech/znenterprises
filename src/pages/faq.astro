@@ -1,29 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
+import { getCollection } from "astro:content";
 import { p, generateBreadcrumbs } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
-const faqs = [
-  { q: "What types of signage does ZN Enterprises manufacture?", a: "We manufacture Pump & Canopy signage, LED illuminated systems, Pylon structures, Totem monument signs, and ACP cladding solutions. All signage is engineered for petroleum, corporate and retail applications with premium durability and weather resistance. Custom fabrication in ACP, acrylic, metal, and LED components available for specific requirements." },
-  { q: "How long does it take to complete a signage project?", a: "From project briefing to installation completion: 2 weeks maximum. This includes manufacturing, quality checks, and installation across locations." },
-  { q: "What materials do you use for signage?", a: "We use premium materials including Aluminium Composite Panels (ACP), acrylic, metal, and LED components—all selected for durability and weather resistance." },
-  { q: "Do you provide maintenance after installation?", a: "Yes, we offer annual maintenance contracts covering preventive care, repairs, and emergency support. This ensures your signage remains operational and visually appealing long-term." },
-  { q: "Can you handle multiple location installations simultaneously?", a: "Yes, our installation network across India enables coordinated deployment across multiple locations simultaneously without timeline extensions." },
-  { q: "How do you ensure quality and compliance?", a: "We maintain ISO certifications, conduct rigorous quality checks at every manufacturing stage, and ensure all installations comply with regulatory standards." },
-  { q: "What happens if signage gets damaged?", a: "Damage during installation is our responsibility—we replace components at no cost." },
-  { q: "Do you work outside major cities?", a: "Yes, we service tier-1, tier-2 and tier-3 cities across India including Tamil Nadu, Karnataka, Telangana, Andhra Pradesh, and Kerala." },
-  { q: "Do you handle signage replacement for existing installations?", a: "Yes, we assess your existing signage, remove old components, and install new signage maintaining the same 2-week delivery timeline." },
-  { q: "What if I need urgent signage installation?", a: "We can expedite manufacturing (7-10 days) for urgent projects if requirements are clear. Contact us with specific deadlines for priority consideration." },
-  { q: "How long does signage last?", a: "Our signage is engineered for 5-10 years of operational reliability with proper maintenance. Annual maintenance contracts ensure optimal performance throughout this period." },
-  { q: "What if regulations change after installation?", a: "We maintain current regulatory knowledge and adjust designs accordingly during project execution. Post-installation compliance updates are handled through maintenance contracts." },
-  { q: "Can you provide client references?", a: "Yes, we have 350+ completed petroleum projects across India. References are available upon request." },
-  { q: "Which industries do you currently serve?", a: "We specialize in petroleum station branding for India's top PSUs—HPCL, BPCL, and CPCL across India. We're expanding to retail, corporate, and pan-India operations soon. Currently focused on delivering excellence in the petroleum segment before scaling to other sectors." },
-  { q: "How do I track project progress during manufacturing and installation?", a: "Dedicated project coordinators provide regular updates via email or phone. Clients receive milestone notifications (manufacturing complete, installation start, completion). Real-time tracking is available for large projects." },
-  { q: "Where are you physically located?", a: "Our corporate office & manufacturing plant is in Bengaluru, Karnataka. We maintain installation networks across India including Tamil Nadu, Karnataka, Telangana, Andhra Pradesh, Rajasthan, Madhya Pradesh and Kerala. We're expanding regional presence as we scale pan-India operations." },
-  { q: "How do I request a quotation?", a: "Contact us via email (imran@znenterprises.in), phone (+91 78999 98547), or WhatsApp. Provide location details, signage type, and timeline requirements—we deliver quotations within 48 hours." },
-];
+const faqs = (await getCollection("faq"))
+  .sort((a, b) => (a.data.order || 99) - (b.data.order || 99))
+  .map((faq) => ({ q: faq.data.question, a: faq.data.answer }));
 
 const faqSchema = {
   "@context": "https://schema.org",

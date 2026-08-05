@@ -27,6 +27,8 @@ const { Content } = await render(post);
     type: "article",
     publishedTime: data.date.toISOString(),
     author: data.author,
+    articleSection: data.category,
+    articleTags: data.tags,
     breadcrumbs,
   }}
 >

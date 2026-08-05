@@ -10,6 +10,19 @@ const allProducts = (await getCollection("products"))
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 
 const categories = [...new Set(allProducts.map((p) => p.data.category))];
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Signage Products",
+  numberOfItems: allProducts.length,
+  itemListElement: allProducts.map((product, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: product.data.title,
+    url: new URL(p(`/products/${product.id}/`), Astro.site).href,
+  })),
+};
 ---
 
 <BaseLayout
@@ -17,6 +30,7 @@ const categories = [...new Set(allProducts.map((p) => p.data.category))];
   description="Explore premium signage products from ZN Enterprises — pump & canopy signage, LED signage, highway & urban pylon signage, and ACP cladding & facades."
   seo={{ breadcrumbs }}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
