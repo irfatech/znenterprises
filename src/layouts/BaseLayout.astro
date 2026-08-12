@@ -40,7 +40,7 @@ const seoProps = { ...seo, title, description, image };
     <script is:inline>
       (function () {
         const theme = localStorage.getItem("theme");
-        if (theme !== "light") {
+        if (theme === "dark") {
           document.documentElement.classList.add("dark");
         }
       })();
