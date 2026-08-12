@@ -2,7 +2,7 @@
 title: ACP Cladding & Facades
 description: Precision-cut, weather-resistant building exteriors that transform ordinary architecture into a seamless brand experience.
 excerpt: Precision-cut, weather-resistant building exteriors.
-image: /images/screenshot-2026-08-12-161219.webp
+image: /images/bpcl-1.webp
 images:
   - /images/bpcl.webp
   - /images/img_0286.webp
