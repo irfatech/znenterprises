@@ -14,6 +14,8 @@
   --color-accent-text: #000000;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, transparent);
   --color-accent-border: #a86b0b;
+  /* Dark surfaces already give the bright accent gold ~8:1 contrast — no need to darken it here */
+  --color-accent-strong: var(--color-accent);
 
   --color-border: color-mix(in srgb, #ffffff 10%, transparent);
   --color-border-strong: #374151;

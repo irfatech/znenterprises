@@ -281,6 +281,12 @@ const about = defineCollection({
     homeImage2: z.string(),
     homeImage2Alt: z.string().default(""),
 
+    whyChooseUs: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+      icon: z.string(),
+    })).default([]),
+
     ctaTitle: z.string(),
     ctaDescription: z.string(),
     ctaPrimaryLabel: z.string(),

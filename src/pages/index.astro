@@ -52,9 +52,16 @@ const homeValues = a?.values ?? [];
 const homeHeadingParts = homeHeading.split(homeHighlight);
 const showHomeHighlight = homeHeadingParts.length > 1 && homeHighlight;
 
+const homeStats = a?.stats?.length ? a.stats.map((s) => ({ label: s.label, value: s.number })) : undefined;
+
+const ctaTitle = a?.ctaTitle ?? "Ready to Transform Your Brand's Visibility?";
+const ctaDescription = a?.ctaDescription ?? "From brief to installation. No delays. No compromises. India's top petroleum chains trust us — you can too.";
+const ctaPrimaryLabel = a?.ctaPrimaryLabel ?? "Request a Free Quote";
+const ctaPrimaryHref = a?.ctaPrimaryLink ? p(a.ctaPrimaryLink) : p("/contact/");
+
 const whatsappHref = `https://wa.me/${(settings.social?.whatsapp ?? settings.phone[0]).replace(/[^0-9]/g, "")}`;
 
-const whyChooseUs = [
+const defaultWhyChooseUs = [
   {
     title: "100% In-House Control",
     description: "No outsourcing. No middlemen. We control the quality from fabrication to installation. When something breaks, we fix it instantly.",
@@ -81,6 +88,7 @@ const whyChooseUs = [
     icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z",
   },
 ];
+const whyChooseUs = a?.whyChooseUs?.length ? a.whyChooseUs : defaultWhyChooseUs;
 
 ---
 
@@ -92,14 +100,14 @@ const whyChooseUs = [
 >
   <Hero />
 
-  <StatsBar />
+  <StatsBar stats={homeStats} />
 
   {/* About */}
   <section class="py-16 sm:py-20 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
         <div>
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">{homeLabel}</span>
+          <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">{homeLabel}</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-3">
             {showHomeHighlight ? homeHeadingParts[0] : homeHeading}
             {showHomeHighlight && <span class="gradient-text">{homeHighlight}</span>}
@@ -109,19 +117,19 @@ const whyChooseUs = [
 
           {homeProblem && (
             <div class="mb-6">
-              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-accent mb-2">The Problem We Solve</h3>
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-accent-strong mb-2">The Problem We Solve</h3>
               <p class="text-muted leading-relaxed">{homeProblem}</p>
             </div>
           )}
           {homeSolution && (
             <div class="mb-6">
-              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-accent mb-2">Our Solution</h3>
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-accent-strong mb-2">Our Solution</h3>
               <p class="text-muted leading-relaxed">{homeSolution}</p>
             </div>
           )}
           {homePhilosophy && (
             <div class="mb-6">
-              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-accent mb-2">Our Philosophy</h3>
+              <h3 class="text-sm font-semibold uppercase tracking-[0.12em] text-accent-strong mb-2">Our Philosophy</h3>
               <p class="text-muted leading-relaxed">{homePhilosophy}</p>
             </div>
           )}
@@ -143,7 +151,7 @@ const whyChooseUs = [
             <div class="space-y-3 mb-8">
               {homeValues.map((v) => (
                 <div class="flex items-start gap-3">
-                  <span class="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-accent-soft text-accent flex items-center justify-center">
+                  <span class="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-accent-soft text-accent-strong flex items-center justify-center">
                     <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                   </span>
                   <div>
@@ -157,7 +165,7 @@ const whyChooseUs = [
 
           <a
             href={p("/projects/")}
-            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-6 py-3 font-medium hover:bg-accent-hover transition-all duration-200"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-6 py-3 font-medium hover:bg-body hover:text-page transition-all duration-200"
           >
             See What We've Built
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
@@ -172,7 +180,7 @@ const whyChooseUs = [
     <section class="py-16 sm:py-20 lg:py-24 bg-section">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16">
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// What We Do</span>
+          <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// What We Do</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             What We <span class="gradient-text">Deliver</span>
           </h2>
@@ -193,7 +201,7 @@ const whyChooseUs = [
         <div class="text-center mt-10">
           <a
             href={p("/services/")}
-            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 text-lg font-medium hover:bg-accent-hover transition-all duration-200"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-6 py-3 font-medium hover:bg-body hover:text-page transition-all duration-200"
           >
             Get Your Signage Project Started
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
@@ -207,7 +215,7 @@ const whyChooseUs = [
   <section class="py-16 sm:py-20 lg:py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 sm:mb-16">
-        <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Why Us</span>
+        <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Why Us</span>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
           Why India's Top Brands <span class="gradient-text">Trust ZN Enterprises</span>?
         </h2>
@@ -216,7 +224,7 @@ const whyChooseUs = [
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {whyChooseUs.map((item) => (
           <div class="text-center group">
-            <div class="mx-auto mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-accent-text shadow-sm group-hover:shadow-lg group-hover:shadow-accent/25">
+            <div class="mx-auto mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-soft text-accent-strong transition-all duration-300 group-hover:bg-accent group-hover:text-accent-text shadow-sm group-hover:shadow-lg group-hover:shadow-accent/25">
               <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d={item.icon} /></svg>
             </div>
             <h3 class="text-lg font-semibold mb-3">{item.title}</h3>
@@ -232,7 +240,7 @@ const whyChooseUs = [
     <section class="py-16 sm:py-20 lg:py-24 bg-section">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16">
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Products</span>
+          <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Products</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             Engineered for <span class="gradient-text">Maximum Impact</span>
           </h2>
@@ -246,7 +254,7 @@ const whyChooseUs = [
                   <div class="aspect-[16/10] overflow-hidden">
                     <img
                       src={p(product.data.image)}
-                      alt={product.data.title}
+                      alt=""
                       loading="lazy"
                       class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
@@ -256,7 +264,7 @@ const whyChooseUs = [
               <div class="p-6 sm:p-8">
                 <div class="mb-4">
                   {product.data.category && (
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-accent-soft text-accent">{product.data.category}</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-accent-soft text-accent-strong">{product.data.category}</span>
                   )}
                 </div>
                 <h3 class="text-lg font-semibold mb-3">{product.data.title}</h3>
@@ -265,7 +273,7 @@ const whyChooseUs = [
                   <ul class="space-y-2 mb-5">
                     {product.data.features.slice(0, 3).map((feature: string) => (
                       <li class="flex items-center gap-2 text-sm text-body/70">
-                        <svg class="h-4 w-4 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <svg class="h-4 w-4 text-accent-strong shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
                         {feature}
@@ -286,7 +294,7 @@ const whyChooseUs = [
         <div class="text-center mt-10">
           <a
             href={p("/products/")}
-            class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 text-lg font-medium hover:bg-accent-hover transition-all duration-200"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-6 py-3 font-medium hover:bg-body hover:text-page transition-all duration-200"
           >
             View Completed Projects
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
@@ -300,10 +308,10 @@ const whyChooseUs = [
   <ProcessTimeline />
 
   {/* Clients */}
-  <section class="py-16 sm:py-20 lg:py-24">
+  <section class="py-16 sm:py-20 lg:py-24 bg-section">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 sm:mb-16">
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Clients</span>
+          <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Clients</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             Trusted by India's <span class="gradient-text">Leading Petroleum Giants</span>
           </h2>
@@ -332,10 +340,10 @@ const whyChooseUs = [
 
   {/* Testimonials */}
   {testimonials.length > 0 && (
-    <section class="py-16 sm:py-20 lg:py-24 bg-section">
+    <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16">
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Testimonials</span>
+          <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Testimonials</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             What Our <span class="gradient-text">Clients Say</span>
           </h2>
@@ -345,7 +353,7 @@ const whyChooseUs = [
             <figure class="rounded-2xl bg-card border border-border shadow-sm p-6 sm:p-8">
               <div class="flex gap-1 mb-4">
                 {Array.from({ length: t.data.rating || 5 }, (_, i) => (
-                  <svg key={i} class="h-5 w-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                  <svg key={i} class="h-5 w-5 text-accent-strong" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
@@ -354,7 +362,7 @@ const whyChooseUs = [
                 &ldquo;{t.data.content}&rdquo;
               </blockquote>
               <figcaption class="flex items-center gap-4">
-                <div class="h-12 w-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-semibold text-lg">
+                <div class="h-12 w-12 rounded-full bg-accent/20 flex items-center justify-center text-accent-strong font-semibold text-lg">
                   {t.data.name.charAt(0)}
                 </div>
                 <div>
@@ -373,10 +381,10 @@ const whyChooseUs = [
 
   {/* Blog */}
   {latestPosts.length > 0 && (
-    <section class="py-16 sm:py-20 lg:py-24">
+    <section class="py-16 sm:py-20 lg:py-24 bg-section">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16">
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Insights</span>
+          <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Insights</span>
           <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
             Latest <span class="gradient-text">Articles</span>
           </h2>
@@ -400,10 +408,10 @@ const whyChooseUs = [
   )}
 
   <CTA
-    title="Ready to Transform Your Brand's Visibility?"
-    description="From brief to installation. No delays. No compromises. India's top petroleum chains trust us — you can too."
-    primaryLabel="Request a Free Quote"
-    primaryHref="/contact/"
+    title={ctaTitle}
+    description={ctaDescription}
+    primaryLabel={ctaPrimaryLabel}
+    primaryHref={ctaPrimaryHref}
     secondaryLabel="Chat With Us on WhatsApp"
     secondaryHref={whatsappHref}
   />

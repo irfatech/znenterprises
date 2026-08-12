@@ -1,10 +1,16 @@
 ---
-const stats = [
+interface Props {
+  stats?: { label: string; value: string }[];
+}
+
+const defaultStats = [
   { label: "Years of Excellence", value: "8+" },
   { label: "Annual Project Execution Value", value: "₹11 Cr+" },
   { label: "Major Petroleum Clients", value: "PSU" },
   { label: "Across India", value: "Pan-India" },
 ];
+
+const { stats = defaultStats } = Astro.props;
 ---
 
 <section class="relative overflow-hidden bg-hero py-14 sm:py-16">

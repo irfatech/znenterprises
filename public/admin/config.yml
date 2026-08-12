@@ -92,6 +92,7 @@ collections:
       - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
       - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Icon (SVG path 'd' attribute)", name: "icon", widget: "string", required: false, hint: "Paste the 'd' attribute value from a 24x24 Heroicons outline icon." }
       - { label: "Features", name: "features", widget: "list", required: false, field: { label: "Feature", name: "feature", widget: "string" } }
       - { label: "CTA Text", name: "ctaText", widget: "string", default: "Learn More" }
       - { label: "CTA Link", name: "ctaLink", widget: "string", required: false }
@@ -110,6 +111,19 @@ collections:
       - { label: "Rating", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
       - { label: "Content", name: "content", widget: "text" }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+  - name: "clients"
+    label: "Clients"
+    folder: "src/content/clients"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Full Name", name: "fullName", widget: "string", required: false }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Logo", name: "logo", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 0 }
 
   - name: "team"
     label: "Team Members"
@@ -284,6 +298,10 @@ collections:
             widget: "string"
           - { label: "Home Heading", name: "homeHeading", widget: "string" }
           - { label: "Home Highlight", name: "homeHighlight", widget: "string" }
+          - { label: "Home Sub-heading", name: "homeSubHead", widget: "string", required: false }
+          - { label: "Home: The Problem We Solve", name: "homeProblem", widget: "text", required: false }
+          - { label: "Home: Our Solution", name: "homeSolution", widget: "text", required: false }
+          - { label: "Home: Our Philosophy", name: "homePhilosophy", widget: "text", required: false }
           - label: "Home Paragraphs"
             name: "homeParagraphs"
             widget: "list"
@@ -292,6 +310,13 @@ collections:
           - { label: "Home Image 1 Alt", name: "homeImage1Alt", widget: "string", required: false }
           - { label: "Home Image 2", name: "homeImage2", widget: "image" }
           - { label: "Home Image 2 Alt", name: "homeImage2Alt", widget: "string", required: false }
+          - label: "Why Choose Us"
+            name: "whyChooseUs"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Icon (SVG path 'd' attribute)", name: "icon", widget: "string", hint: "Paste the 'd' attribute value from a 24x24 Heroicons outline icon." }
           - label: "CTA"
             name: "ctaTitle"
             widget: "string"

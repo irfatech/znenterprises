@@ -1,7 +1,10 @@
 ---
-const phone = "+917899998547";
+import { getSiteSettings, getWhatsAppUrl } from "../lib/site";
+
+const settings = await getSiteSettings();
+const phone = settings.social?.whatsapp ?? settings.phone[0];
 const message = "Hello! I'm interested in your corporate signage solutions.";
-const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+const url = getWhatsAppUrl(phone, message);
 ---
 
 <a
