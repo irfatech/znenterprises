@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
+import ImageGallery from "../../components/ImageGallery.astro";
 import { getCollection, render } from "astro:content";
-import { p, generateBreadcrumbs } from "../../lib/site";
+import { p, generateBreadcrumbs, getSiteSettings, getWhatsAppUrl } from "../../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 export async function getStaticPaths() {
@@ -17,6 +18,17 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 const { data } = product;
 const { Content } = await render(product);
+
+const settings = await getSiteSettings();
+const whatsappHref = getWhatsAppUrl(
+  settings.social?.whatsapp ?? settings.phone[0],
+  `Hi! I'm interested in "${data.title}" — could you share pricing and specs?`
+);
+
+const galleryImages = [data.image, ...(data.images ?? [])]
+  .filter((img): img is string => Boolean(img))
+  .filter((img, i, arr) => arr.indexOf(img) === i)
+  .map((img) => p(img));
 
 const productSchema = {
   "@context": "https://schema.org",
@@ -44,53 +56,50 @@ const productSchema = {
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div>
-            <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// {data.category || "Product"}</span>
+            <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// {data.category || "Product"}</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">{data.title}</h1>
             <p class="text-muted text-lg leading-relaxed mb-8">{data.description}</p>
 
             {data.features && data.features.length > 0 && (
               <div class="mb-8">
                 <h2 class="text-lg font-semibold mb-4">Key Features</h2>
-                <ul class="space-y-3">
+                <ul class="grid sm:grid-cols-2 gap-2.5">
                   {data.features.map((f) => (
-                    <li class="flex items-center gap-3">
-                      <svg class="h-5 w-5 text-accent shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <li class="flex items-center gap-3 rounded-xl bg-card border border-border px-4 py-3">
+                      <svg class="h-5 w-5 text-accent-strong shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
-                      <span>{f}</span>
+                      <span class="text-sm">{f}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
 
-            <a
-              href={p("/contact/")}
-              class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 font-medium hover:bg-accent-hover transition-all duration-200 shadow-sm hover:shadow-md active:scale-[0.98]"
-            >
-              Enquire About This Product
-              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
-            </a>
-          </div>
-
-          <div class="aspect-[4/3] rounded-2xl overflow-hidden">
-            <img
-              src={data.image ? p(data.image) : "https://images.unsplash.com/photo-1565479786208-530fb8a4fc0e?w=800&q=80"}
-              alt={data.title}
-              class="h-full w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-
-          {data.images && data.images.length > 0 && (
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
-              {data.images.map((img) => (
-                <div class="aspect-[4/3] rounded-xl overflow-hidden">
-                  <img src={p(img)} alt="" loading="lazy" class="h-full w-full object-cover" />
-                </div>
-              ))}
+            <div class="flex flex-wrap gap-3">
+              <a
+                href={p("/contact/")}
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 font-medium hover:bg-accent-hover transition-all duration-200 shadow-sm hover:shadow-md active:scale-[0.98]"
+              >
+                Enquire About This Product
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+              </a>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-8 py-4 font-medium hover:bg-body hover:text-page transition-all duration-200"
+              >
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Ask on WhatsApp
+              </a>
             </div>
-          )}
+          </div>
+
+          <ImageGallery
+            images={galleryImages.length > 0 ? galleryImages : ["https://images.unsplash.com/photo-1565479786208-530fb8a4fc0e?w=800&q=80"]}
+            alt={data.title}
+          />
         </div>
 
         <div class="mt-16 max-w-3xl">
@@ -106,6 +115,8 @@ const productSchema = {
       description="Contact us for pricing, specifications, and customization options."
       primaryLabel="Request a Quote"
       primaryHref={p("/contact/")}
+      secondaryLabel="Chat With Us on WhatsApp"
+      secondaryHref={whatsappHref}
     />
   </div>
 </BaseLayout>

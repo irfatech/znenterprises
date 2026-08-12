@@ -1,0 +1,178 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import CTA from "../../components/CTA.astro";
+import ImageGallery from "../../components/ImageGallery.astro";
+import { getCollection, render } from "astro:content";
+import { p, getSiteSettings, getWhatsAppUrl } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+
+const settings = await getSiteSettings();
+const whatsappHref = getWhatsAppUrl(
+  settings.social?.whatsapp ?? settings.phone[0],
+  `Hi! I saw the "${data.title}" project — could you help with something similar for us?`
+);
+
+const galleryImages = (data.images ?? []).map((img) => p(img));
+
+const allProjects = await getCollection("projects");
+const relatedProjects = allProjects
+  .filter((other) => other.id !== project.id && other.data.images.length > 0)
+  .sort((a, b) => {
+    const sameCategory = (b.data.category === data.category ? 1 : 0) - (a.data.category === data.category ? 1 : 0);
+    if (sameCategory !== 0) return sameCategory;
+    return (a.data.order || 99) - (b.data.order || 99);
+  })
+  .slice(0, 3);
+
+const metaLine = [data.client, data.location].filter(Boolean).join(" · ");
+
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: data.title,
+  description: data.description,
+  ...(data.client ? { creator: { "@type": "Organization", name: "Z N Enterprises" }, about: data.client } : {}),
+  ...(galleryImages.length ? { image: galleryImages } : {}),
+};
+---
+
+<BaseLayout
+  title={`${data.title} — Project`}
+  description={data.description || `${data.title} — a signage project by ZN Enterprises${data.client ? ` for ${data.client}` : ""}.`}
+  image={data.images?.[0]}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(projectSchema)} />
+  <div class="pt-24">
+    <section class="py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Breadcrumb path={Astro.url.pathname} class="mb-8" />
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div>
+            {data.category && (
+              <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// {data.category}</span>
+            )}
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4">{data.title}</h1>
+            {metaLine && <p class="text-muted text-lg mb-6">{metaLine}</p>}
+            {data.description && <p class="text-body/80 text-lg leading-relaxed mb-8">{data.description}</p>}
+
+            {(data.client || data.location || data.category) && (
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+                {data.client && (
+                  <div class="rounded-xl bg-card border border-border px-4 py-3">
+                    <div class="text-xs uppercase tracking-wide text-muted mb-1">Client</div>
+                    <div class="font-medium text-sm">{data.client}</div>
+                  </div>
+                )}
+                {data.location && (
+                  <div class="rounded-xl bg-card border border-border px-4 py-3">
+                    <div class="text-xs uppercase tracking-wide text-muted mb-1">Location</div>
+                    <div class="font-medium text-sm">{data.location}</div>
+                  </div>
+                )}
+                {data.category && (
+                  <div class="rounded-xl bg-card border border-border px-4 py-3">
+                    <div class="text-xs uppercase tracking-wide text-muted mb-1">Category</div>
+                    <div class="font-medium text-sm">{data.category}</div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div class="flex flex-wrap gap-3">
+              <a
+                href={p("/contact/")}
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent text-accent-text px-8 py-4 font-medium hover:bg-accent-hover transition-all duration-200 shadow-sm hover:shadow-md active:scale-[0.98]"
+              >
+                Start a Similar Project
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+              </a>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-border text-body px-8 py-4 font-medium hover:bg-body hover:text-page transition-all duration-200"
+              >
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Ask on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <ImageGallery images={galleryImages} alt={data.title} />
+        </div>
+
+        {project.body?.trim() && (
+          <div class="mt-16 max-w-3xl">
+            <div class="prose prose-lg dark:prose-invert max-w-none prose-headings:text-body prose-a:text-accent">
+              <Content />
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    {relatedProjects.length > 0 && (
+      <section class="py-16 sm:py-20 lg:py-24 bg-section">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex items-end justify-between mb-10 gap-4 flex-wrap">
+            <div>
+              <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// More Work</span>
+              <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Related Projects</h2>
+            </div>
+            <a href={p("/projects/")} class="inline-flex items-center gap-2 text-sm font-medium text-accent-strong hover:text-accent-hover transition-colors">
+              View All Projects
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+            </a>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedProjects.map((other) => (
+              <a
+                href={p(`/projects/${other.id}/`)}
+                class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted/10 ring-1 ring-border hover:ring-accent-border transition-all duration-300"
+              >
+                <img
+                  src={p(other.data.images[0])}
+                  alt={other.data.title}
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                  {other.data.category && (
+                    <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide bg-accent text-accent-text mb-2">
+                      {other.data.category}
+                    </span>
+                  )}
+                  <h3 class="text-white font-semibold leading-snug">{other.data.title}</h3>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <CTA
+      title="Ready to Start Your Own Project?"
+      description="Tell us about your brand's signage needs — we'll take it from design to installation."
+      primaryLabel="Request a Free Quote"
+      primaryHref={p("/contact/")}
+      secondaryLabel="Chat With Us on WhatsApp"
+      secondaryHref={whatsappHref}
+    />
+  </div>
+</BaseLayout>

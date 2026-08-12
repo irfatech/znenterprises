@@ -10,10 +10,6 @@ const projects = (await getCollection("projects"))
   .filter((project) => project.data.images.length > 0)
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 const categories = ["All", ...new Set(projects.map((project) => project.data.category).filter(Boolean))];
-const galleryData = projects.map((project) => ({
-  title: project.data.title,
-  images: project.data.images.map((img) => p(img)),
-}));
 ---
 
 <BaseLayout
@@ -25,7 +21,7 @@ const galleryData = projects.map((project) => ({
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
-          <span class="inline-block text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Projects</span>
+          <span class="inline-block text-accent-strong font-semibold text-xs uppercase tracking-[0.15em] mb-4">/// Projects</span>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-6">
             Our <span class="gradient-text">Projects</span>
           </h1>
@@ -49,13 +45,11 @@ const galleryData = projects.map((project) => ({
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="project-grid">
-              {projects.map((project, i) => (
-                <button
-                  type="button"
-                  class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted/10 text-left ring-1 ring-border hover:ring-accent-border transition-all duration-300"
-                  data-project={i}
+              {projects.map((project) => (
+                <a
+                  href={p(`/projects/${project.id}/`)}
+                  class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted/10 ring-1 ring-border hover:ring-accent-border hover:shadow-lg transition-all duration-300"
                   data-category={project.data.category?.toLowerCase() || "general"}
-                  aria-label={`View ${project.data.title} project`}
                 >
                   <img
                     src={p(project.data.images[0])}
@@ -69,6 +63,12 @@ const galleryData = projects.map((project) => ({
                       {project.data.images.length} photos
                     </span>
                   )}
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-colors duration-300">
+                    <span class="opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-2 rounded-full bg-white/95 text-body px-4 py-2 text-sm font-medium shadow-lg">
+                      View Case Study
+                      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                    </span>
+                  </div>
                   <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
                     {project.data.category && (
                       <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide bg-accent text-accent-text mb-2">
@@ -82,7 +82,7 @@ const galleryData = projects.map((project) => ({
                       </p>
                     )}
                   </div>
-                </button>
+                </a>
               ))}
             </div>
           </>
@@ -111,93 +111,9 @@ const galleryData = projects.map((project) => ({
       primaryHref={p("/contact/")}
     />
   </div>
-
-  <div id="project-lightbox" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Project gallery">
-    <button id="lightbox-close" class="absolute top-4 right-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Close gallery">
-      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-    </button>
-    <button id="lightbox-prev" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Previous image">
-      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-    </button>
-    <button id="lightbox-next" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Next image">
-      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-    </button>
-    <figure class="flex h-full w-full items-center justify-center px-16 sm:px-24 py-20">
-      <img id="lightbox-img" src="" alt="" class="max-h-full max-w-full object-contain rounded-lg" />
-    </figure>
-    <div class="absolute bottom-6 left-0 right-0 text-center px-6">
-      <p id="lightbox-title" class="text-white font-semibold"></p>
-      <p id="lightbox-counter" class="text-white/60 text-sm mt-1"></p>
-    </div>
-  </div>
 </BaseLayout>
 
-<script type="application/json" id="projects-data" set:html={JSON.stringify(galleryData)} />
-
 <script>
-  const projectsData = JSON.parse(document.getElementById("projects-data").textContent);
-  const lightbox = document.getElementById("project-lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const lightboxTitle = document.getElementById("lightbox-title");
-  const lightboxCounter = document.getElementById("lightbox-counter");
-  const prevBtn = document.getElementById("lightbox-prev");
-  const nextBtn = document.getElementById("lightbox-next");
-  const closeBtn = document.getElementById("lightbox-close");
-
-  let currentProject = 0;
-  let currentIndex = 0;
-
-  function render() {
-    const project = projectsData[currentProject];
-    if (!project) return;
-    lightboxImg.src = project.images[currentIndex];
-    lightboxImg.alt = project.title;
-    lightboxTitle.textContent = project.title;
-    lightboxCounter.textContent = `${currentIndex + 1} / ${project.images.length}`;
-  }
-
-  function open(index) {
-    currentProject = index;
-    currentIndex = 0;
-    render();
-    lightbox.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
-  }
-
-  function close() {
-    lightbox.classList.add("hidden");
-    document.body.style.overflow = "";
-  }
-
-  function next() {
-    const project = projectsData[currentProject];
-    currentIndex = (currentIndex + 1) % project.images.length;
-    render();
-  }
-
-  function prev() {
-    const project = projectsData[currentProject];
-    currentIndex = (currentIndex - 1 + project.images.length) % project.images.length;
-    render();
-  }
-
-  document.querySelectorAll("[data-project]").forEach((card) => {
-    card.addEventListener("click", () => open(Number(card.dataset.project)));
-  });
-
-  closeBtn.addEventListener("click", close);
-  nextBtn.addEventListener("click", next);
-  prevBtn.addEventListener("click", prev);
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) close();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (lightbox.classList.contains("hidden")) return;
-    if (e.key === "Escape") close();
-    if (e.key === "ArrowRight") next();
-    if (e.key === "ArrowLeft") prev();
-  });
-
   const filters = document.querySelectorAll("[data-filter]");
   const cards = document.querySelectorAll("[data-category]");
 
