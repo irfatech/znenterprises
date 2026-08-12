@@ -2,17 +2,25 @@
 title: Highway & Urban Pylon Signage
 description: Towering, freestanding structures engineered from steel and premium cladding. Commands attention from miles away.
 excerpt: Towering, freestanding pylon structures engineered from steel.
-category: Illuminated
-order: 3
-featured: true
+image: /images/whatsapp-image-2026-04-27-at-9.51.18-am.webp
+images:
+  - /images/img-20241122-wa0019.webp
+  - /images/img-20250225-wa0081.webp
+  - /images/whatsapp-image-2026-04-21-at-3.55.06-pm-1.webp
+  - /images/whatsapp-image-2026-04-29-at-7.49.42-pm.webp
+  - /images/whatsapp-image-2026-04-29-at-9.42.43-am.webp
+  - /images/whatsapp-image-2026-04-23-at-9.49.00-am.webp
 features:
   - Steel frame construction
   - ACP or metal cladding
   - LED or non-illuminated options
   - Wind-load engineered
   - Maximum long-distance visibility
-ctaText: Get a Quote
+category: Illuminated
+order: 3
+featured: true
 ctaLink: /contact/
+ctaText: Get a Quote
 ---
 
 ## What It Is
