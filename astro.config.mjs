@@ -6,7 +6,6 @@ import icon from "astro-icon";
 
 export default defineConfig({
   site: "https://znenterprises.in",
-  base: "/znenterprises",
   output: "static",
   trailingSlash: "always",
   build: {

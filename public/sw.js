@@ -1,6 +1,6 @@
 const CACHE_NAME = "znenterprises-v1";
 
-const BASE = "/znenterprises";
+const BASE = "/";
 
 const PRECACHE_URLS = [
   `${BASE}/`,
@@ -70,7 +70,7 @@ async function networkFirst(request) {
   } catch {
     const cached = await caches.match(request);
     if (cached) return cached;
-    return caches.match(`${BASE}/`);
+    return caches.match("/");
   }
 }
 
