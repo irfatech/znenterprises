@@ -48,6 +48,7 @@ const columns = [
 ];
 
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings.address ?? "Bengaluru, India")}`;
+const factoryMapsHref = "https://maps.app.goo.gl/PU8j4fGYM2aDNp146";
 ---
 
 <footer class="bg-inverse text-inverted border-t border-white/10">
@@ -136,6 +137,7 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
             <div>
               <span class="block text-inverted/70">Factory</span>
               <span class="block">No. 85/2, Site No. 9, Sulikere Road, Ramasandra Village, Sulikere Post, Hobli Kengeri, Bengaluru – 560060</span>
+              <a href={factoryMapsHref} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-xs">Get directions</a>
             </div>
           </li>
           {settings.phone.map((p) => {
