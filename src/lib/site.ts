@@ -4,6 +4,12 @@ import { getCollection } from "astro:content";
 const base = import.meta.env.BASE_URL;
 export const p = (path: string) => path?.startsWith("/") ? base + path.replace(/^\//, "") : path;
 
+export const absoluteUrl = (path: string): string =>
+  new URL(p(path || ""), import.meta.env.SITE || "https://znenterprises.in").href;
+
+export const normalizeTelephone = (tel: string): string =>
+  tel.replace(/[\s\-()]/g, "");
+
 export interface NavItem {
   label: string;
   href: string;
@@ -31,6 +37,7 @@ export interface SiteSettings {
   };
   googleMapsEmbedUrl?: string;
   currency: string;
+  geo?: { latitude: number; longitude: number };
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -64,17 +71,34 @@ export function getWhatsAppUrl(phone: string, message?: string): string {
   return `https://wa.me/${cleaned}${text}`;
 }
 
-export function generateBreadcrumbs(path: string) {
+const CRUMB_LABELS: Record<string, string> = {
+  about: "About Us",
+  services: "Services",
+  products: "Products",
+  projects: "Projects",
+  gallery: "Gallery",
+  industries: "Industries We Serve",
+  faq: "FAQ",
+  blog: "Blog",
+  contact: "Contact Us",
+  careers: "Careers",
+  install: "Install App",
+  privacy: "Privacy Policy",
+  terms: "Terms & Conditions",
+};
+
+export function generateBreadcrumbs(path: string, overrides: Record<string, string> = {}) {
   const parts = path.split("/").filter(Boolean);
   const crumbs = [{ label: "Home", href: "/" }];
 
   let current = "";
   for (const part of parts) {
     current += `/${part}`;
-    crumbs.push({
-      label: part.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
-      href: current,
-    });
+    const label =
+      overrides[part] ??
+      CRUMB_LABELS[part] ??
+      part.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    crumbs.push({ label, href: current });
   }
 
   return crumbs;

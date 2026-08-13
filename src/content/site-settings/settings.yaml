@@ -11,6 +11,9 @@ email: imran@znenterprises.in
 address: No. 15, ST Mary's Layout, 1st Floor, K.G Halli, Bengaluru – 560045
 workingHours: Mon–Sat, 9:00 AM – 6:00 PM
 googleMapsEmbedUrl: ''
+geo:
+  latitude: 12.9437518
+  longitude: 77.3885536
 social:
   facebook: ''
   instagram: ''

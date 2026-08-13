@@ -2,7 +2,7 @@
 title: "Why Quality Signage Matters for Retail Business Success"
 slug: quality-signage-retail-success
 excerpt: "Explore how premium retail signage drives foot traffic, enhances customer experience, and boosts sales for retail businesses."
-author: "Z N ENTERPRISES"
+author: "ZN Enterprises"
 date: 2026-05-20
 image: "/images/blog-retail-signage.jpg"
 category: "Retail"

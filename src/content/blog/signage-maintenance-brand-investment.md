@@ -2,7 +2,7 @@
 title: "Corporate Signage Maintenance: Protecting Your Brand Investment"
 slug: signage-maintenance-brand-investment
 excerpt: "Learn why regular signage maintenance is essential for preserving brand image, extending asset life, and preventing costly emergency repairs."
-author: "Z N ENTERPRISES"
+author: "ZN Enterprises"
 date: 2026-05-12
 image: "/images/blog-signage-maintenance.jpg"
 category: "Maintenance"

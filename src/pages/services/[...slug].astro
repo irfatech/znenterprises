@@ -2,8 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
-import { p, generateBreadcrumbs } from "../../lib/site";
-const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
+import { p, generateBreadcrumbs, getSiteSettings, absoluteUrl } from "../../lib/site";
 
 export async function getStaticPaths() {
   const services = await getCollection("services");
@@ -18,16 +17,29 @@ const { service } = Astro.props;
 const { data } = service;
 const { Content } = await render(service);
 
+const settings = await getSiteSettings();
+const serviceUrl = absoluteUrl(`/services/${service.id}/`);
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname, { services: "Services", [service.id]: data.title });
+
 const serviceSchema = {
-  "@context": "https://schema.org",
   "@type": "Service",
+  "@id": serviceUrl,
   name: data.title,
   description: data.description,
-  provider: {
-    "@type": "Organization",
-    name: "ZN Enterprises",
-  },
-  ...(data.features?.length ? { offers: { "@type": "Offer", description: data.features.join(", ") } } : {}),
+  url: serviceUrl,
+  ...(data.image ? { image: absoluteUrl(data.image) } : {}),
+  serviceType: "Corporate Signage Manufacturing and Installation",
+  provider: { "@id": `${settings.url}/#organization` },
+  areaServed: "IN",
+  ...(data.features?.length
+    ? {
+        offers: {
+          "@type": "Offer",
+          description: data.features.join(", "),
+          offeredBy: { "@id": `${settings.url}/#organization` },
+        },
+      }
+    : {}),
 };
 ---
 
@@ -35,9 +47,8 @@ const serviceSchema = {
   title={data.title}
   description={data.description}
   image={data.image}
-  seo={{ breadcrumbs }}
+  seo={{ breadcrumbs, mainEntity: serviceSchema }}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

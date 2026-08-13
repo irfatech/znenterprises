@@ -7,7 +7,7 @@ const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 <BaseLayout
   title="Terms & Conditions"
   description="Terms and conditions for ZN Enterprises website."
-  seo={{ breadcrumbs }}
+  seo={{ breadcrumbs, hideBusinessSchema: true }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

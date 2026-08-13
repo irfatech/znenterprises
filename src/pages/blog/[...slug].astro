@@ -2,8 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
-import { p, generateBreadcrumbs } from "../../lib/site";
-const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
+import { p, generateBreadcrumbs, getSiteSettings, absoluteUrl } from "../../lib/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -17,6 +16,32 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { data } = post;
 const { Content } = await render(post);
+
+const settings = await getSiteSettings();
+const postUrl = absoluteUrl(`/blog/${post.id}/`);
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname, { blog: "Blog", [post.id]: data.title });
+
+const modifiedTime =
+  data.updatedDate instanceof Date && !Number.isNaN(data.updatedDate.getTime())
+    ? data.updatedDate.toISOString()
+    : undefined;
+
+const articleSchema = {
+  "@type": "BlogPosting",
+  "@id": postUrl,
+  headline: data.title,
+  description: data.excerpt,
+  url: postUrl,
+  mainEntityOfPage: postUrl,
+  ...(data.image ? { image: absoluteUrl(data.image) } : {}),
+  datePublished: data.date.toISOString(),
+  ...(modifiedTime ? { dateModified: modifiedTime } : {}),
+  author: { "@type": "Person", name: data.author },
+  publisher: { "@id": `${settings.url}/#organization` },
+  ...(data.category ? { articleSection: data.category } : {}),
+  ...(data.tags && data.tags.length ? { keywords: data.tags.join(", ") } : {}),
+  inLanguage: "en-IN",
+};
 ---
 
 <BaseLayout
@@ -26,10 +51,12 @@ const { Content } = await render(post);
   seo={{
     type: "article",
     publishedTime: data.date.toISOString(),
+    modifiedTime,
     author: data.author,
     articleSection: data.category,
     articleTags: data.tags,
     breadcrumbs,
+    mainEntity: articleSchema,
   }}
 >
   <div class="pt-24">

@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
-import { p, generateBreadcrumbs } from "../lib/site";
+import { p, generateBreadcrumbs, absoluteUrl } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
@@ -10,12 +10,25 @@ const projects = (await getCollection("projects"))
   .filter((project) => project.data.images.length > 0)
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 const categories = ["All", ...new Set(projects.map((project) => project.data.category).filter(Boolean))];
+
+const projectListSchema = {
+  "@type": "ItemList",
+  "@id": absoluteUrl("/projects/#itemlist"),
+  name: "Signage Projects",
+  numberOfItems: projects.length,
+  itemListElement: projects.map((project, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: project.data.title,
+    url: absoluteUrl(`/projects/${project.id}/`),
+  })),
+};
 ---
 
 <BaseLayout
   title="Our Projects"
   description="Browse ZN Enterprises' portfolio of corporate signage projects across India — petroleum stations, corporate branding, retail signage, and more."
-  seo={{ breadcrumbs }}
+  seo={{ breadcrumbs, mainEntity: projectListSchema }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

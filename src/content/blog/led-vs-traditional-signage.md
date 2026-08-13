@@ -2,7 +2,7 @@
 title: "LED Signage vs Traditional Signage: Which is Right for Your Business?"
 slug: led-vs-traditional-signage
 excerpt: "Compare LED illuminated signage against traditional non-illuminated options to determine the best investment for your corporate branding needs."
-author: "Z N ENTERPRISES"
+author: "ZN Enterprises"
 date: 2026-06-10
 image: "/images/blog-led-vs-traditional.jpg"
 category: "Technology"

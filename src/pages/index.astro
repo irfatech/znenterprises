@@ -32,6 +32,16 @@ const testimonials = (await getCollection("testimonials"))
   .filter((t) => t.data.featured)
   .slice(0, 3);
 
+const reviewData = testimonials.map((t) => ({
+  author: t.data.name,
+  authorTitle: [t.data.role, t.data.company].filter(Boolean).join(", "),
+  reviewBody: t.data.content,
+  ratingValue: t.data.rating,
+}));
+const avgRating = testimonials.length
+  ? Math.round((testimonials.reduce((s, t) => s + t.data.rating, 0) / testimonials.length) * 10) / 10
+  : undefined;
+
 const clients = (await getCollection("clients"))
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 
@@ -97,6 +107,10 @@ const whyChooseUs = a?.whyChooseUs?.length ? a.whyChooseUs : defaultWhyChooseUs;
   title="Elevate Your Brand Visibility"
   description="Premium signage solution across India. End-to-end signage for petroleum and retail brands — manufactured, installed, and maintained 100% in-house by ZN Enterprises."
   preloadHero
+  seo={{
+    reviews: reviewData,
+    aggregateRating: avgRating ? { ratingValue: avgRating, reviewCount: reviewData.length } : undefined,
+  }}
 >
   <Hero />
 

@@ -3,8 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
 import ImageGallery from "../../components/ImageGallery.astro";
 import { getCollection, render } from "astro:content";
-import { p, generateBreadcrumbs, getSiteSettings, getWhatsAppUrl } from "../../lib/site";
-const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
+import { p, generateBreadcrumbs, getSiteSettings, getWhatsAppUrl, absoluteUrl } from "../../lib/site";
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
@@ -25,22 +24,33 @@ const whatsappHref = getWhatsAppUrl(
   `Hi! I'm interested in "${data.title}" — could you share pricing and specs?`
 );
 
+const productUrl = absoluteUrl(`/products/${product.id}/`);
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname, { products: "Products", [product.id]: data.title });
+
 const galleryImages = [data.image, ...(data.images ?? [])]
   .filter((img): img is string => Boolean(img))
   .filter((img, i, arr) => arr.indexOf(img) === i)
   .map((img) => p(img));
 
 const productSchema = {
-  "@context": "https://schema.org",
   "@type": "Product",
+  "@id": productUrl,
   name: data.title,
   description: data.description,
-  category: data.category,
-  ...(data.features?.length ? { features: data.features } : {}),
-  offers: {
-    "@type": "Offer",
-    availability: "https://schema.org/InStock",
-  },
+  url: productUrl,
+  brand: { "@type": "Brand", name: settings.siteName },
+  ...(data.image ? { image: absoluteUrl(data.image) } : {}),
+  ...(data.category ? { category: data.category } : {}),
+  ...(data.features?.length
+    ? {
+        additionalProperty: data.features.map((f) => ({
+          "@type": "PropertyValue",
+          name: f,
+          value: "Included",
+        })),
+      }
+    : {}),
+  ...(settings.phone[0] ? { manufacturer: { "@id": `${settings.url}/#organization` } } : {}),
 };
 ---
 
@@ -48,9 +58,8 @@ const productSchema = {
   title={data.title}
   description={data.description}
   image={data.image}
-  seo={{ breadcrumbs }}
+  seo={{ type: "product", breadcrumbs, mainEntity: productSchema }}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

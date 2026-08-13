@@ -2,7 +2,7 @@
 title: "A Complete Guide to Petroleum Station Signage Compliance in India"
 slug: petroleum-station-signage-compliance
 excerpt: "Understand the regulatory requirements, safety standards, and branding guidelines for petroleum retail signage in India."
-author: "Z N ENTERPRISES"
+author: "ZN Enterprises"
 date: 2026-05-28
 image: "/images/blog-petrol-station.jpg"
 category: "Industry Guide"

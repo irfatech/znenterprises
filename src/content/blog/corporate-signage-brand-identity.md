@@ -2,7 +2,7 @@
 title: "The Importance of Corporate Signage in Building Brand Identity"
 slug: corporate-signage-brand-identity
 excerpt: "Discover how premium corporate signage strengthens brand recognition, builds customer trust, and creates lasting impressions for businesses across India."
-author: "Z N ENTERPRISES"
+author: "ZN Enterprises"
 date: 2026-06-15
 image: "/images/blog-signage-brand.jpg"
 category: "Branding"

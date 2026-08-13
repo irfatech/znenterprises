@@ -1,6 +1,6 @@
 ---
 import { buildSEO } from "../lib/seo";
-import { getSiteSettings, p } from "../lib/site";
+import { getSiteSettings, p, absoluteUrl, normalizeTelephone } from "../lib/site";
 import { getImageMeta } from "../lib/imageMeta";
 import type { SEOProps } from "../lib/seo";
 
@@ -15,10 +15,16 @@ const {
   noIndex,
   type,
   publishedTime,
+  modifiedTime,
   author,
   articleSection,
   articleTags,
   breadcrumbs,
+  pageType,
+  mainEntity,
+  hideBusinessSchema,
+  reviews,
+  aggregateRating,
 } = buildSEO(Astro.props as SEOProps);
 
 const baseUrl = Astro.site;
@@ -26,73 +32,165 @@ const ogImage = new URL(p(image), baseUrl).href;
 const ogImageMeta = getImageMeta(image);
 const ogImageAlt = imageAlt || title;
 
-const schemaOrg = breadcrumbs
-  ? {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: breadcrumbs.map((crumb, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        name: crumb.label,
-        item: `${Astro.site}${crumb.href}`,
-      })),
-    }
-  : null;
+const pageUrl = canonical || Astro.url.href;
+const siteUrl = settings.url;
+const orgId = `${siteUrl}/#organization`;
+const siteId = `${siteUrl}/#website`;
+const webPageId = `${pageUrl}#webpage`;
+const breadcrumbId = `${pageUrl}#breadcrumb`;
 
-const businessSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${settings.url}/#organization`,
+function parseAddress(raw?: string) {
+  if (!raw) return undefined;
+  const parts = raw.split(",").map((s) => s.trim()).filter(Boolean);
+  const last = parts[parts.length - 1] ?? "";
+  const match = last.match(/^(.*?)\s*[-–]?\s*(\d{6})$/);
+  let locality = last;
+  let postalCode: string | undefined;
+  if (match) {
+    locality = (match[1] || "Bengaluru").trim();
+    postalCode = match[2];
+  }
+  return {
+    "@type": "PostalAddress",
+    streetAddress: parts.slice(0, -1).join(", "),
+    addressLocality: locality || "Bengaluru",
+    addressRegion: "Karnataka",
+    postalCode,
+    addressCountry: "IN",
+  };
+}
+
+const hasBusinessSchema = !hideBusinessSchema;
+
+const organizationNode = hasBusinessSchema
+  ? {
+      "@type": ["Organization", "LocalBusiness"],
+      "@id": orgId,
       name: settings.siteName,
-      url: settings.url,
-      logo: settings.logo ? `${settings.url}${settings.logo}` : undefined,
+      url: siteUrl,
+      logo: settings.logo ? absoluteUrl(settings.logo) : undefined,
+      image: absoluteUrl("/images/og-default.jpg"),
+      slogan: settings.tagline,
       description: settings.description,
-      contactPoint: settings.phone[0] ? {
+      telephone: settings.phone[0] ? normalizeTelephone(settings.phone[0]) : undefined,
+      email: settings.email,
+      address: parseAddress(settings.address),
+      ...(settings.geo
+        ? {
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: settings.geo.latitude,
+              longitude: settings.geo.longitude,
+            },
+          }
+        : {}),
+      ...(settings.address
+        ? {
+            hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings.address)}`,
+            map: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings.address)}`,
+          }
+        : {}),
+      areaServed: "IN",
+      priceRange: "₹₹",
+      currenciesAccepted: settings.currency || "INR",
+      contactPoint: settings.phone.map((tel, i) => ({
         "@type": "ContactPoint",
-        telephone: settings.phone[0],
-        contactType: "sales",
+        telephone: normalizeTelephone(tel),
+        contactType: i === 0 ? "sales" : "customer service",
         areaServed: "IN",
         availableLanguage: "en",
-      } : undefined,
+        ...(settings.email ? { email: settings.email } : {}),
+      })),
+      openingHoursSpecification: settings.workingHours
+        ? [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              opens: "09:00",
+              closes: "18:00",
+            },
+          ]
+        : undefined,
       sameAs: [
         settings.social?.facebook,
         settings.social?.instagram,
         settings.social?.youtube,
-      ].filter(Boolean),
-    },
-    {
+        settings.social?.tiktok,
+      ].filter((l): l is string => Boolean(l && l.trim())),
+      ...(reviews && reviews.length
+        ? {
+            review: reviews.map((r) => ({
+              "@type": "Review",
+              author: { "@type": "Person", name: r.author, ...(r.authorTitle ? { jobTitle: r.authorTitle } : {}) },
+              reviewBody: r.reviewBody,
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: r.ratingValue,
+                bestRating: 5,
+                worstRating: 1,
+              },
+            })),
+          }
+        : {}),
+      ...(aggregateRating && aggregateRating.reviewCount > 0
+        ? {
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: aggregateRating.ratingValue,
+              reviewCount: aggregateRating.reviewCount,
+              bestRating: aggregateRating.bestRating || 5,
+            },
+          }
+        : {}),
+    }
+  : null;
+
+const websiteNode = hasBusinessSchema
+  ? {
       "@type": "WebSite",
-      "@id": `${settings.url}/#website`,
-      url: settings.url,
+      "@id": siteId,
+      url: siteUrl,
       name: settings.siteName,
       description: settings.description,
       inLanguage: "en-IN",
-      publisher: { "@id": `${settings.url}/#organization` },
-    },
-    ...(settings.address ? [{
-      "@type": "LocalBusiness",
-      name: settings.siteName,
-      "@id": `${settings.url}/#localbusiness`,
-      url: settings.url,
-      image: settings.logo ? `${settings.url}${settings.logo}` : undefined,
-      telephone: settings.phone[0],
-      email: settings.email,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: settings.address,
-        addressCountry: "IN",
-      },
-      openingHoursSpecification: settings.workingHours ? [{
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "09:00",
-        closes: "18:00",
-      }] : undefined,
-      priceRange: "₹₹",
-    }] : []),
-  ],
+      publisher: { "@id": orgId },
+      mainEntity: { "@id": orgId },
+    }
+  : null;
+
+const webPageNode = {
+  "@type": pageType || "WebPage",
+  "@id": webPageId,
+  url: pageUrl,
+  name: title,
+  description,
+  inLanguage: "en-IN",
+  ...(hasBusinessSchema ? { isPartOf: { "@id": siteId } } : {}),
+  ...(breadcrumbs ? { breadcrumb: { "@id": breadcrumbId } } : {}),
+  mainEntity: mainEntity ?? (hasBusinessSchema ? { "@id": orgId } : undefined),
+};
+
+const breadcrumbNode = breadcrumbs
+  ? {
+      "@type": "BreadcrumbList",
+      "@id": breadcrumbId,
+      itemListElement: breadcrumbs.map((crumb, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: crumb.label,
+        item: `${siteUrl}${crumb.href}`,
+      })),
+    }
+  : null;
+
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@graph": [
+    organizationNode,
+    websiteNode,
+    webPageNode,
+    breadcrumbNode,
+  ].filter(Boolean),
 };
 ---
 
@@ -121,12 +219,13 @@ const businessSchema = {
 <meta name="twitter:image:alt" content={ogImageAlt} />
 
 {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{publishedTime && <meta name="datePublished" content={publishedTime} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 {articleSection && <meta property="article:section" content={articleSection} />}
 {articleTags && articleTags.length > 0 && articleTags.map((tag) => <meta property="article:tag" content={tag} />)}
 {author && <meta name="author" content={author} />}
 
-{schemaOrg && <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />}
-<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
 
 {breadcrumbs && (
   <nav aria-label="Breadcrumb" class="sr-only">

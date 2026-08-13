@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
-import { p, generateBreadcrumbs } from "../lib/site";
+import { p, generateBreadcrumbs, absoluteUrl } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
@@ -37,12 +37,27 @@ const industries = [
     icon: "M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z",
   },
 ];
+
+const industriesSchema = {
+  "@type": "ItemList",
+  "@id": absoluteUrl("/industries/#industrieslist"),
+  name: "Industries We Serve",
+  itemListElement: industries.map((industry, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Thing",
+      name: industry.sector,
+      description: industry.description,
+    },
+  })),
+};
 ---
 
 <BaseLayout
   title="Industries We Serve"
   description="ZN Enterprises provides premium corporate signage solutions across petroleum, automotive, banking, telecom, and industrial sectors in India."
-  seo={{ breadcrumbs }}
+  seo={{ breadcrumbs, mainEntity: industriesSchema }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

@@ -4,7 +4,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 import CTA from "../../components/CTA.astro";
 import ImageGallery from "../../components/ImageGallery.astro";
 import { getCollection, render } from "astro:content";
-import { p, getSiteSettings, getWhatsAppUrl } from "../../lib/site";
+import { p, getSiteSettings, getWhatsAppUrl, absoluteUrl, generateBreadcrumbs } from "../../lib/site";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -24,7 +24,10 @@ const whatsappHref = getWhatsAppUrl(
   `Hi! I saw the "${data.title}" project — could you help with something similar for us?`
 );
 
-const galleryImages = (data.images ?? []).map((img) => p(img));
+const projectUrl = absoluteUrl(`/projects/${project.id}/`);
+const breadcrumbs = generateBreadcrumbs(Astro.url.pathname, { projects: "Projects", [project.id]: data.title });
+
+const galleryImages = (data.images ?? []).map((img) => absoluteUrl(img));
 
 const allProjects = await getCollection("projects");
 const relatedProjects = allProjects
@@ -39,12 +42,20 @@ const relatedProjects = allProjects
 const metaLine = [data.client, data.location].filter(Boolean).join(" · ");
 
 const projectSchema = {
-  "@context": "https://schema.org",
   "@type": "CreativeWork",
+  "@id": projectUrl,
   name: data.title,
+  headline: data.title,
   description: data.description,
-  ...(data.client ? { creator: { "@type": "Organization", name: "Z N Enterprises" }, about: data.client } : {}),
+  url: projectUrl,
+  ...(data.client ? { about: { "@type": "Organization", name: data.client } } : {}),
+  ...(data.location ? { locationCreated: data.location } : {}),
+  ...(data.category ? { keywords: data.category } : {}),
   ...(galleryImages.length ? { image: galleryImages } : {}),
+  author: { "@id": `${settings.url}/#organization` },
+  creator: { "@id": `${settings.url}/#organization` },
+  copyrightHolder: { "@id": `${settings.url}/#organization` },
+  isPartOf: { "@id": absoluteUrl("/projects/#itemlist") },
 };
 ---
 
@@ -52,8 +63,8 @@ const projectSchema = {
   title={`${data.title} — Project`}
   description={data.description || `${data.title} — a signage project by ZN Enterprises${data.client ? ` for ${data.client}` : ""}.`}
   image={data.images?.[0]}
+  seo={{ breadcrumbs, mainEntity: projectSchema }}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(projectSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

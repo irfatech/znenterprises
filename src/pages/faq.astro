@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
-import { p, generateBreadcrumbs } from "../lib/site";
+import { p, generateBreadcrumbs, absoluteUrl } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
@@ -11,8 +11,9 @@ const faqs = (await getCollection("faq"))
   .map((faq) => ({ q: faq.data.question, a: faq.data.answer }));
 
 const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": absoluteUrl("/faq/#faqpage"),
+  inLanguage: "en-IN",
   mainEntity: faqs.map((faq) => ({
     "@type": "Question",
     name: faq.q,
@@ -27,9 +28,8 @@ const faqSchema = {
 <BaseLayout
   title="FAQ"
   description="Frequently asked questions about ZN Enterprises corporate signage services, manufacturing, installation, and maintenance."
-  seo={{ breadcrumbs }}
+  seo={{ breadcrumbs, mainEntity: faqSchema }}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
-import { p, generateBreadcrumbs } from "../lib/site";
+import { p, generateBreadcrumbs, absoluteUrl } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
@@ -12,15 +12,15 @@ const allProducts = (await getCollection("products"))
 const categories = [...new Set(allProducts.map((p) => p.data.category))];
 
 const itemListSchema = {
-  "@context": "https://schema.org",
   "@type": "ItemList",
+  "@id": absoluteUrl("/products/#itemlist"),
   name: "Signage Products",
   numberOfItems: allProducts.length,
   itemListElement: allProducts.map((product, i) => ({
     "@type": "ListItem",
     position: i + 1,
     name: product.data.title,
-    url: new URL(p(`/products/${product.id}/`), Astro.site).href,
+    url: absoluteUrl(`/products/${product.id}/`),
   })),
 };
 ---
@@ -28,9 +28,8 @@ const itemListSchema = {
 <BaseLayout
   title="Products"
   description="Explore premium signage products from ZN Enterprises — pump & canopy signage, LED signage, highway & urban pylon signage, and ACP cladding & facades."
-  seo={{ breadcrumbs }}
+  seo={{ breadcrumbs, mainEntity: itemListSchema }}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

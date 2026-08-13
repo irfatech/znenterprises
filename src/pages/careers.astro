@@ -1,7 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { generateBreadcrumbs } from "../lib/site";
+import { getSiteSettings, absoluteUrl, generateBreadcrumbs } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
+
+const settings = await getSiteSettings();
+const datePosted = new Date().toISOString().split("T")[0];
+const validThrough = new Date(Date.now() + 90 * 86400000).toISOString().split("T")[0];
+
+const employmentType = (t: string) =>
+  t === "Full-time" ? "FULL_TIME" : t === "Part-time" ? "PART_TIME" : t === "Contract" ? "CONTRACTOR" : "OTHER";
 
 const positions = [
   {
@@ -29,12 +36,43 @@ const positions = [
     description: "Manage end-to-end signage project execution for corporate clients across multiple sectors.",
   },
 ];
+
+const jobsSchema = {
+  "@type": "ItemList",
+  "@id": absoluteUrl("/careers/#joblist"),
+  name: "Open Positions at ZN Enterprises",
+  itemListElement: positions.map((job, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "JobPosting",
+      "@id": absoluteUrl(`/careers/#job-${i + 1}`),
+      title: job.title,
+      description: job.description,
+      datePosted,
+      validThrough,
+      employmentType: employmentType(job.type),
+      hiringOrganization: { "@id": `${settings.url}/#organization` },
+      jobLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: job.location,
+          addressRegion: "Karnataka",
+          addressCountry: "IN",
+        },
+      },
+      directApply: true,
+      url: absoluteUrl("/careers/"),
+    },
+  })),
+};
 ---
 
 <BaseLayout
   title="Careers"
   description="Join ZN Enterprises and build a career in the corporate signage industry. We're hiring skilled professionals in Bengaluru."
-  seo={{ breadcrumbs }}
+  seo={{ breadcrumbs, mainEntity: jobsSchema }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">
