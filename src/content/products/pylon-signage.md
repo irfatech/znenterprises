@@ -19,18 +19,22 @@ features:
 category: Illuminated
 order: 3
 featured: true
-ctaLink: /contact/
 ctaText: Get a Quote
+ctaLink: /contact/
 ---
 
-## What It Is
+# **What It Is**
 
 Towering, freestanding structures engineered from steel and premium cladding.
 
-## Materials
+ㅤ
+
+# **Materials**
 
 Steel frame. ACP or metal cladding. LED or non-illuminated.
 
-## Why It Matters
+ㅤ
+
+# **Why It Matters**
 
 Commands attention from miles away.
