@@ -4,7 +4,7 @@ excerpt: Discover how premium corporate signage strengthens brand recognition, b
 author: ZN Enterprises
 date: 2026-06-15
 updatedDate: ''
-image: /images/blog-signage-brand.jpg
+image: /images/office-logo-signage-installation-kolkata.webp
 category: Corporate
 tags:
   - Corporate Signage
