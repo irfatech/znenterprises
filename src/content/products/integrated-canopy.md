@@ -22,9 +22,13 @@ featured: true
 
 High-visibility, weather-resistant, and customizable branding for fuel stations.
 
+ㅤ
+
 # **Materials**
 
 ACP, LED, metal, acrylic, vinyl, polycarbonate. UV-resistant finishes.
+
+ㅤ
 
 # **Why It matters**
 
