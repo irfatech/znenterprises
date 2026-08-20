@@ -3,7 +3,7 @@ title: NRVI work at JCS Fuels
 client: BPCL
 location: 12°12'00.73"N 75°47'51.86"E
 description: end-to-end new retail visual identity at JCS Fuels
-category: Petroleum
+category: BPCL - Retail
 order: 2
 featured: true
 images:
