@@ -16,18 +16,18 @@ features:
 category: Non-Illuminated
 order: 4
 featured: true
-ctaLink: /contact/
 ctaText: Get a Quote
+ctaLink: /contact/
 ---
 
-## What It Is
+# **What It is**
 
 Precision-cut, weather-resistant building exteriors.
 
-## Materials
+# **Materials**
 
 High-quality ACP panels. Precision-cut.
 
-## Why It Matters
+# **Why It Matters**
 
 Transforms ordinary architecture into a seamless brand experience.
