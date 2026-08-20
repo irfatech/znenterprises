@@ -2,7 +2,7 @@
 name: CPCL
 fullName: Chennai Petroleum Corporation Limited
 slug: cpcl
-logo: /images/clients/cpcl.svg
+logo: /images/logo_cpcl_ro.webp
 description: Leading petroleum refining company and trusted partner for fuel station branding and retail visual identity solutions.
 order: 0
 ---
