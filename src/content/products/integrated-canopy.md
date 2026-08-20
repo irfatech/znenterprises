@@ -10,7 +10,7 @@ images:
   - /images/whatsapp-image-2026-08-12-at-11.20.20-pm.webp
 features:
   - 24/7 Visibility
-  - Premium structure
+  - Premium made-to-order structure
   - Backlit boards
   - High Quality ACP
 category: Customizable
