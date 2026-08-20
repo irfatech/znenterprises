@@ -18,7 +18,7 @@ order: 1
 featured: true
 ---
 
-## What It Is
+# **What It is**
 
 High-visibility, weather-resistant, and customizable branding for fuel stations.
 
