@@ -7,5 +7,10 @@ category: Petroleum
 order: 4
 featured: true
 images:
-  - /images/943bb754-3148-40fd-89fb-18b49d09c227.webp
+  - /images/whatsapp-image-2025-12-31-at-10.04.49-2.webp
+  - /images/whatsapp-image-2025-12-31-at-10.04.49-1.webp
+  - /images/whatsapp-image-2025-12-31-at-10.04.47-1.webp
+  - /images/whatsapp-image-2026-02-13-at-17.40.57.webp
+  - /images/whatsapp-image-2026-02-13-at-17.41.01.webp
+  - /images/whatsapp-image-2026-02-13-at-17.40.59.webp
 ---
