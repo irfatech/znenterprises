@@ -22,18 +22,22 @@ features:
 category: Illuminated
 order: 2
 featured: true
-ctaText: Explore LED Options
 ctaLink: /contact/
+ctaText: Explore LED Options
 ---
 
-## What It Is
+# **What It Is**
 
 Illuminated signage that works 24/7. Channel letters, backlit boards, digital displays.
 
-## Materials
+ㅤ
+
+# **Materials**
 
 LED technology, ACM, polycarbonate, acrylic. Weather-proof. Energy-efficient.
 
-## Why It Matters
+ㅤ
+
+# **Why It Matters**
 
 Captures high-value night traffic and elevates brand prestige.
