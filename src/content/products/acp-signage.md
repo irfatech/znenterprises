@@ -20,7 +20,7 @@ ctaText: Get a Quote
 ctaLink: /contact/
 ---
 
-# **What It is**
+# **What It Is**
 
 Precision-cut, weather-resistant building exteriors.
 
