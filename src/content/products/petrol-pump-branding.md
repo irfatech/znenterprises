@@ -16,8 +16,8 @@ features:
 category: Specialized
 order: 1
 featured: true
-ctaLink: /contact/
 ctaText: Get a Quote
+ctaLink: /contact/
 ---
 
 # **What It Is**
@@ -29,6 +29,8 @@ High-visibility, weather-resistant branding for fuel islands.
 # **Materials**
 
 ACP, metal, acrylic, vinyl, polycarbonate. UV-resistant finishes.
+
+ㅤ
 
 # **Why It Matters**
 
