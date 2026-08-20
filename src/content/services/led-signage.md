@@ -31,4 +31,4 @@ We install illuminated signage — LED channel letters, backlit boards, and digi
 
 Real Impact
 
-We installed premium LED's in almost hundreds petrol pumps.
+Installed premium LEDs at almost hundreds of petrol pumps across India.
