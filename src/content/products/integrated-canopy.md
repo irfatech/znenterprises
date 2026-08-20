@@ -28,4 +28,4 @@ ACP, LED, metal, acrylic, vinyl, polycarbonate. UV-resistant finishes.
 
 # **Why It matters**
 
-what customers sees, must be flawless.
+what customers see, must be flawless.
