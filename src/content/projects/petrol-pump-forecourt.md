@@ -1,7 +1,7 @@
 ---
 title: NRVI Work at BP Mulbagal (Company Owned Outlet)
 client: BPCL
-location: Bengaluru, Karnataka
+location: 13°08'48.33"N 78°16'51.38"E
 description: end-to-end new retail visual identity and branding work at one of the biggest petrol pump in Karnataka.
 category: Petroleum
 order: 1
