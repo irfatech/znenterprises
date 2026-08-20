@@ -1,5 +1,5 @@
 ---
-title: Integrated Canopy for Various Products.
+title: Integrated Canopy for Various Products
 description: An integrated canopy at fuel stations that makes brand reliable & valuable with high-quality visibility.
 excerpt: A product that bridges the gap between a brand and its branding.
 image: /images/943bb754-3148-40fd-89fb-18b49d09c227.webp
