@@ -12,4 +12,7 @@ images:
   - /images/img-20241014-wa0094.webp
   - /images/img-20241014-wa0084.webp
   - /images/img-20241014-wa0091.webp
+  - /images/img-20241014-wa0085.webp
+  - /images/img-20241014-wa0082.webp
+  - /images/img-20241014-wa0083.webp
 ---
