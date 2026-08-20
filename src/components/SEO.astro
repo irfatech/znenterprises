@@ -3,8 +3,12 @@ import { buildSEO } from "../lib/seo";
 import { getSiteSettings, p, absoluteUrl, normalizeTelephone } from "../lib/site";
 import { getImageMeta } from "../lib/imageMeta";
 import type { SEOProps } from "../lib/seo";
+import { getCollection } from "astro:content";
 
 const settings = await getSiteSettings();
+const services = await getCollection("services");
+const products = await getCollection("products");
+const isHome = Astro.url.pathname === "/";
 
 const {
   title,
@@ -62,6 +66,38 @@ function parseAddress(raw?: string) {
 
 const hasBusinessSchema = !hideBusinessSchema;
 
+const knowsAbout = Array.from(
+  new Set([
+    "Retail Visual Identity (RVI)",
+    "Petroleum Signage",
+    "Corporate Signage",
+    "LED Signage",
+    "Industrial Fabrication",
+    "Nationwide Signage Installation",
+    ...services.map((s) => s.data.title),
+    ...products.map((pr) => pr.data.title),
+  ]),
+).filter(Boolean);
+
+const offerCatalog = isHome
+  ? {
+      "@type": "OfferCatalog",
+      name: "Signage Services and Products",
+      itemListElement: [
+        ...services.map((s) => ({
+          "@type": "Offer",
+          "@id": `${absoluteUrl(`/services/${s.id}/`)}#offer`,
+          itemOffered: { "@id": absoluteUrl(`/services/${s.id}/`) },
+        })),
+        ...products.map((pr) => ({
+          "@type": "Offer",
+          "@id": `${absoluteUrl(`/products/${pr.id}/`)}#offer`,
+          itemOffered: { "@id": absoluteUrl(`/products/${pr.id}/`) },
+        })),
+      ],
+    }
+  : undefined;
+
 const organizationNode = hasBusinessSchema
   ? {
       "@type": ["Organization", "LocalBusiness"],
@@ -75,6 +111,12 @@ const organizationNode = hasBusinessSchema
       telephone: settings.phone[0] ? normalizeTelephone(settings.phone[0]) : undefined,
       email: settings.email,
       address: parseAddress(settings.address),
+      ...(settings.foundingDate ? { foundingDate: settings.foundingDate } : {}),
+      ...(settings.taxID ? { taxID: settings.taxID } : {}),
+      ...(settings.founder ? { founder: { "@type": "Person", name: settings.founder } } : {}),
+      ...(settings.numberOfEmployees && settings.numberOfEmployees > 0
+        ? { numberOfEmployees: { "@type": "QuantitativeValue", value: settings.numberOfEmployees } }
+        : {}),
       ...(settings.geo
         ? {
             geo: {
@@ -90,14 +132,14 @@ const organizationNode = hasBusinessSchema
             map: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings.address)}`,
           }
         : {}),
-      areaServed: "IN",
-      priceRange: "₹₹",
+      areaServed: { "@type": "Country", name: "IN" },
       currenciesAccepted: settings.currency || "INR",
+      knowsAbout,
       contactPoint: settings.phone.map((tel, i) => ({
         "@type": "ContactPoint",
         telephone: normalizeTelephone(tel),
         contactType: i === 0 ? "sales" : "customer service",
-        areaServed: "IN",
+        areaServed: { "@type": "Country", name: "IN" },
         availableLanguage: "en",
         ...(settings.email ? { email: settings.email } : {}),
       })),
@@ -117,6 +159,7 @@ const organizationNode = hasBusinessSchema
         settings.social?.youtube,
         settings.social?.tiktok,
       ].filter((l): l is string => Boolean(l && l.trim())),
+      ...(offerCatalog ? { hasOfferCatalog: offerCatalog } : {}),
       ...(reviews && reviews.length
         ? {
             review: reviews.map((r) => ({
@@ -154,7 +197,6 @@ const websiteNode = hasBusinessSchema
       description: settings.description,
       inLanguage: "en-IN",
       publisher: { "@id": orgId },
-      mainEntity: { "@id": orgId },
     }
   : null;
 

@@ -8,6 +8,7 @@ const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 const images = (await getCollection("gallery")).sort(() => Math.random() - 0.5);
 const categories = ["All", "Corporate", "Petroleum", "Retail", "Manufacturing", "Installation"];
 
+const orgId = absoluteUrl("/#organization");
 const gallerySchema = {
   "@type": "ItemList",
   "@id": absoluteUrl("/gallery/#gallerylist"),
@@ -19,9 +20,17 @@ const gallerySchema = {
     item: {
       "@type": "ImageObject",
       contentUrl: absoluteUrl(item.data.image),
+      thumbnailUrl: absoluteUrl(item.data.image),
       ...(item.data.title ? { name: item.data.title } : {}),
       ...(item.data.category ? { description: `ZN Enterprises signage project — ${item.data.category}` } : {}),
-      ...(item.data.date ? { datePublished: new Date(item.data.date).toISOString() } : {}),
+      ...(item.data.date
+        ? {
+            datePublished: new Date(item.data.date).toISOString(),
+            uploadDate: new Date(item.data.date).toISOString(),
+          }
+        : {}),
+      copyrightHolder: { "@id": orgId },
+      creator: { "@id": orgId },
     },
   })),
 };
@@ -30,7 +39,7 @@ const gallerySchema = {
 <BaseLayout
   title="Gallery"
   description="Browse ZN Enterprises' project gallery showcasing corporate signage, LED boards, petroleum branding, and installation work across India."
-  seo={{ breadcrumbs, mainEntity: gallerySchema }}
+  seo={{ breadcrumbs, pageType: "CollectionPage", mainEntity: gallerySchema }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
 import { p, generateBreadcrumbs, getSiteSettings, absoluteUrl } from "../../lib/site";
+import { authorNode } from "../../lib/schema";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -36,7 +37,7 @@ const articleSchema = {
   ...(data.image ? { image: absoluteUrl(data.image) } : {}),
   datePublished: data.date.toISOString(),
   ...(modifiedTime ? { dateModified: modifiedTime } : {}),
-  author: { "@type": "Person", name: data.author },
+  author: authorNode(data.author, `${settings.url}/#organization`),
   publisher: { "@id": `${settings.url}/#organization` },
   ...(data.category ? { articleSection: data.category } : {}),
   ...(data.tags && data.tags.length ? { keywords: data.tags.join(", ") } : {}),

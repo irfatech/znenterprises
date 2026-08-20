@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CTA from "../components/CTA.astro";
 import { getCollection } from "astro:content";
-import { p, generateBreadcrumbs, absoluteUrl } from "../lib/site";
+import { p, generateBreadcrumbs } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
@@ -10,25 +10,20 @@ const faqs = (await getCollection("faq"))
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99))
   .map((faq) => ({ q: faq.data.question, a: faq.data.answer }));
 
-const faqSchema = {
-  "@type": "FAQPage",
-  "@id": absoluteUrl("/faq/#faqpage"),
-  inLanguage: "en-IN",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.a,
-    },
-  })),
-};
+const faqSchema = faqs.map((faq) => ({
+  "@type": "Question",
+  name: faq.q,
+  acceptedAnswer: {
+    "@type": "Answer",
+    text: faq.a,
+  },
+}));
 ---
 
 <BaseLayout
   title="FAQ"
   description="Frequently asked questions about ZN Enterprises corporate signage services, manufacturing, installation, and maintenance."
-  seo={{ breadcrumbs, mainEntity: faqSchema }}
+  seo={{ breadcrumbs, pageType: "FAQPage", mainEntity: faqSchema }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

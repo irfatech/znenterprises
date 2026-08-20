@@ -16,6 +16,15 @@ features:
 category: Non-Illuminated
 order: 4
 featured: true
+specs:
+  - name: Material
+    value: High-quality ACP panels
+  - name: Fabrication
+    value: Precision-cut
+  - name: Finish
+    value: Weather-resistant
+  - name: Application
+    value: Building exteriors and facades
 ctaText: Get a Quote
 ctaLink: /contact/
 ---

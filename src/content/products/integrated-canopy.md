@@ -16,6 +16,15 @@ features:
 category: Customizable
 order: 1
 featured: true
+specs:
+  - name: Material
+    value: High-quality ACP
+  - name: Illumination
+    value: Backlit LED boards
+  - name: Structure
+    value: Premium made-to-order
+  - name: Visibility
+    value: 24/7
 ---
 
 # **What It Is**

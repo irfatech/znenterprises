@@ -4,6 +4,7 @@ import CTA from "../../components/CTA.astro";
 import ImageGallery from "../../components/ImageGallery.astro";
 import { getCollection, render } from "astro:content";
 import { p, generateBreadcrumbs, getSiteSettings, getWhatsAppUrl, absoluteUrl } from "../../lib/site";
+import { quoteOffer } from "../../lib/schema";
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
@@ -38,18 +39,22 @@ const productSchema = {
   name: data.title,
   description: data.description,
   url: productUrl,
+  sku: product.id,
+  mpn: product.id,
   brand: { "@type": "Brand", name: settings.siteName },
   ...(data.image ? { image: absoluteUrl(data.image) } : {}),
   ...(data.category ? { category: data.category } : {}),
-  ...(data.features?.length
+  ...(data.features?.length ? { feature: data.features } : {}),
+  ...(data.specs?.length
     ? {
-        additionalProperty: data.features.map((f) => ({
+        additionalProperty: data.specs.map((s) => ({
           "@type": "PropertyValue",
-          name: f,
-          value: "Included",
+          name: s.name,
+          value: s.value,
         })),
       }
     : {}),
+  offers: quoteOffer(productUrl, `${settings.url}/#organization`, "Price on request — custom quote provided by ZN Enterprises"),
   ...(settings.phone[0] ? { manufacturer: { "@id": `${settings.url}/#organization` } } : {}),
 };
 ---

@@ -43,6 +43,10 @@ const products = defineCollection({
     featured: z.boolean().default(false),
     lang: z.string().default("en"),
     seo: seoSchema.optional(),
+    specs: z.array(z.object({
+      name: z.string(),
+      value: z.string(),
+    })).default([]),
   }),
 });
 
@@ -117,6 +121,7 @@ const projects = defineCollection({
     order: z.number({ coerce: true }).int().default(0),
     featured: z.boolean().default(false),
     lang: z.string().default("en"),
+    date: z.date({ coerce: true }).optional(),
   }),
 });
 
@@ -170,6 +175,10 @@ const siteSettings = defineCollection({
       latitude: z.number({ coerce: true }),
       longitude: z.number({ coerce: true }),
     }).optional(),
+    foundingDate: z.string().optional(),
+    taxID: z.string().optional(),
+    founder: z.string().optional(),
+    numberOfEmployees: z.number({ coerce: true }).optional(),
     language: z.string().default("en"),
     languages: z.array(z.string()).default(["en", "tet", "id"]),
   }),

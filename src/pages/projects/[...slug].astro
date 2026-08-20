@@ -5,6 +5,7 @@ import CTA from "../../components/CTA.astro";
 import ImageGallery from "../../components/ImageGallery.astro";
 import { getCollection, render } from "astro:content";
 import { p, getSiteSettings, getWhatsAppUrl, absoluteUrl, generateBreadcrumbs } from "../../lib/site";
+import { placeNode } from "../../lib/schema";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -49,8 +50,14 @@ const projectSchema = {
   description: data.description,
   url: projectUrl,
   ...(data.client ? { about: { "@type": "Organization", name: data.client } } : {}),
-  ...(data.location ? { locationCreated: data.location } : {}),
+  ...(data.location ? { locationCreated: placeNode(data.location) } : {}),
   ...(data.category ? { keywords: data.category } : {}),
+  ...(data.date
+    ? {
+        dateCreated: new Date(data.date).toISOString(),
+        datePublished: new Date(data.date).toISOString(),
+      }
+    : {}),
   ...(galleryImages.length ? { image: galleryImages } : {}),
   author: { "@id": `${settings.url}/#organization` },
   creator: { "@id": `${settings.url}/#organization` },

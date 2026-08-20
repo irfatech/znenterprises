@@ -14,6 +14,10 @@ googleMapsEmbedUrl: ''
 geo:
   latitude: 12.9437518
   longitude: 77.3885536
+foundingDate: '2018-01-01'
+taxID: ''
+founder: ''
+numberOfEmployees: 0
 social:
   facebook: ''
   instagram: ''

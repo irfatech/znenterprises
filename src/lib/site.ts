@@ -38,6 +38,10 @@ export interface SiteSettings {
   googleMapsEmbedUrl?: string;
   currency: string;
   geo?: { latitude: number; longitude: number };
+  foundingDate?: string;
+  taxID?: string;
+  founder?: string;
+  numberOfEmployees?: number;
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -98,7 +102,7 @@ export function generateBreadcrumbs(path: string, overrides: Record<string, stri
       overrides[part] ??
       CRUMB_LABELS[part] ??
       part.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    crumbs.push({ label, href: current });
+    crumbs.push({ label, href: `${current}/` });
   }
 
   return crumbs;

@@ -22,6 +22,17 @@ features:
 category: Illuminated
 order: 2
 featured: true
+specs:
+  - name: Type
+    value: LED channel letters
+  - name: Illumination
+    value: Backlit boards and digital displays
+  - name: Construction
+    value: Weather-proof
+  - name: Operation
+    value: Energy-efficient
+  - name: Visibility
+    value: 24/7
 ctaLink: /contact/
 ctaText: Explore LED Options
 ---

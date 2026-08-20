@@ -4,8 +4,8 @@ import { getSiteSettings, absoluteUrl, generateBreadcrumbs } from "../lib/site";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 const settings = await getSiteSettings();
-const datePosted = new Date().toISOString().split("T")[0];
-const validThrough = new Date(Date.now() + 90 * 86400000).toISOString().split("T")[0];
+const datePosted = "2026-08-01";
+const validThrough = "2026-11-30";
 
 const employmentType = (t: string) =>
   t === "Full-time" ? "FULL_TIME" : t === "Part-time" ? "PART_TIME" : t === "Contract" ? "CONTRACTOR" : "OTHER";
@@ -72,7 +72,7 @@ const jobsSchema = {
 <BaseLayout
   title="Careers"
   description="Join ZN Enterprises and build a career in the corporate signage industry. We're hiring skilled professionals in Bengaluru."
-  seo={{ breadcrumbs, mainEntity: jobsSchema }}
+  seo={{ breadcrumbs, pageType: "CollectionPage", mainEntity: jobsSchema }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

@@ -4,6 +4,7 @@ import CTA from "../components/CTA.astro";
 import BlogCard from "../components/BlogCard.astro";
 import { getCollection } from "astro:content";
 import { p, generateBreadcrumbs, absoluteUrl } from "../lib/site";
+import { authorNode } from "../lib/schema";
 const breadcrumbs = generateBreadcrumbs(Astro.url.pathname);
 
 
@@ -12,6 +13,7 @@ const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const categories = [...new Set(posts.map((p) => p.data.category))];
+const orgId = absoluteUrl("/#organization");
 
 const blogSchema = {
   "@type": "Blog",
@@ -21,11 +23,15 @@ const blogSchema = {
   description: "Corporate signage insights, RVI industry news, branding trends, and best practices from the ZN Enterprises team.",
   blogPost: posts.map((post) => ({
     "@type": "BlogPosting",
+    "@id": absoluteUrl(`/blog/${post.id}/`),
     headline: post.data.title,
+    description: post.data.excerpt,
     url: absoluteUrl(`/blog/${post.id}/`),
+    mainEntityOfPage: absoluteUrl(`/blog/${post.id}/`),
     datePublished: post.data.date.toISOString(),
     ...(post.data.image ? { image: absoluteUrl(post.data.image) } : {}),
-    author: { "@type": "Person", name: post.data.author },
+    author: authorNode(post.data.author, orgId),
+    inLanguage: "en-IN",
   })),
 };
 ---
@@ -33,7 +39,7 @@ const blogSchema = {
 <BaseLayout
   title="Blog"
   description="Corporate signage insights, RVI industry news, branding trends, and updates from ZN Enterprises."
-  seo={{ breadcrumbs, mainEntity: blogSchema }}
+  seo={{ breadcrumbs, pageType: "CollectionPage", mainEntity: blogSchema }}
 >
   <div class="pt-24">
     <section class="py-16 sm:py-20 lg:py-24">

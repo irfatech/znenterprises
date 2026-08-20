@@ -2,7 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CTA from "../../components/CTA.astro";
 import { getCollection, render } from "astro:content";
-import { p, generateBreadcrumbs, getSiteSettings, absoluteUrl } from "../../lib/site";
+import { p, generateBreadcrumbs, getSiteSettings, absoluteUrl, normalizeTelephone } from "../../lib/site";
+import { quoteOffer } from "../../lib/schema";
 
 export async function getStaticPaths() {
   const services = await getCollection("services");
@@ -30,14 +31,32 @@ const serviceSchema = {
   ...(data.image ? { image: absoluteUrl(data.image) } : {}),
   serviceType: "Corporate Signage Manufacturing and Installation",
   provider: { "@id": `${settings.url}/#organization` },
-  areaServed: "IN",
+  areaServed: { "@type": "Country", name: "IN" },
+  ...(settings.workingHours
+    ? {
+        hoursAvailable: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            opens: "09:00",
+            closes: "18:00",
+          },
+        ],
+      }
+    : {}),
+  availableChannel: [
+    {
+      "@type": "ServiceChannel",
+      serviceUrl,
+      ...(settings.phone[0]
+        ? { servicePhone: { "@type": "ContactPoint", telephone: normalizeTelephone(settings.phone[0]), contactType: "sales" } }
+        : {}),
+      providesService: { "@id": serviceUrl },
+    },
+  ],
   ...(data.features?.length
     ? {
-        offers: {
-          "@type": "Offer",
-          description: data.features.join(", "),
-          offeredBy: { "@id": `${settings.url}/#organization` },
-        },
+        offers: quoteOffer(serviceUrl, `${settings.url}/#organization`, "Price on request — custom quote provided by ZN Enterprises"),
       }
     : {}),
 };

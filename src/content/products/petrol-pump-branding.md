@@ -16,6 +16,15 @@ features:
 category: Specialized
 order: 1
 featured: true
+specs:
+  - name: Material
+    value: ACP, metal, acrylic, vinyl, polycarbonate
+  - name: Finish
+    value: UV-resistant
+  - name: Construction
+    value: Weather-resistant
+  - name: Application
+    value: Fuel islands and forecourts
 ctaText: Get a Quote
 ctaLink: /contact/
 ---

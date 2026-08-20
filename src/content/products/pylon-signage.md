@@ -19,6 +19,17 @@ features:
 category: Illuminated
 order: 3
 featured: true
+specs:
+  - name: Frame
+    value: Steel frame construction
+  - name: Cladding
+    value: ACP or metal
+  - name: Illumination
+    value: LED or non-illuminated options
+  - name: Engineering
+    value: Wind-load engineered
+  - name: Visibility
+    value: Maximum long-distance
 ctaText: Get a Quote
 ctaLink: /contact/
 ---
