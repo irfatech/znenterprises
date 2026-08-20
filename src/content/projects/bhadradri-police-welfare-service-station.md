@@ -7,5 +7,10 @@ category: Petroleum
 order: 3
 featured: true
 images:
-  - /images/943bb754-3148-40fd-89fb-18b49d09c227.webp
+  - /images/bhadrad.webp
+  - /images/bhadradr.webp
+  - /images/bhadradri.webp
+  - /images/bhadradri1.webp
+  - /images/bhad.webp
+  - /images/bhadra.webp
 ---
