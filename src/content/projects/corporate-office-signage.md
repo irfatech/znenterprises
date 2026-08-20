@@ -1,13 +1,13 @@
 ---
-title: Corporate Office Signage
-client: Corporate Client
-location: Bengaluru, Karnataka
-description: Premium LED signage and ACP cladding for a corporate office facade.
+title: NRVI work at JCS Fuels
+client: BPCL
+location: Mysore
+description: end-to-end new retail visual identity at JCS Fuels
+category: Petroleum
+order: 2
+featured: true
 images:
   - /images/blog-signage-brand.jpg
   - /images/blog-led-vs-traditional.jpg
   - /images/blog-signage-maintenance.jpg
-category: Corporate
-order: 2
-featured: true
 ---
