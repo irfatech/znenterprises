@@ -3,7 +3,7 @@ title: Integrated Canopy at Jannu Karthik Filling Station
 client: BPCL
 location: 16°51'14.68"N 78°09'37.98"E
 description: Complete installation of three products integrated canopy at Jannu Karthik Filling Station.
-category: Petroleum
+category: BPCL - Retail
 order: 5
 featured: true
 images:
