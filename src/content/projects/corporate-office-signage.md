@@ -1,7 +1,7 @@
 ---
 title: NRVI work at JCS Fuels
 client: BPCL
-location: Mysore
+location: 12°12'00.73"N 75°47'51.86"E
 description: end-to-end new retail visual identity at JCS Fuels
 category: Petroleum
 order: 2
