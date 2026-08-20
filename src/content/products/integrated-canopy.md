@@ -1,5 +1,5 @@
 ---
-title: Customized Canopy for Various Products.
+title: Integrated Canopy for Various Products.
 description: A Dedicated canopy that create values and catch eyes, makes brand reliable with high-quality visibility
 excerpt: A customizable lit and non-lit canopy for various products that fill the gap amidst brands and branding.
 image: /images/943bb754-3148-40fd-89fb-18b49d09c227.webp
@@ -13,7 +13,7 @@ features:
   - Premium structure
   - Backlit boards
   - High Quality ACP
-category: General
+category: Customizable
 order: 1
 featured: true
 ---
