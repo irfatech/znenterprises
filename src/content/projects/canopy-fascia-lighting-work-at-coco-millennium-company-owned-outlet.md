@@ -2,7 +2,7 @@
 title: Canopy Fascia Lighting Work at COCO Millennium (Company Owned Outlet)
 client: HPCL
 location: 17°43'14.41"N 83°19'13.88"E
-description: end-to-end canopy fascia lighting at one of the biggest outlet in Andhra Pradesh.
+description: end-to-end canopy fascia lighting at one of the biggest outlet in Visakhapatnam, Andhra Pradesh.
 category: HPCL - Retail
 order: 1
 featured: true
