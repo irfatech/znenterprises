@@ -9,7 +9,7 @@ images:
   - /images/whatsapp-image-2026-04-21-at-3.55.06-pm-1.webp
   - /images/whatsapp-image-2026-04-29-at-7.49.42-pm.webp
   - /images/whatsapp-image-2026-04-29-at-9.42.43-am.webp
-  - /images/whatsapp-image-2026-04-23-at-9.49.00-am-1.webp
+  - /images/chatgpt-image-aug-22-2026-06_47_09-pm.webp
 features:
   - Steel frame construction
   - ACP or metal cladding
