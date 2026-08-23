@@ -10,11 +10,11 @@ featured: true
 image: /images/survey-photo.webp
 icon: ''
 features:
-  - Pump signage & canopy branding
-  - Price boards & directional signage
-  - Simultaneous multi-state installation
-  - Zero-failure compliance with safety layouts
-  - Ultra-fast deployment
+  - Detailed assessment of site conditions and dimensions
+  - Identification of signage locations and visibility requirements
+  - Review of structural, electrical, and installation considerations
+  - Assessment of access, safety, and installation constraints
+  - Practical inputs for accurate design and costing
 ctaText: Get Your Project Started
 ctaLink: /contact/
 slug: petroleum-station-branding
