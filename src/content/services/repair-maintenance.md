@@ -1,6 +1,11 @@
 ---
-title: Programmatic Signage Maintenance
-description: UV exposure, extreme weather, and electrical failures degrade brand perception. Our comprehensive Annual Maintenance Contracts fix peeling paint, replace broken LEDs, and extend your asset's lifespan.
+title: Fabrication – Precision Manufacturing from Concept to Product
+description: |-
+  Our fabrication process transforms approved designs into finished signage using controlled
+  manufacturing practices and suitable materials for the product.
+  ㅤ
+  Our almost decade of experience in petroleum retail gives us a strong foundation in producing
+  signage where consistency, finish quality, durability, and brand accuracy are critical.
 excerpt: Annual Maintenance Contracts that protect your signage assets.
 order: 3
 featured: true
