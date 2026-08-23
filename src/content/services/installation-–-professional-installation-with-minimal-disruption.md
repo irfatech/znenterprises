@@ -13,5 +13,5 @@ features:
   - Coordination with site and project teams
   - Final inspection and handover
 ctaText: Let's Start the project
-ctaLink: ''
+ctaLink: /contact/
 ---
