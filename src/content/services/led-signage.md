@@ -12,7 +12,7 @@ features:
   - Structural and fabrication considerations built into the design
   - Material and component selection
   - Design focused on durability, visibility, and ease of maintenance
-ctaText: Explore LED Options
+ctaText: Explore Design Options
 ctaLink: /contact/
 slug: led-signage
 ---
