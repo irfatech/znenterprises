@@ -4,7 +4,7 @@ description: A well-designed sign only performs as intended when it is installed
 excerpt: A well-designed sign only performs as intended when it is installed correctly.
 order: 4
 featured: true
-image: /images/installation.webp
+image: /images/installation-1.webp
 icon: ''
 features:
   - Experienced installation teams and supervised execution
