@@ -32,13 +32,6 @@ const testimonials = (await getCollection("testimonials"))
   .filter((t) => t.data.featured)
   .slice(0, 3);
 
-const reviewData = testimonials.map((t) => ({
-  author: t.data.name,
-  authorTitle: [t.data.role, t.data.company].filter(Boolean).join(", "),
-  reviewBody: t.data.content,
-  ratingValue: t.data.rating,
-}));
-
 const clients = (await getCollection("clients"))
   .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 
@@ -106,7 +99,6 @@ const whyChooseUs = a?.whyChooseUs?.length ? a.whyChooseUs : defaultWhyChooseUs;
   preloadHero
   seo={{
     pageType: "HomePage",
-    reviews: reviewData,
   }}
 >
   <Hero />

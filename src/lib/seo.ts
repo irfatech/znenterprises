@@ -1,16 +1,3 @@
-export interface ReviewData {
-  author: string;
-  authorTitle?: string;
-  reviewBody: string;
-  ratingValue: number;
-}
-
-export interface AggregateRatingData {
-  ratingValue: number;
-  reviewCount: number;
-  bestRating?: number;
-}
-
 export interface SEOProps {
   title?: string;
   description?: string;
@@ -33,8 +20,6 @@ export interface SEOProps {
   mainEntity?: Record<string, unknown>;
   /** Do not emit the Organization/WebSite/LocalBusiness graph on this page (404, legal, utility pages). */
   hideBusinessSchema?: boolean;
-  reviews?: ReviewData[];
-  aggregateRating?: AggregateRatingData;
 }
 
 const defaults = {
@@ -74,7 +59,5 @@ export function buildSEO(props: SEOProps) {
     pageType: props.pageType,
     mainEntity: props.mainEntity,
     hideBusinessSchema: props.hideBusinessSchema,
-    reviews: props.reviews,
-    aggregateRating: props.aggregateRating,
   };
 }

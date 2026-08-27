@@ -27,8 +27,6 @@ const {
   pageType,
   mainEntity,
   hideBusinessSchema,
-  reviews,
-  aggregateRating,
 } = buildSEO(Astro.props as SEOProps);
 
 const baseUrl = Astro.site;
@@ -160,31 +158,6 @@ const organizationNode = hasBusinessSchema
         settings.social?.tiktok,
       ].filter((l): l is string => Boolean(l && l.trim())),
       ...(offerCatalog ? { hasOfferCatalog: offerCatalog } : {}),
-      ...(reviews && reviews.length
-        ? {
-            review: reviews.map((r) => ({
-              "@type": "Review",
-              author: { "@type": "Person", name: r.author, ...(r.authorTitle ? { jobTitle: r.authorTitle } : {}) },
-              reviewBody: r.reviewBody,
-              reviewRating: {
-                "@type": "Rating",
-                ratingValue: r.ratingValue,
-                bestRating: 5,
-                worstRating: 1,
-              },
-            })),
-          }
-        : {}),
-      ...(aggregateRating && aggregateRating.reviewCount > 0
-        ? {
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: aggregateRating.ratingValue,
-              reviewCount: aggregateRating.reviewCount,
-              bestRating: aggregateRating.bestRating || 5,
-            },
-          }
-        : {}),
     }
   : null;
 
