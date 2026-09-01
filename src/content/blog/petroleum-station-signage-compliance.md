@@ -39,9 +39,9 @@ Petroleum retail outlets must adhere to several key standards:
 
 - **OMC Brand Guidelines** — Each oil marketing company has detailed brand manuals specifying colors, logo placement, typography, and illumination levels.
 
-### **Key Signage Requirements**
+ㅤ
 
-### **Canopy Signage**
+### **Key Signage Requirements Canopy Signage**
 
 ㅤ
 
