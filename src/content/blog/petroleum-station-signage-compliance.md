@@ -4,7 +4,7 @@ excerpt: Understand the regulatory requirements, safety standards, and branding 
 author: ZN Enterprises
 date: 2026-05-28
 updatedDate: ''
-image: /images/blog-petrol-station.jpg
+image: /images/bpcl-1.webp
 category: Industry Guide
 tags:
   - Petroleum Station
