@@ -3,7 +3,7 @@ title: A Complete Guide to Petroleum Station Signage Compliance in India
 excerpt: Understand the regulatory requirements, safety standards, and branding guidelines for petroleum retail signage in India.
 author: ZN Enterprises
 date: 2026-05-28
-updatedDate: ''
+updatedDate: 2026-09-01T11:22:00
 image: /images/bpcl-1.webp
 category: Industry Guide
 tags:
