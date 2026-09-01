@@ -21,7 +21,7 @@ Petroleum station signage in India is subject to stringent regulatory standards 
 
 ㅤ
 
-## **Regulatory Framework**
+# **Regulatory Framework**
 
 ㅤ
 
