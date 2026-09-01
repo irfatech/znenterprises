@@ -21,7 +21,7 @@ Petroleum station signage in India is subject to stringent regulatory standards 
 
 ㅤ
 
-## Regulatory Framework
+## **Regulatory Framework**
 
 ㅤ
 
@@ -39,9 +39,9 @@ Petroleum retail outlets must adhere to several key standards:
 
 - **OMC Brand Guidelines** — Each oil marketing company has detailed brand manuals specifying colors, logo placement, typography, and illumination levels.
 
-## Key Signage Requirements
+### **Key Signage Requirements**
 
-### Canopy Signage
+### **Canopy Signage**
 
 ㅤ
 
@@ -49,7 +49,7 @@ Must display the OMC brand identity with precise color specification (Pantone-ma
 
 ㅤ
 
-### Price Boards
+### **Price Boards**
 
 ㅤ
 
@@ -57,7 +57,7 @@ Digital or manual price boards must display current fuel prices legibly, with re
 
 ㅤ
 
-### Safety and Warning Signs
+### **Safety and Warning Signs**
 
 ㅤ
 
@@ -73,7 +73,7 @@ Mandatory signs include:
 
 ㅤ
 
-### Pole and Pylon Signs
+### **Pole and Pylon Signs**
 
 ㅤ
 
@@ -81,7 +81,7 @@ These must comply with structural safety standards, wind load calculations, and 
 
 ㅤ
 
-## Why Professional Installation Matters
+### **Why Professional Installation Matters**
 
 ㅤ
 
