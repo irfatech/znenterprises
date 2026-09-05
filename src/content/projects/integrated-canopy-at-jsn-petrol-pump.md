@@ -1,7 +1,7 @@
 ---
 title: Integrated Canopy at JSN Petrol Pump
 client: BPCL
-location: ''
+location: 12°54'53.72"N 77°40'31.87"E
 description: Complete installation of five products integrated canopy and branding work at JSN Petrol Pump
 category: BPCL - Retail
 order: 11
