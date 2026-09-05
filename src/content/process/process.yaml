@@ -1,23 +1,23 @@
-sectionLabel: "/// Process"
-heading: "How We Execute: The 6-Step Framework"
+sectionLabel: /// Process
+heading: 'How We Execute: The 6-Step Framework'
 highlightWord: 6-Step Framework
 subtitle: A systematic framework from briefing to lifetime support, ensuring quality at every stage.
 steps:
-  - number: "01"
+  - number: '01'
     title: Briefing
     description: We align on your exact budget, timeline, and compliance needs.
-  - number: "02"
+  - number: '02'
     title: Site Survey
     description: Our engineers assess structural requirements and installation logistics.
-  - number: "03"
+  - number: '03'
     title: In-House Fabrication
     description: Precision manufacturing with zero shortcuts.
-  - number: "04"
+  - number: '04'
     title: Rigorous Quality Assurance
     description: Every piece is stress-tested. Only perfect components ship.
-  - number: "05"
+  - number: '05'
     title: Deployment
     description: Coordinated, multi-location professional installation.
-  - number: "06"
-    title: Lifetime Support
+  - number: '06'
+    title: Lifetime Assistance
     description: Our AMC kicks in. We handle all future upkeep.
