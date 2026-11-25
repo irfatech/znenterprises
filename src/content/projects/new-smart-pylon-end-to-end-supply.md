@@ -1,5 +1,5 @@
 ---
-title: New Smart Pylon end-to-end supply.
+title: New Smart Pylon end-to-end supply
 client: HPCL - Retail
 location: Across South India
 description: |-
@@ -10,7 +10,7 @@ description: |-
   The one of the beneficial investment of the retail brands that drives customers from the distance and helps foster the brands growth, build a positive reputation and reliability and helps the brand to sustain in the market.
 
   Z N Enterprises helps retail brands to grow, illuminate, and sustain in the market.
-category: General
+category: HPCL - Retail
 order: 0
 featured: true
 images:
